@@ -31,6 +31,7 @@ const CardActionsWrapper = styled(CardActions)(
 );
 const course = {
   title: 'Node Js',
+  currentContent: 1,
   description:
     'You will be able to know basics fundamental of Nodejs from different  youtube content creator. there are total 4 videos. Sit and enjoy your learning. You will be able to know basics fundamental of Nodejs from different youtube content creator. there are total 4 videos. Sit and enjoy your learning. You will be able to know basics fundamental of Nodejs from different youtube content creator. there are total 4 videos. Sit and enjoy your learning.',
   contentDetails: [
@@ -42,7 +43,8 @@ const course = {
       videoLength: '4:47 mins',
       contentCreatorLink: 'https://www.youtube.com/@MuppetsStudio',
       thumpsUp: [{ name: 'Madhav Gautam' }],
-      comments: [{ name: 'Madhav Gautam', comment: 'This is nice Video' }]
+      comments: [{ name: 'Madhav Gautam', comment: 'This is nice Video' }],
+      completeStatus: 'COMPLETED'
     },
     {
       link: 'https://www.youtube.com/embed/BLl32FvcdVM',
@@ -55,7 +57,8 @@ const course = {
       comments: [
         { name: 'Madhav Gautam', comment: 'This is nice Video' },
         { name: 'Madhav Gautam', comment: 'This is nice Video' }
-      ]
+      ],
+      completeStatus: 'NOT_COMPLETED'
     },
     {
       link: 'https://www.youtube.com/embed/TlB_eWDSMt4',
@@ -64,22 +67,14 @@ const course = {
       videoLength: '',
       contentCreatorLink: '',
       thumpsUp: [{ name: 'Madhav Gautam' }],
-      comments: [{ name: 'Madhav Gautam', comment: 'This is nice Video' }]
-    },
-    {
-      link: 'https://www.youtube.com/embed/JnvKXcSI7yk&t=24008s',
-      title: '',
-      description: '',
-      videoLength: '',
-      contentCreatorLink: '',
-      thumpsUp: [{ name: 'Madhav Gautam' }],
-      comments: [{ name: 'Madhav Gautam', comment: 'This is nice Video' }]
+      comments: [{ name: 'Madhav Gautam', comment: 'This is nice Video' }],
+      completeStatus: 'NOT_COMPLETED'
     }
   ]
 };
 
 function ActivityTab() {
-  const [currentContent, setCurrentContent] = useState(0);
+  const [currentContent, setCurrentContent] = useState(course.currentContent);
 
   return (
     <Card>

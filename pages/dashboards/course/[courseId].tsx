@@ -32,8 +32,8 @@ function DashboardCrypto() {
           spacing={4}
         >
           <Grid item xs={12}>
-            <Avatars />
-            {/* <ActivityTab /> */}
+            {/* <Avatars /> */}
+            <ActivityTab />
           </Grid>
           {/* <Grid item xs={12}>
             <AccountBalance />

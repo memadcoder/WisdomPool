@@ -8,8 +8,13 @@ import {
   Card,
   CardHeader,
   CardContent,
-  Divider
+  Divider,
+  Typography,
+  Box,
+  Button
 } from '@mui/material';
+import Text from '@/components/Text';
+import NextLink from 'next/link';
 import Footer from '@/components/Footer';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -17,6 +22,7 @@ import { deepOrange, deepPurple, green, pink } from '@mui/material/colors';
 import FolderIcon from '@mui/icons-material/Folder';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -47,20 +53,93 @@ function stringAvatar(name: string) {
   };
 }
 
+const poolFeeds = [
+  {
+    _id: 1,
+    courseId: 1,
+    title: 'Nodejs Fundamental',
+    authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
+    description:
+      'This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.',
+    totalVideos: 5,
+    totalTime: '2 hrs',
+    thumbsUp: 2,
+    comments: 3,
+    isStarred: true,
+    createdDate: '12 March 2022'
+  },
+  {
+    _id: 1,
+    courseId: 2,
+    title: 'Nodejs Fundamental',
+    authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
+    description:
+      'This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.',
+    totalVideos: 5,
+    totalTime: '2 hrs',
+    thumbsUp: 2,
+    comments: 3,
+    isStarred: true,
+    createdDate: '12 March 2022'
+  },
+  {
+    _id: 1,
+    courseId: 3,
+    title: 'Nodejs Fundamental',
+    authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
+    description:
+      'This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.',
+    totalVideos: 5,
+    totalTime: '2 hrs',
+    thumbsUp: 2,
+    comments: 3,
+    isStarred: true,
+    createdDate: '12 March 2022'
+  },
+  {
+    _id: 1,
+    courseId: 4,
+    title: 'Nodejs Fundamental',
+    authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
+    description:
+      'This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.This is description about Nodejs.',
+    totalVideos: 5,
+    totalTime: '2 hrs',
+    thumbsUp: 2,
+    comments: 3,
+    isStarred: true,
+    createdDate: '12 March 2022'
+  },
+  {
+    _id: 1,
+    courseId: 5,
+    title: 'Nodejs Fundamental',
+    authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
+    description: '',
+    totalVideos: 5,
+    totalTime: '2 hrs',
+    thumbsUp: 2,
+    comments: 3,
+    isStarred: true,
+    createdDate: '12 March 2022'
+  }
+];
+
 function Avatars() {
   return (
     <>
       <Head>
-        <title>Avatars - Components</title>
+        <title>Pool</title>
       </Head>
       <PageTitleWrapper>
+        <PageHeader />
         <PageTitle
-          heading="Avatars"
-          subHeading="Avatars are found throughout material design with uses in everything from tables to dialog menus."
+          // heading="Pool"
+          subHeading="Pool contains recommended contents according to your interest."
           docs="https://material-ui.com/components/avatars/"
         />
       </PageTitleWrapper>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <Grid
           container
           direction="row"
@@ -68,7 +147,9 @@ function Avatars() {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid item xs={12}>
+          {poolFeeds.map((feed) => {
+            {
+              /* <Grid item xs={12}>
             <Card>
               <CardHeader title="Images" />
               <Divider />
@@ -105,8 +186,10 @@ function Avatars() {
                 </Stack>
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item xs={12}>
+          </Grid> */
+            }
+            {
+              /* <Grid item xs={12}>
             <Card>
               <CardHeader title="Sizes" />
               <Divider />
@@ -126,38 +209,102 @@ function Avatars() {
                 </Stack>
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Icons" />
-              <Divider />
-              <CardContent>
-                <Stack direction="row" spacing={2}>
-                  <Avatar>
-                    <FolderIcon />
-                  </Avatar>
-                  <Avatar sx={{ bgcolor: pink[500] }}>
-                    <PageviewIcon />
-                  </Avatar>
-                  <Avatar sx={{ bgcolor: green[500] }}>
-                    <AssignmentIcon />
-                  </Avatar>
-                </Stack>
-                <Divider sx={{ my: 5 }} />
-                <Stack direction="row" spacing={2}>
-                  <Avatar sx={{ bgcolor: deepOrange[500] }} variant="square">
-                    N
-                  </Avatar>
-                  <Avatar sx={{ bgcolor: green[500] }} variant="rounded">
-                    <AssignmentIcon />
-                  </Avatar>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
+          </Grid> */
+            }
+            return (
+              <NextLink href={`course/${feed.courseId}`} passHref>
+                <Grid item xs={12} key={feed._id} style={{ cursor: 'pointer' }}>
+                  <Card>
+                    <Box
+                      p={3}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="space-between"
+                    >
+                      <Box>
+                        <Typography variant="h4" gutterBottom>
+                          {feed.title}
+                        </Typography>
+                        <Typography variant="subtitle2">
+                          {feed.description}
+                        </Typography>
+                      </Box>
+                      {/* <Button variant="text" startIcon={<EditTwoToneIcon />}>
+              Edit
+            </Button> */}
+                    </Box>
+                    <Divider />
+                    <CardContent sx={{ p: 4 }}>
+                      <Typography variant="subtitle2">
+                        <Grid container spacing={0}>
+                          <Grid
+                            item
+                            xs={12}
+                            sm={4}
+                            md={3}
+                            textAlign={{ sm: 'right' }}
+                          >
+                            <Box pr={3} pb={2}>
+                              Total Time:
+                            </Box>
+                          </Grid>
+                          <Grid item xs={12} sm={8} md={9}>
+                            <Text color="black">
+                              <b>{feed.totalTime}</b>
+                            </Text>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={12}
+                            sm={4}
+                            md={3}
+                            textAlign={{ sm: 'right' }}
+                          >
+                            <Box pr={3} pb={2}>
+                              Created Date:
+                            </Box>
+                          </Grid>
+                          <Grid item xs={12} sm={8} md={9}>
+                            <Text color="black">
+                              <b>{feed.createdDate}</b>
+                            </Text>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={12}
+                            sm={4}
+                            md={3}
+                            textAlign={{ sm: 'right' }}
+                          >
+                            <Box pr={3} pb={2}>
+                              Content Creators:
+                            </Box>
+                          </Grid>
+                          <Grid item xs={12} sm={8} md={9}>
+                            <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
+                              {feed.authors.map((author, index) => {
+                                return (
+                                  <>
+                                    <Text color="black" key={index}>
+                                      {author}
+                                    </Text>
+                                    <br />
+                                  </>
+                                );
+                              })}
+                            </Box>
+                          </Grid>
+                        </Grid>
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </NextLink>
+            );
+          })}
         </Grid>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
