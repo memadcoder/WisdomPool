@@ -11,16 +11,17 @@ import AccountBalance from '@/content/Dashboards/Crypto/AccountBalance';
 import Wallets from '@/content/Dashboards/Crypto/Wallets';
 import AccountSecurity from '@/content/Dashboards/Crypto/AccountSecurity';
 import WatchList from '@/content/Dashboards/Crypto/WatchList';
+import ActivityTab from '@/content/Management/Users/settings/ActivityTab';
 
 function DashboardCrypto() {
   return (
     <>
       <Head>
-        <title>Crypto Dashboard</title>
+        <title>Wisdom Pool</title>
       </Head>
-      <PageTitleWrapper>
+      {/* <PageTitleWrapper>
         <PageHeader />
-      </PageTitleWrapper>
+      </PageTitleWrapper> */}
       <Container maxWidth="lg">
         <Grid
           container
@@ -30,6 +31,9 @@ function DashboardCrypto() {
           spacing={4}
         >
           <Grid item xs={12}>
+            <ActivityTab />
+          </Grid>
+          {/* <Grid item xs={12}>
             <AccountBalance />
           </Grid>
           <Grid item lg={8} xs={12}>
@@ -40,7 +44,7 @@ function DashboardCrypto() {
           </Grid>
           <Grid item xs={12}>
             <WatchList />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
       <Footer />

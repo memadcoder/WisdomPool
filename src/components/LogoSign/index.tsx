@@ -102,7 +102,7 @@ function Logo() {
       title="Tokyo Free White Next.js Typescript Admin Dashboard"
       arrow
     >
-      <LogoWrapper href="/">
+      <LogoWrapper href="/dashboards/crypto">
         <Badge
           sx={{
             '.MuiBadge-badge': {

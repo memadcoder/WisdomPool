@@ -116,7 +116,7 @@ function SecurityTab() {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Box pb={2}>
           <Typography variant="h3">Social Accounts</Typography>
           <Typography variant="subtitle2">
@@ -144,8 +144,8 @@ function SecurityTab() {
             </ListItem>
           </List>
         </Card>
-      </Grid>
-      <Grid item xs={12}>
+      </Grid> */}
+      {/* <Grid item xs={12}>
         <Card>
           <List>
             <ListItem sx={{ p: 3 }}>
@@ -189,7 +189,7 @@ function SecurityTab() {
             </ListItem>
           </List>
         </Card>
-      </Grid>
+      </Grid> */}
       <Grid item xs={12}>
         <Box pb={2}>
           <Typography variant="h3">Security</Typography>
@@ -213,7 +213,7 @@ function SecurityTab() {
                 Change password
               </Button>
             </ListItem>
-            <Divider component="li" />
+            {/* <Divider component="li" />
             <ListItem sx={{ p: 3 }}>
               <ListItemText
                 primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
@@ -225,11 +225,11 @@ function SecurityTab() {
                 secondary="Enable PIN verification for all sign in attempts"
               />
               <Switch color="primary" />
-            </ListItem>
+            </ListItem> */}
           </List>
         </Card>
       </Grid>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Card>
           <CardHeader
             subheaderTypographyProps={{}}
@@ -290,7 +290,7 @@ function SecurityTab() {
             />
           </Box>
         </Card>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

@@ -187,7 +187,7 @@ function SidebarMenu() {
           <SubMenuWrapper>
             <List component="div">
               <ListItem component="div">
-                <NextLink href="/" passHref>
+                {/* <NextLink href="/" passHref>
                   <Button
                     className={currentRoute === '="/' ? 'active' : ''}
                     disableRipple
@@ -197,12 +197,12 @@ function SidebarMenu() {
                   >
                     Overview
                   </Button>
-                </NextLink>
+                </NextLink> */}
               </ListItem>
             </List>
           </SubMenuWrapper>
         </List>
-        <List
+        {/* <List
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
@@ -244,8 +244,8 @@ function SidebarMenu() {
               </ListItem>
             </List>
           </SubMenuWrapper>
-        </List>
-        <List
+        </List> */}
+        {/* <List
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
@@ -274,7 +274,7 @@ function SidebarMenu() {
               </ListItem>
             </List>
           </SubMenuWrapper>
-        </List>
+        </List> */}
         <List
           component="div"
           subheader={
@@ -296,7 +296,7 @@ function SidebarMenu() {
                     onClick={closeSidebar}
                     startIcon={<AccountCircleTwoToneIcon />}
                   >
-                    User Profile
+                    Profile
                   </Button>
                 </NextLink>
               </ListItem>
@@ -320,7 +320,7 @@ function SidebarMenu() {
             </List>
           </SubMenuWrapper>
         </List>
-        <List
+        {/* <List
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
@@ -467,8 +467,8 @@ function SidebarMenu() {
               </ListItem>
             </List>
           </SubMenuWrapper>
-        </List>
-        <List
+        </List> */}
+        {/* <List
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
@@ -536,7 +536,7 @@ function SidebarMenu() {
               </ListItem>
             </List>
           </SubMenuWrapper>
-        </List>
+        </List> */}
       </MenuWrapper>
     </>
   );

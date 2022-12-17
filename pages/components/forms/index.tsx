@@ -72,14 +72,14 @@ function Forms() {
       <Head>
         <title>Forms - Components</title>
       </Head>
-      <PageTitleWrapper>
+      {/* <PageTitleWrapper>
         <PageTitle
-          heading="Forms"
-          subHeading="Components that are used to build interactive placeholders used for data collection from users."
+          heading="Favourites"
+          subHeading="List of your favourites courses."
           docs="https://material-ui.com/components/text-fields/"
         />
-      </PageTitleWrapper>
-      <Container maxWidth="lg">
+      </PageTitleWrapper> */}
+      {/* <Container maxWidth="lg">
         <Grid
           container
           direction="row"
@@ -474,7 +474,7 @@ function Forms() {
             </Card>
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
       <Footer />
     </>
   );

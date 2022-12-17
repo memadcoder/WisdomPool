@@ -135,7 +135,7 @@ const ProfileCover = ({ user }) => {
         <Typography sx={{ py: 2 }} variant="subtitle2" color="text.primary">
           {user.jobtitle} | {user.location} | {user.followers} followers
         </Typography>
-        <Box
+        {/* <Box
           display={{ xs: 'block', md: 'flex' }}
           alignItems="center"
           justifyContent="space-between"
@@ -159,7 +159,7 @@ const ProfileCover = ({ user }) => {
           >
             See all {user.followers} connections
           </Button>
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

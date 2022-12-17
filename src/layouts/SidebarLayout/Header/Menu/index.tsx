@@ -90,11 +90,11 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={Link}
-            href="/components/buttons"
+            href="/dashboards/crypto"
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
-              primary="Buttons"
+              primary="Home"
             />
           </ListItem>
           <ListItem
@@ -105,10 +105,10 @@ function HeaderMenu() {
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
-              primary="Forms"
+              primary="Favourites"
             />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
             ref={ref}
@@ -125,7 +125,7 @@ function HeaderMenu() {
                 </Box>
               }
             />
-          </ListItem>
+          </ListItem> */}
         </List>
       </ListWrapper>
       <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>

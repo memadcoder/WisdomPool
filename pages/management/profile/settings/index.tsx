@@ -21,12 +21,12 @@ const TabsWrapper = styled(Tabs)(
 );
 
 function ManagementUserSettings() {
-  const [currentTab, setCurrentTab] = useState<string>('activity');
+  const [currentTab, setCurrentTab] = useState<string>('edit_profile');
 
   const tabs = [
-    { value: 'activity', label: 'Activity' },
+    // { value: 'activity', label: 'Activity' },
     { value: 'edit_profile', label: 'Edit Profile' },
-    { value: 'notifications', label: 'Notifications' },
+    // { value: 'notifications', label: 'Notifications' },
     { value: 'security', label: 'Passwords/Security' }
   ];
 
