@@ -90,7 +90,7 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={Link}
-            href="/dashboards/crypto"
+            href="/pool"
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
@@ -101,11 +101,35 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={Link}
-            href="/components/forms"
+            href="/fav"
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
               primary="Favourites"
+            />
+          </ListItem>
+
+          <ListItem
+            classes={{ root: 'MuiListItem-indicators' }}
+            button
+            component={Link}
+            href="/mycourse"
+          >
+            <ListItemText
+              primaryTypographyProps={{ noWrap: true }}
+              primary="My Course"
+            />
+          </ListItem>
+
+          <ListItem
+            classes={{ root: 'MuiListItem-indicators' }}
+            button
+            component={Link}
+            href="/liked"
+          >
+            <ListItemText
+              primaryTypographyProps={{ noWrap: true }}
+              primary="Liked"
             />
           </ListItem>
           {/* <ListItem
