@@ -116,7 +116,7 @@ function HeaderUserbox() {
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <List sx={{ p: 1 }} component="nav">
-          <NextLink href="/management/profile" passHref>
+          <NextLink href="/profile" passHref>
             <ListItem button>
               <AccountBoxTwoToneIcon fontSize="small" />
               <ListItemText primary="My Profile" />
@@ -128,7 +128,7 @@ function HeaderUserbox() {
               <ListItemText primary="Messenger" />
             </ListItem>
           </NextLink> */}
-          <NextLink href="/management/profile/settings" passHref>
+          <NextLink href="/profile/settings" passHref>
             <ListItem button>
               <AccountTreeTwoToneIcon fontSize="small" />
               <ListItemText primary="Account Settings" />

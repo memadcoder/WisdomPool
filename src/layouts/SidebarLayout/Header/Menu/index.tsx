@@ -97,17 +97,6 @@ function HeaderMenu() {
               primary="Pool"
             />
           </ListItem>
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={Link}
-            href="/fav"
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="Favourites"
-            />
-          </ListItem>
 
           <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
@@ -118,6 +107,18 @@ function HeaderMenu() {
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
               primary="My Course"
+            />
+          </ListItem>
+
+          <ListItem
+            classes={{ root: 'MuiListItem-indicators' }}
+            button
+            component={Link}
+            href="/fav"
+          >
+            <ListItemText
+              primaryTypographyProps={{ noWrap: true }}
+              primary="Favourites"
             />
           </ListItem>
 
@@ -152,7 +153,7 @@ function HeaderMenu() {
           </ListItem> */}
         </List>
       </ListWrapper>
-      <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
+      {/* <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
         <MenuItem sx={{ px: 3 }} component={Link} href="/">
           Overview
         </MenuItem>
@@ -165,7 +166,7 @@ function HeaderMenu() {
         <MenuItem sx={{ px: 3 }} component={Link} href="/components/modals">
           Modals
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </>
   );
 }
