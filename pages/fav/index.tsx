@@ -169,29 +169,29 @@ function Favourites() {
           </Grid> */
             }
             return (
-              <NextLink href={`course/${feed.courseId}`} passHref>
-                <Grid item xs={12} key={feed._id} style={{ cursor: 'pointer' }}>
-                  <Card>
-                    <Box
-                      p={3}
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="space-between"
-                    >
-                      <Box>
-                        <Typography variant="h4" gutterBottom>
-                          {feed.title}
-                        </Typography>
-                        <Typography variant="subtitle2">
-                          {feed.description}
-                        </Typography>
-                      </Box>
-                      <Button variant="text" startIcon={<FavoriteIcon />}>
-                        Unfavorite
-                      </Button>
+              <Grid item xs={12} key={feed._id}>
+                <Card>
+                  <Box
+                    p={3}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box>
+                      <Typography variant="h4" gutterBottom>
+                        {feed.title}
+                      </Typography>
+                      <Typography variant="subtitle2">
+                        {feed.description}
+                      </Typography>
                     </Box>
-                    <Divider />
-                    <CardContent sx={{ p: 4 }}>
+                    <Button variant="text" startIcon={<FavoriteIcon />}>
+                      Unfavorite
+                    </Button>
+                  </Box>
+                  <Divider />
+                  <NextLink href={`course/${feed.courseId}`} passHref>
+                    <CardContent sx={{ p: 4 }} style={{ cursor: 'pointer' }}>
                       <Typography variant="subtitle2">
                         <Grid container spacing={0}>
                           <Grid
@@ -254,9 +254,9 @@ function Favourites() {
                         </Grid>
                       </Typography>
                     </CardContent>
-                  </Card>
-                </Grid>
-              </NextLink>
+                  </NextLink>
+                </Card>
+              </Grid>
             );
           })}
         </Grid>

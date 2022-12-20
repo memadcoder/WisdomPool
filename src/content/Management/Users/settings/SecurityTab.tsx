@@ -29,6 +29,7 @@ import {
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import { format, subHours, subWeeks, subDays } from 'date-fns';
+import SecurityDetailsModal from '@/components/Modal/Profile/SecurityDetailsModal';
 
 const ButtonError = styled(Button)(
   ({ theme }) => `
@@ -57,66 +58,71 @@ const AvatarWrapper = styled(Avatar)(
 );
 
 function SecurityTab() {
-  const theme = useTheme();
-
-  const [page, setPage] = useState(2);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  const handleChangePage = (
-    _event: MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
+  const [open, setOpen] = useState(false);
+  const setModal = () => {
+    setOpen(!open);
   };
+  // const theme = useTheme();
 
-  const handleChangeRowsPerPage = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  // const [page, setPage] = useState(2);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const logs = [
-    {
-      id: 1,
-      browser: ' Safari/537.36',
-      ipaddress: '3.70.73.142',
-      location: 'United States',
-      date: subDays(new Date(), 2).getTime()
-    },
-    {
-      id: 2,
-      browser: 'Chrome/36.0.1985.67',
-      ipaddress: '138.13.136.179',
-      location: 'China',
-      date: subDays(new Date(), 6).getTime()
-    },
-    {
-      id: 3,
-      browser: 'Googlebot/2.1',
-      ipaddress: '119.229.170.253',
-      location: 'China',
-      date: subHours(new Date(), 15).getTime()
-    },
-    {
-      id: 4,
-      browser: 'AppleWebKit/535.1',
-      ipaddress: '206.8.99.49',
-      location: 'Philippines',
-      date: subDays(new Date(), 4).getTime()
-    },
-    {
-      id: 5,
-      browser: 'Mozilla/5.0',
-      ipaddress: '235.40.59.85',
-      location: 'China',
-      date: subWeeks(new Date(), 3).getTime()
-    }
-  ];
+  // const handleChangePage = (
+  //   _event: MouseEvent<HTMLButtonElement> | null,
+  //   newPage: number
+  // ) => {
+  //   setPage(newPage);
+  // };
+
+  // const handleChangeRowsPerPage = (
+  //   event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   setRowsPerPage(parseInt(event.target.value, 10));
+  //   setPage(0);
+  // };
+
+  // const logs = [
+  //   {
+  //     id: 1,
+  //     browser: ' Safari/537.36',
+  //     ipaddress: '3.70.73.142',
+  //     location: 'United States',
+  //     date: subDays(new Date(), 2).getTime()
+  //   },
+  //   {
+  //     id: 2,
+  //     browser: 'Chrome/36.0.1985.67',
+  //     ipaddress: '138.13.136.179',
+  //     location: 'China',
+  //     date: subDays(new Date(), 6).getTime()
+  //   },
+  //   {
+  //     id: 3,
+  //     browser: 'Googlebot/2.1',
+  //     ipaddress: '119.229.170.253',
+  //     location: 'China',
+  //     date: subHours(new Date(), 15).getTime()
+  //   },
+  //   {
+  //     id: 4,
+  //     browser: 'AppleWebKit/535.1',
+  //     ipaddress: '206.8.99.49',
+  //     location: 'Philippines',
+  //     date: subDays(new Date(), 4).getTime()
+  //   },
+  //   {
+  //     id: 5,
+  //     browser: 'Mozilla/5.0',
+  //     ipaddress: '235.40.59.85',
+  //     location: 'China',
+  //     date: subWeeks(new Date(), 3).getTime()
+  //   }
+  // ];
 
   return (
-    <Grid container spacing={3}>
-      {/* <Grid item xs={12}>
+    <>
+      <Grid container spacing={3}>
+        {/* <Grid item xs={12}>
         <Box pb={2}>
           <Typography variant="h3">Social Accounts</Typography>
           <Typography variant="subtitle2">
@@ -145,7 +151,7 @@ function SecurityTab() {
           </List>
         </Card>
       </Grid> */}
-      {/* <Grid item xs={12}>
+        {/* <Grid item xs={12}>
         <Card>
           <List>
             <ListItem sx={{ p: 3 }}>
@@ -190,30 +196,36 @@ function SecurityTab() {
           </List>
         </Card>
       </Grid> */}
-      <Grid item xs={12}>
-        <Box pb={2}>
-          <Typography variant="h3">Security</Typography>
-          <Typography variant="subtitle2">
-            Change your security preferences below
-          </Typography>
-        </Box>
-        <Card>
-          <List>
-            <ListItem sx={{ p: 3 }}>
-              <ListItemText
-                primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
-                secondaryTypographyProps={{
-                  variant: 'subtitle2',
-                  lineHeight: 1
-                }}
-                primary="Change Password"
-                secondary="You can change your password here"
-              />
-              <Button size="large" variant="outlined">
-                Change password
-              </Button>
-            </ListItem>
-            {/* <Divider component="li" />
+        <Grid item xs={12}>
+          <Box pb={2}>
+            <Typography variant="h3">Security</Typography>
+            <Typography variant="subtitle2">
+              Change your security preferences below
+            </Typography>
+          </Box>
+          <Card>
+            <List>
+              <ListItem sx={{ p: 3 }}>
+                <ListItemText
+                  primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
+                  secondaryTypographyProps={{
+                    variant: 'subtitle2',
+                    lineHeight: 1
+                  }}
+                  primary="Change Password"
+                  secondary="You can change your password here"
+                />
+                <Button
+                  size="large"
+                  variant="outlined"
+                  onClick={() => {
+                    setModal();
+                  }}
+                >
+                  Change password
+                </Button>
+              </ListItem>
+              {/* <Divider component="li" />
             <ListItem sx={{ p: 3 }}>
               <ListItemText
                 primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
@@ -226,10 +238,10 @@ function SecurityTab() {
               />
               <Switch color="primary" />
             </ListItem> */}
-          </List>
-        </Card>
-      </Grid>
-      {/* <Grid item xs={12}>
+            </List>
+          </Card>
+        </Grid>
+        {/* <Grid item xs={12}>
         <Card>
           <CardHeader
             subheaderTypographyProps={{}}
@@ -291,7 +303,9 @@ function SecurityTab() {
           </Box>
         </Card>
       </Grid> */}
-    </Grid>
+        <SecurityDetailsModal open={open} setModal={setModal} />
+      </Grid>
+    </>
   );
 }
 

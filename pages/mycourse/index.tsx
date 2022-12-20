@@ -17,6 +17,8 @@ import {
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import Text from '@/components/Text';
 import NextLink from 'next/link';
+import { useState } from 'react';
+import EditCourseModal from '@/components/Modal/CourseModal/EditCourse';
 
 const poolFeeds = [
   {
@@ -91,6 +93,10 @@ const poolFeeds = [
 ];
 
 function MyCourse() {
+  const [open, setOpen] = useState(false);
+  const setEditCourseModal = () => {
+    setOpen(!open);
+  };
   return (
     <>
       <Head>
@@ -169,8 +175,8 @@ function MyCourse() {
           </Grid> */
             }
             return (
-              <NextLink href={`course/${feed.courseId}`} passHref>
-                <Grid item xs={12} key={feed._id} style={{ cursor: 'pointer' }}>
+              <>
+                <Grid item xs={12} key={feed._id}>
                   <Card>
                     <Box
                       p={3}
@@ -186,77 +192,89 @@ function MyCourse() {
                           {feed.description}
                         </Typography>
                       </Box>
-                      <Button variant="text" startIcon={<EditTwoToneIcon />}>
+                      <Button
+                        variant="text"
+                        startIcon={<EditTwoToneIcon />}
+                        onClick={() => {
+                          setEditCourseModal();
+                        }}
+                      >
                         Edit
                       </Button>
                     </Box>
                     <Divider />
-                    <CardContent sx={{ p: 4 }}>
-                      <Typography variant="subtitle2">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Total Time:
-                            </Box>
+                    <NextLink href={`course/${feed.courseId}`} passHref>
+                      <CardContent sx={{ p: 4 }} style={{ cursor: 'pointer' }}>
+                        <Typography variant="subtitle2">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={4}
+                              md={3}
+                              textAlign={{ sm: 'right' }}
+                            >
+                              <Box pr={3} pb={2}>
+                                Total Time:
+                              </Box>
+                            </Grid>
+                            <Grid item xs={12} sm={8} md={9}>
+                              <Text color="black">
+                                <b>{feed.totalTime}</b>
+                              </Text>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={4}
+                              md={3}
+                              textAlign={{ sm: 'right' }}
+                            >
+                              <Box pr={3} pb={2}>
+                                Created Date:
+                              </Box>
+                            </Grid>
+                            <Grid item xs={12} sm={8} md={9}>
+                              <Text color="black">
+                                <b>{feed.createdDate}</b>
+                              </Text>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={4}
+                              md={3}
+                              textAlign={{ sm: 'right' }}
+                            >
+                              <Box pr={3} pb={2}>
+                                Content Creators:
+                              </Box>
+                            </Grid>
+                            <Grid item xs={12} sm={8} md={9}>
+                              <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
+                                {feed.authors.map((author, index) => {
+                                  return (
+                                    <>
+                                      <Text color="black" key={index}>
+                                        {author}
+                                      </Text>
+                                      <br />
+                                    </>
+                                  );
+                                })}
+                              </Box>
+                            </Grid>
                           </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed.totalTime}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Created Date:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed.createdDate}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Content Creators:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
-                              {feed.authors.map((author, index) => {
-                                return (
-                                  <>
-                                    <Text color="black" key={index}>
-                                      {author}
-                                    </Text>
-                                    <br />
-                                  </>
-                                );
-                              })}
-                            </Box>
-                          </Grid>
-                        </Grid>
-                      </Typography>
-                    </CardContent>
+                        </Typography>
+                      </CardContent>
+                    </NextLink>
                   </Card>
                 </Grid>
-              </NextLink>
+                <EditCourseModal
+                  open={open}
+                  setEditCourseModal={setEditCourseModal}
+                />
+              </>
             );
           })}
         </Grid>

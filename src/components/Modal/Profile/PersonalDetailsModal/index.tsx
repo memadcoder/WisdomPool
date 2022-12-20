@@ -2,17 +2,17 @@ import PropTypes from 'prop-types';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
-function CourseModal(props) {
-  const { setCourseModal, open } = props;
+function PersonalDetailsModal(props) {
+  const { setModal, open } = props;
   const handleClose = () => {
-    setCourseModal();
+    setModal();
   };
 
   return (
     <Dialog onClose={handleClose} open={open} fullWidth={true}>
-      <DialogTitle>Enter Course Details</DialogTitle>
+      <DialogTitle>Update Personal Details</DialogTitle>
       <Grid
         container
         justifyContent="space-between"
@@ -50,14 +50,19 @@ function CourseModal(props) {
             fullWidth={true}
           />
         </Grid>
+        <Grid item xs={12}>
+          <Button size="large" variant="outlined" fullWidth>
+            Confirm Update
+          </Button>
+        </Grid>
       </Grid>
     </Dialog>
   );
 }
 
-CourseModal.propTypes = {
-  setCourseModal: PropTypes.func.isRequired,
+PersonalDetailsModal.propTypes = {
+  setModal: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired
 };
 
-export default CourseModal;
+export default PersonalDetailsModal;

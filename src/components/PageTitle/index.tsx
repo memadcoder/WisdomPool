@@ -2,8 +2,7 @@ import { FC, useState } from 'react';
 import PropTypes from 'prop-types';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Typography, Button, Grid } from '@mui/material';
-import Modals from 'pages/components/modals';
-import CourseModal from '../CourseModal';
+import AddCourseModal from '../Modal/CourseModal/AddCourse';
 
 interface PageTitleProps {
   heading?: string;
@@ -18,7 +17,7 @@ const PageTitle: FC<PageTitleProps> = ({
   ...rest
 }) => {
   const [open, setOpen] = useState(false);
-  const setCourseModal = () => {
+  const setAddCourseModal = () => {
     setOpen(!open);
   };
 
@@ -42,14 +41,14 @@ const PageTitle: FC<PageTitleProps> = ({
             variant="contained"
             startIcon={<AddTwoToneIcon fontSize="small" />}
             onClick={() => {
-              setCourseModal();
+              setAddCourseModal();
             }}
           >
             Add Course
           </Button>
         </Grid>
       </Grid>
-      <CourseModal open={open} setCourseModal={setCourseModal} />
+      <AddCourseModal open={open} setAddCourseModal={setAddCourseModal} />
     </>
   );
 };
