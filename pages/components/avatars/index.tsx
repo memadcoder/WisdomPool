@@ -23,6 +23,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
+import Comment from '@/components/Comment';
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -212,14 +213,15 @@ function Avatars() {
           </Grid> */
             }
             return (
-              <NextLink href={`course/${feed.courseId}`} passHref>
-                <Grid item xs={12} key={feed._id} style={{ cursor: 'pointer' }}>
-                  <Card>
+              <Grid item xs={12} key={feed._id}>
+                <Card>
+                  <NextLink href={`course/${feed.courseId}`} passHref>
                     <Box
                       p={3}
                       display="flex"
                       alignItems="center"
                       justifyContent="space-between"
+                      style={{ cursor: 'pointer' }}
                     >
                       <Box>
                         <Typography variant="h4" gutterBottom>
@@ -233,73 +235,76 @@ function Avatars() {
               Edit
             </Button> */}
                     </Box>
-                    <Divider />
-                    <CardContent sx={{ p: 4 }}>
-                      <Typography variant="subtitle2">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Total Time:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed.totalTime}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Created Date:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed.createdDate}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Content Creators:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
-                              {feed.authors.map((author, index) => {
-                                return (
-                                  <>
-                                    <Text color="black" key={index}>
-                                      {author}
-                                    </Text>
-                                    <br />
-                                  </>
-                                );
-                              })}
-                            </Box>
-                          </Grid>
+                  </NextLink>
+
+                  <Divider />
+                  <CardContent sx={{ p: 4 }}>
+                    <Typography variant="subtitle2">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={4}
+                          md={3}
+                          textAlign={{ sm: 'right' }}
+                        >
+                          <Box pr={3} pb={2}>
+                            Total Time:
+                          </Box>
                         </Grid>
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              </NextLink>
+                        <Grid item xs={12} sm={8} md={9}>
+                          <Text color="black">
+                            <b>{feed.totalTime}</b>
+                          </Text>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={4}
+                          md={3}
+                          textAlign={{ sm: 'right' }}
+                        >
+                          <Box pr={3} pb={2}>
+                            Created Date:
+                          </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={8} md={9}>
+                          <Text color="black">
+                            <b>{feed.createdDate}</b>
+                          </Text>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={4}
+                          md={3}
+                          textAlign={{ sm: 'right' }}
+                        >
+                          <Box pr={3} pb={2}>
+                            Content Creators:
+                          </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={8} md={9}>
+                          <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
+                            {feed.authors.map((author, index) => {
+                              return (
+                                <>
+                                  <Text color="black" key={index}>
+                                    {author}
+                                  </Text>
+                                  <br />
+                                </>
+                              );
+                            })}
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Typography>
+                  </CardContent>
+                  <Divider />
+                  <Comment />
+                </Card>
+              </Grid>
             );
           })}
         </Grid>

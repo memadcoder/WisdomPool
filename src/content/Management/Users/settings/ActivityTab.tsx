@@ -9,7 +9,12 @@ import {
   IconButton,
   Button,
   CardActions,
-  Link
+  Link,
+  InputBase,
+  ListItemAvatar,
+  ListItemText,
+  List,
+  ListItemButton
 } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -22,6 +27,8 @@ import CommentTwoToneIcon from '@mui/icons-material/CommentTwoTone';
 import ShareTwoToneIcon from '@mui/icons-material/ShareTwoTone';
 import Text from '@/components/Text';
 import { useState } from 'react';
+import Label from 'src/components/Label';
+import Comment from '@/components/Comment';
 
 const CardActionsWrapper = styled(CardActions)(
   ({ theme }) => `
@@ -29,6 +36,23 @@ const CardActionsWrapper = styled(CardActions)(
      padding: ${theme.spacing(3)};
 `
 );
+
+const MessageInputWrapper = styled(InputBase)(
+  ({ theme }) => `
+    font-size: ${theme.typography.pxToRem(18)};
+    padding: ${theme.spacing(1)};
+    width: 100%;
+`
+);
+
+const ListItemWrapper = styled(ListItemButton)(
+  ({ theme }) => `
+        &.MuiButtonBase-root {
+            margin: ${theme.spacing(1)} 0;
+        }
+  `
+);
+
 const course = {
   title: 'Node Js',
   currentContent: 1,
@@ -74,6 +98,11 @@ const course = {
 };
 
 function ActivityTab() {
+  const user = {
+    name: 'Catherine Pike',
+    avatar: '/static/images/avatars/1.jpg'
+  };
+
   const [currentContent, setCurrentContent] = useState(course.currentContent);
 
   return (
@@ -214,6 +243,7 @@ function ActivityTab() {
           </Typography>
         </Box>
       </CardActionsWrapper>
+      <Comment />
     </Card>
   );
 }
