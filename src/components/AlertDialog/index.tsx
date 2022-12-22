@@ -6,22 +6,18 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function AlertDialog({ message, open, setOpen }) {
-  //   const [open, setOpen] = React.useState(false);
-
-  //   const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
-
+export default function AlertDialog({ message, open, setOpen, confirmAgree }) {
   const handleClose = () => {
     setOpen(false);
   };
 
+  const onAgree = () => {
+    handleClose();
+    confirmAgree();
+  };
+
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -29,14 +25,9 @@ export default function AlertDialog({ message, open, setOpen }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{message}</DialogTitle>
-        {/* <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            By confirming this, you will be 
-          </DialogContentText>
-        </DialogContent> */}
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={onAgree} autoFocus>
             Agree
           </Button>
         </DialogActions>

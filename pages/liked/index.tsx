@@ -18,6 +18,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Text from '@/components/Text';
 import NextLink from 'next/link';
 import AlertDialog from '@/components/AlertDialog';
+import Snackbars from '@/components/Snackbar';
 
 const poolFeeds = [
   {
@@ -93,8 +94,14 @@ const poolFeeds = [
 
 function Liked() {
   const [open, setOpen] = useState(false);
+  const [snackbarOpen, setSnackbar] = useState(false);
+
   const setConfirmDialog = () => {
     setOpen(!open);
+  };
+
+  const confirmAgree = () => {
+    setSnackbar(true);
   };
 
   return (
@@ -175,7 +182,7 @@ function Liked() {
           </Grid> */
             }
             return (
-              <Grid item xs={12} key={feed._id}>
+              <Grid item xs={12} key={feed.courseId}>
                 <Card>
                   <Box
                     p={3}
@@ -277,6 +284,13 @@ function Liked() {
         open={open}
         setOpen={setConfirmDialog}
         message="Are you sure you want to unlike?"
+        confirmAgree={confirmAgree}
+      />
+      <Snackbars
+        open={snackbarOpen}
+        setOpen={setSnackbar}
+        message={'This is test message'}
+        type={'success'}
       />
       <Footer />
     </>
