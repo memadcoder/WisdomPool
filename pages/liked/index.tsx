@@ -1,5 +1,5 @@
 import Head from 'next/head';
-
+import { useState } from 'react';
 import SidebarLayout from '@/layouts/SidebarLayout';
 
 import Footer from '@/components/Footer';
@@ -17,6 +17,7 @@ import {
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Text from '@/components/Text';
 import NextLink from 'next/link';
+import AlertDialog from '@/components/AlertDialog';
 
 const poolFeeds = [
   {
@@ -91,6 +92,11 @@ const poolFeeds = [
 ];
 
 function Liked() {
+  const [open, setOpen] = useState(false);
+  const setConfirmDialog = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
       <Head>
@@ -185,7 +191,13 @@ function Liked() {
                         {feed.description}
                       </Typography>
                     </Box>
-                    <Button variant="text" startIcon={<ThumbUpAltIcon />}>
+                    <Button
+                      variant="text"
+                      startIcon={<ThumbUpAltIcon />}
+                      onClick={() => {
+                        setConfirmDialog();
+                      }}
+                    >
                       Unlike
                     </Button>
                   </Box>
@@ -261,6 +273,11 @@ function Liked() {
           })}
         </Grid>
       </Container>
+      <AlertDialog
+        open={open}
+        setOpen={setConfirmDialog}
+        message="Are you sure you want to unlike?"
+      />
       <Footer />
     </>
   );

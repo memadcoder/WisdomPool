@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import Head from 'next/head';
-
 import SidebarLayout from '@/layouts/SidebarLayout';
 
 import Footer from '@/components/Footer';
@@ -17,6 +17,7 @@ import {
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Text from '@/components/Text';
 import NextLink from 'next/link';
+import AlertDialog from '@/components/AlertDialog';
 
 const poolFeeds = [
   {
@@ -91,6 +92,10 @@ const poolFeeds = [
 ];
 
 function Favourites() {
+  const [open, setOpen] = useState(false);
+  const setConfirmDialog = () => {
+    setOpen(!open);
+  };
   return (
     <>
       <Head>
@@ -185,7 +190,13 @@ function Favourites() {
                         {feed.description}
                       </Typography>
                     </Box>
-                    <Button variant="text" startIcon={<FavoriteIcon />}>
+                    <Button
+                      variant="text"
+                      startIcon={<FavoriteIcon />}
+                      onClick={() => {
+                        setConfirmDialog();
+                      }}
+                    >
                       Unfavorite
                     </Button>
                   </Box>
@@ -261,6 +272,11 @@ function Favourites() {
           })}
         </Grid>
       </Container>
+      <AlertDialog
+        open={open}
+        setOpen={setConfirmDialog}
+        message="Are you sure you want to unfavorite?"
+      />
       <Footer />
     </>
   );
