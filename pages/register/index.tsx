@@ -4,7 +4,8 @@ import {
   Card,
   Container,
   Button,
-  styled
+  styled,
+  Grid
 } from '@mui/material';
 import type { ReactElement } from 'react';
 import BaseLayout from 'src/layouts/BaseLayout';
@@ -14,27 +15,28 @@ import Head from 'next/head';
 
 import Logo from 'src/components/LogoSign';
 import Hero from 'src/content/Overview/Hero';
+import SignUp from '@/components/SignUp';
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `
-  width: 100%;
-  display: flex;
-  align-items: center;
-  height: ${theme.spacing(10)};
-  margin-bottom: ${theme.spacing(10)};
-`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: ${theme.spacing(10)};
+    margin-bottom: ${theme.spacing(10)};
+  `
 );
 
 const OverviewWrapper = styled(Box)(
   ({ theme }) => `
-    overflow: auto;
-    background: ${theme.palette.common.white};
-    flex: 1;
-    overflow-x: hidden;
-`
+      overflow: auto;
+      background: ${theme.palette.common.white};
+      flex: 1;
+      overflow-x: hidden;
+  `
 );
 
-function Overview() {
+function Register() {
   return (
     <OverviewWrapper>
       <Head>
@@ -52,20 +54,31 @@ function Overview() {
             >
               <Box />
               {/* <Box>
-                <Button
-                  component={Link}
-                  href="/pool"
-                  variant="contained"
-                  sx={{ ml: 2 }}
-                >
-                  Live Preview
-                </Button>
-              </Box> */}
+                  <Button
+                    component={Link}
+                    href="/pool"
+                    variant="contained"
+                    sx={{ ml: 2 }}
+                  >
+                    Live Preview
+                  </Button>
+                </Box> */}
             </Box>
           </Box>
         </Container>
       </HeaderWrapper>
-      <Hero />
+      <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
+        <Grid
+          spacing={{ xs: 6, md: 10 }}
+          justifyContent="center"
+          alignItems="center"
+          container
+        >
+          <Grid item md={10} lg={8} mx="auto">
+            <SignUp />
+          </Grid>
+        </Grid>
+      </Container>
       <Container maxWidth="lg" sx={{ mt: 8 }}>
         <Typography textAlign="center" variant="subtitle1">
           Copyright ©
@@ -78,8 +91,8 @@ function Overview() {
   );
 }
 
-export default Overview;
+export default Register;
 
-Overview.getLayout = function getLayout(page: ReactElement) {
+Register.getLayout = function getLayout(page: ReactElement) {
   return <BaseLayout>{page}</BaseLayout>;
 };

@@ -1,3 +1,4 @@
+import SignIn from '@/components/SignIn';
 import {
   Box,
   Button,
@@ -105,7 +106,8 @@ function Hero() {
         container
       >
         <Grid item md={10} lg={8} mx="auto">
-          <LabelWrapper color="success">Version 1.0.0</LabelWrapper>
+          <SignIn />
+          {/* <LabelWrapper color="success">Version 1.0.0</LabelWrapper>
           <TypographyH1 sx={{ mb: 2 }} variant="h1">
             Tokyo Free White Next.js Typescript Admin Dashboard
           </TypographyH1>
@@ -187,7 +189,7 @@ function Hero() {
                 </Typography>
               </Typography>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </Container>
