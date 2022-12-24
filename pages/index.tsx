@@ -14,6 +14,7 @@ import Head from 'next/head';
 
 import Logo from 'src/components/LogoSign';
 import Hero from 'src/content/Overview/Hero';
+import Snackbars from '@/components/Snackbar';
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `
@@ -65,6 +66,7 @@ function Overview() {
           </Box>
         </Container>
       </HeaderWrapper>
+      <Snackbars />
       <Hero />
       <Container maxWidth="lg" sx={{ mt: 8 }}>
         <Typography textAlign="center" variant="subtitle1">

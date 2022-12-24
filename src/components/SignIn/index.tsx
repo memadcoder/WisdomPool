@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NextLink from 'next/link';
+import { createResource } from '@/api';
+import { setToken } from '@/utility/setUser';
+import { SnackbarContext } from '@/contexts/SnackbarContext';
 
 function Copyright(props: any) {
   return (
@@ -24,7 +27,7 @@ function Copyright(props: any) {
     >
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        www.wisdompool.com
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -35,13 +38,31 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const { setSnackbar, setSnackbarMessage, setSnackbarType } =
+    React.useContext(SnackbarContext);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const payload = {
       email: data.get('email'),
       password: data.get('password')
-    });
+    };
+
+    // login
+    try {
+      const response = await createResource(payload, '/users/login');
+      setSnackbar();
+      setSnackbarMessage('Successfully Logged In');
+      setSnackbarType('success');
+      setToken(response.data.accessToken);
+    } catch (error) {
+      setSnackbar();
+      setSnackbarMessage(
+        error.response.data.message || error.response.data.message?.[0]
+      );
+      setSnackbarType('error');
+    }
   };
 
   return (
@@ -88,10 +109,10 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            {/* <FormControlLabel
+            <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            /> */}
+            />
             <Button
               type="submit"
               fullWidth
@@ -101,9 +122,11 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              {/* <Grid item xs>
-                <Link variant="body2">Forgot password?</Link>
-              </Grid> */}
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
               <Grid item>
                 <NextLink href="/register" passHref>
                   <Link variant="body2">
@@ -114,7 +137,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

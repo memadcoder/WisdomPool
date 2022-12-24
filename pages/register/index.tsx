@@ -16,6 +16,7 @@ import Head from 'next/head';
 import Logo from 'src/components/LogoSign';
 import Hero from 'src/content/Overview/Hero';
 import SignUp from '@/components/SignUp';
+import Snackbars from '@/components/Snackbar';
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `
@@ -78,6 +79,7 @@ function Register() {
             <SignUp />
           </Grid>
         </Grid>
+        <Snackbars />
       </Container>
       <Container maxWidth="lg" sx={{ mt: 8 }}>
         <Typography textAlign="center" variant="subtitle1">

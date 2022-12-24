@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -13,35 +11,37 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NextLink from 'next/link';
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        www.wisdompool.com
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { createResource } from '@/api';
+import { SnackbarContext } from '@/contexts/SnackbarContext';
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const { setSnackbar, setSnackbarMessage, setSnackbarType } =
+    React.useContext(SnackbarContext);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const payload = {
+      name: data.get('fullName'),
       email: data.get('email'),
       password: data.get('password')
-    });
+    };
+
+    // create the new user
+    try {
+      const response = await createResource(payload, '/users');
+      setSnackbar();
+      setSnackbarMessage('Congratulations !! You are registered successfully');
+      setSnackbarType('success');
+    } catch (error) {
+      setSnackbar();
+      setSnackbarMessage(
+        error.response.data.message || error.response.data.message?.[0]
+      );
+      setSnackbarType('error');
+    }
   };
 
   return (
@@ -69,7 +69,7 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -79,15 +79,15 @@ export default function SignUp() {
                   label="First Name"
                   autoFocus
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  id="fullName"
+                  label="Full Name"
+                  name="fullName"
+                  autoComplete="full-name"
                 />
               </Grid>
               <Grid item xs={12}>

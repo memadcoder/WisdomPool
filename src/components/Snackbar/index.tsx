@@ -2,6 +2,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { SnackbarContext } from '@/contexts/SnackbarContext';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -10,7 +11,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Snackbars({ open, setOpen, message, type }) {
+export default function Snackbars() {
+  console.log('called');
+  const { snackbar, message, type, setSnackbar } =
+    React.useContext(SnackbarContext);
+
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -19,13 +24,13 @@ export default function Snackbars({ open, setOpen, message, type }) {
       return;
     }
 
-    setOpen(false);
+    setSnackbar();
   };
 
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
       <Snackbar
-        open={open}
+        open={snackbar}
         autoHideDuration={6000}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
