@@ -1,28 +1,23 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
-
 import { Grid, Container } from '@mui/material';
-
 import ProfileCover from '@/content/Management/Users/details/ProfileCover';
-import { useContext, useState } from 'react';
-import { UserContext } from '@/contexts/UserContext';
-import { withPrivateRoute } from '@/hocs/withPrivateRoute';
 import { checkAuthentication } from '@/utility/checkAuthentication';
+import { getToken } from '@/utility/setUser';
 
 function ManagementUserProfile() {
-  const { loggedInUser } = useContext(UserContext);
+  const [loggedInUser, setUser] = useState(getToken()?.user);
 
   const user = {
     savedCards: 7,
-    name: loggedInUser?.user?.name,
+    name: loggedInUser?.name,
     coverImg: '/static/images/placeholders/covers/5.jpg',
     avatar: '/static/images/avatars/4.jpg',
     description:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage",
     jobtitle: 'User'
-    // location: 'Barcelona, Spain',
-    // followers: '465'
   };
 
   return (
@@ -41,21 +36,6 @@ function ManagementUserProfile() {
           <Grid item xs={12} md={8}>
             <ProfileCover user={user} />
           </Grid>
-          {/* <Grid item xs={12} md={4}>
-            <RecentActivity />
-          </Grid> */}
-          {/* <Grid item xs={12} md={8}>
-            <Feed />
-          </Grid> */}
-          {/* <Grid item xs={12} md={4}>
-            <PopularTags />
-          </Grid> */}
-          {/* <Grid item xs={12} md={7}>
-            <MyCards />
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <Addresses />
-          </Grid> */}
         </Grid>
       </Container>
       <Footer />

@@ -1,4 +1,4 @@
-import { useRef, useState, useContext } from 'react';
+import { useRef, useState } from 'react';
 
 import NextLink from 'next/link';
 
@@ -16,15 +16,13 @@ import {
   Typography
 } from '@mui/material';
 
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import { UserContext } from '@/contexts/UserContext';
-import { clearToken } from '@/utility/setUser';
+import { clearToken, getToken } from '@/utility/setUser';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -63,15 +61,15 @@ const UserBoxDescription = styled(Typography)(
 
 function HeaderUserbox() {
   const router = useRouter();
-  const { setLoggedInUser, loggedInUser } = useContext(UserContext);
+  const [loggedInUser, setUser] = useState(getToken()?.user);
+
   const handleLogout = () => {
     clearToken();
-    setLoggedInUser(null);
     router.push('/');
   };
-  console.log({ loggedInUser });
+
   const user = {
-    name: loggedInUser?.user?.name,
+    name: loggedInUser?.name,
     avatar: '/static/images/avatars/1.jpg',
     jobtitle: 'User'
   };
@@ -133,12 +131,6 @@ function HeaderUserbox() {
               <ListItemText primary="My Profile" />
             </ListItem>
           </NextLink>
-          {/* <NextLink href="/applications/messenger" passHref>
-            <ListItem button>
-              <InboxTwoToneIcon fontSize="small" />
-              <ListItemText primary="Messenger" />
-            </ListItem>
-          </NextLink> */}
           <NextLink href="/profile/settings" passHref>
             <ListItem button>
               <AccountTreeTwoToneIcon fontSize="small" />

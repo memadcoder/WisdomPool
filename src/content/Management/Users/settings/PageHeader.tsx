@@ -1,12 +1,12 @@
-import { UserContext } from '@/contexts/UserContext';
+import { useState } from 'react';
+import { getToken } from '@/utility/setUser';
 import { Typography } from '@mui/material';
-import { useContext } from 'react';
 
 function PageHeader() {
-  const { loggedInUser } = useContext(UserContext);
+  const [loggedInUser, setUser] = useState(getToken()?.user);
 
   const user = {
-    name: loggedInUser?.user?.name,
+    name: loggedInUser?.name,
     avatar: '/static/images/avatars/1.jpg'
   };
 

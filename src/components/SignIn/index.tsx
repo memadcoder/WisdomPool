@@ -19,24 +19,6 @@ import { SnackbarContext } from '@/contexts/SnackbarContext';
 import { useRouter } from 'next/router';
 import { UserContext } from '@/contexts/UserContext';
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 export default function SignIn() {
@@ -55,17 +37,20 @@ export default function SignIn() {
 
     // login
     try {
+      console.log('here');
       const response = await createResource(payload, '/users/login');
-      setToken(response.data.accessToken);
+      console.log(response.data);
+      setToken(response.data.accessToken, response.data.user);
       setLoggedInUser(response.data);
       router.push('/pool');
     } catch (error) {
       setLoggedInUser(null);
-      setSnackbar(true);
-      setSnackbarMessage(
-        error.response.data.message || error.response.data.message?.[0]
-      );
-      setSnackbarType('error');
+      console.log(error);
+      // setSnackbarMessage(
+      //   error.response.data.message || error.response.data.message?.[0]
+      // );
+      // setSnackbarType('error');
+      // setSnackbar(true);
     }
   };
 
@@ -141,7 +126,6 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
