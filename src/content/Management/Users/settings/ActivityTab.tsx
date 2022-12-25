@@ -7,15 +7,11 @@ import {
   IconButton,
   Button,
   CardActions,
-  Link,
-  InputBase,
-  ListItemButton
+  Link
 } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { styled } from '@mui/material/styles';
-
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
 import ThumbUpAltTwoToneIcon from '@mui/icons-material/ThumbUpAltTwoTone';
 import CommentTwoToneIcon from '@mui/icons-material/CommentTwoTone';
@@ -64,7 +60,7 @@ const course = {
     },
     {
       link: 'https://www.youtube.com/embed/TlB_eWDSMt4',
-      title: '',
+      title: 'Code With Mosh',
       description: '',
       videoLength: '',
       contentCreatorLink: '',
@@ -89,26 +85,7 @@ function ActivityTab() {
         titleTypographyProps={{ variant: 'h4' }}
         subheaderTypographyProps={{ variant: 'subtitle2' }}
         title={course.title}
-        subheader={
-          <>{course.description}</>
-          // <>
-          //   Managing Partner,{' '}
-          //   <Link
-          //     href="@/content/Management/Users/settings/ActivityTab#"
-          //     underline="hover"
-          //   >
-          //     #software
-          //   </Link>
-          //   ,{' '}
-          //   <Link
-          //     href="@/content/Management/Users/settings/ActivityTab#"
-          //     underline="hover"
-          //   >
-          //     #managers
-          //   </Link>
-          //   , Google Inc.
-          // </>
-        }
+        subheader={<>{course.description}</>}
       />
       <div className="course-video-frame">
         <iframe
@@ -125,37 +102,70 @@ function ActivityTab() {
             width: '100%',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            backgroundColor: 'rgb(17, 25, 42)',
+            color: 'white'
           }}
         >
-          <ArrowBackIosNewIcon
-            fontSize="medium"
-            onClick={() => {
-              if (currentContent - 1 >= 0)
-                setCurrentContent(currentContent - 1);
-            }}
-            style={{
-              color: 'white',
-              cursor: 'pointer',
-              position: 'absolute',
-              marginTop: '-45px',
-              marginRight: '30px'
-            }}
-          />
-          <ArrowForwardIosIcon
-            fontSize="medium"
-            onClick={() => {
-              if (currentContent + 1 <= course.contentDetails.length)
-                setCurrentContent(currentContent + 1);
-            }}
-            style={{
-              color: 'white',
-              cursor: 'pointer',
-              position: 'absolute',
-              marginTop: '-45px',
-              marginLeft: '30px'
-            }}
-          />
+          <div>
+            <p
+              style={{
+                fontSize: '10px',
+                position: 'absolute',
+                marginLeft: '-140px',
+                marginTop: '6px',
+                width: '145px',
+                height: '30px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                textAlign: 'right'
+              }}
+            >
+              {course.contentDetails[currentContent - 1]?.title ||
+                'No Previous'}
+            </p>
+            <SkipPreviousIcon
+              fontSize="large"
+              onClick={() => {
+                if (currentContent - 1 >= 0)
+                  setCurrentContent(currentContent - 1);
+              }}
+              style={{
+                color: 'white',
+                cursor: 'pointer'
+              }}
+            />
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: '10px',
+                textAlign: 'left',
+                position: 'absolute',
+                marginLeft: '30px',
+                marginTop: '6px',
+                width: '150px',
+                height: '30px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}
+            >
+              {course.contentDetails[currentContent + 1]?.title || 'No Next'}
+            </p>
+            <SkipNextIcon
+              fontSize="large"
+              onClick={() => {
+                if (currentContent + 1 < course.contentDetails.length)
+                  setCurrentContent(currentContent + 1);
+              }}
+              style={{
+                color: 'white',
+                cursor: 'pointer'
+              }}
+            />
+          </div>
         </div>
       </div>
       <Box p={3}>
