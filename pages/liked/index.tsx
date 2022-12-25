@@ -1,24 +1,13 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import SidebarLayout from '@/layouts/SidebarLayout';
 
 import Footer from '@/components/Footer';
-import {
-  Container,
-  Grid,
-  Card,
-  CardHeader,
-  CardContent,
-  Divider,
-  Typography,
-  Box,
-  Button
-} from '@mui/material';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import Text from '@/components/Text';
-import NextLink from 'next/link';
+import { Container, Grid } from '@mui/material';
 import AlertDialog from '@/components/AlertDialog';
-import Snackbars from '@/components/Snackbar';
+import Feeds from 'pages/components/Feeds';
+import { UserContext } from '@/contexts/UserContext';
+import { checkAuthentication } from '@/utility/checkAuthentication';
 
 const poolFeeds = [
   {
@@ -93,16 +82,15 @@ const poolFeeds = [
 ];
 
 function Liked() {
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+  // const { isLoggedIn } = useContext(UserContext);
   const [open, setOpen] = useState(false);
-  const [snackbarOpen, setSnackbar] = useState(false);
 
   const setConfirmDialog = () => {
     setOpen(!open);
   };
 
-  const confirmAgree = () => {
-    setSnackbar(true);
-  };
+  const confirmAgree = () => {};
 
   return (
     <>
@@ -117,186 +105,29 @@ function Liked() {
           alignItems="stretch"
           spacing={3}
         >
-          {poolFeeds.map((feed) => {
-            {
-              /* <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Images" />
-              <Divider />
-              <CardContent>
-                <Stack direction="row" spacing={2}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatars/1.jpg" />
-                  <Avatar
-                    alt="Travis Howard"
-                    src="/static/images/avatars/2.jpg"
-                  />
-                  <Avatar
-                    alt="Cindy Baker"
-                    src="/static/images/avatars/3.jpg"
-                  />
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Letters" />
-              <Divider />
-              <CardContent>
-                <Stack direction="row" spacing={2}>
-                  <Avatar>H</Avatar>
-                  <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-                  <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
-                </Stack>
-                <Divider sx={{ my: 5 }} />
-                <Stack direction="row" spacing={2}>
-                  <Avatar {...stringAvatar('Kent Dodds')} />
-                  <Avatar {...stringAvatar('Jed Watson')} />
-                  <Avatar {...stringAvatar('Tim Neutkens')} />
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid> */
+          <Feeds
+            feeds={poolFeeds}
+            setModal={setConfirmDialog}
+            type="Unlike"
+            DialogModal={
+              <AlertDialog
+                open={open}
+                setOpen={setConfirmDialog}
+                confirmAgree={confirmAgree}
+                message="Are you sure you want to unlike?"
+              />
             }
-            {
-              /* <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Sizes" />
-              <Divider />
-              <CardContent>
-                <Stack direction="row" spacing={2}>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatars/4.jpg"
-                    sx={{ width: 24, height: 24 }}
-                  />
-                  <Avatar alt="Remy Sharp" src="/static/images/avatars/5.jpg" />
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatars/3.jpg"
-                    sx={{ width: 56, height: 56 }}
-                  />
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid> */
-            }
-            return (
-              <Grid item xs={12} key={feed.courseId}>
-                <Card>
-                  <Box
-                    p={3}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Box>
-                      <Typography variant="h4" gutterBottom>
-                        {feed.title}
-                      </Typography>
-                      <Typography variant="subtitle2">
-                        {feed.description}
-                      </Typography>
-                    </Box>
-                    <Button
-                      variant="text"
-                      startIcon={<ThumbUpAltIcon />}
-                      onClick={() => {
-                        setConfirmDialog();
-                      }}
-                    >
-                      Unlike
-                    </Button>
-                  </Box>
-                  <Divider />
-                  <NextLink href={`course/${feed.courseId}`} passHref>
-                    <CardContent sx={{ p: 4 }} style={{ cursor: 'pointer' }}>
-                      <Typography variant="subtitle2">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Total Time:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed.totalTime}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Created Date:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed.createdDate}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Content Creators:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
-                              {feed.authors.map((author, index) => {
-                                return (
-                                  <>
-                                    <Text color="black" key={index}>
-                                      {author}
-                                    </Text>
-                                    <br />
-                                  </>
-                                );
-                              })}
-                            </Box>
-                          </Grid>
-                        </Grid>
-                      </Typography>
-                    </CardContent>
-                  </NextLink>
-                </Card>
-              </Grid>
-            );
-          })}
+          />
         </Grid>
       </Container>
-      <AlertDialog
-        open={open}
-        setOpen={setConfirmDialog}
-        message="Are you sure you want to unlike?"
-        confirmAgree={confirmAgree}
-      />
-      <Snackbars
-        open={snackbarOpen}
-        setOpen={setSnackbar}
-        message={'This is test message'}
-        type={'success'}
-      />
       <Footer />
     </>
   );
 }
 
-Liked.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
+Liked.getLayout = (page) => {
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
+};
 
 export default Liked;

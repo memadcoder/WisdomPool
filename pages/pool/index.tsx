@@ -1,28 +1,20 @@
 import Head from 'next/head';
-
+import * as React from 'react';
 import SidebarLayout from '@/layouts/SidebarLayout';
-
-import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
 import { Container, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
-
-import AccountBalance from '@/content/Dashboards/Crypto/AccountBalance';
-import Wallets from '@/content/Dashboards/Crypto/Wallets';
-import AccountSecurity from '@/content/Dashboards/Crypto/AccountSecurity';
-import WatchList from '@/content/Dashboards/Crypto/WatchList';
-import ActivityTab from '@/content/Management/Users/settings/ActivityTab';
 import Avatars from 'pages/components/avatars';
+import Snackbars from '@/components/Snackbar';
+import { checkAuthentication } from '@/utility/checkAuthentication';
 
 function DashboardCrypto() {
+  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
+
   return (
     <>
       <Head>
         <title>Wisdom Pool</title>
       </Head>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
       <Container maxWidth="lg">
         <Grid
           container
@@ -32,28 +24,19 @@ function DashboardCrypto() {
           spacing={4}
         >
           <Grid item xs={12}>
-            <Avatars />
-            {/* <ActivityTab /> */}
+            <Avatars isAuthenticated={isLoggedIn} />
           </Grid>
-          {/* <Grid item xs={12}>
-            <AccountBalance />
-          </Grid>
-          <Grid item lg={8} xs={12}>
-            <Wallets />
-          </Grid>
-          <Grid item lg={4} xs={12}>
-            <AccountSecurity />
-          </Grid>
-          <Grid item xs={12}>
-            <WatchList />
-          </Grid> */}
         </Grid>
+        <Snackbars />
       </Container>
       <Footer />
     </>
   );
 }
 
-DashboardCrypto.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
+DashboardCrypto.getLayout = (page) => {
+  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
+  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
+};
 
 export default DashboardCrypto;

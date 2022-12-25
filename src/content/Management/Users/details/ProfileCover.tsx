@@ -89,10 +89,7 @@ const ProfileCover = ({ user }) => {
         </Tooltip>
         <Box>
           <Typography variant="h3" component="h3" gutterBottom>
-            Profile for {user.name}
-          </Typography>
-          <Typography variant="subtitle2">
-            This is a profile page. Easy to modify, always blazing fast
+            {user.name}
           </Typography>
         </Box>
       </Box>
@@ -132,9 +129,9 @@ const ProfileCover = ({ user }) => {
           {user.name}
         </Typography>
         <Typography variant="subtitle2">{user.description}</Typography>
-        <Typography sx={{ py: 2 }} variant="subtitle2" color="text.primary">
+        {/* <Typography sx={{ py: 2 }} variant="subtitle2" color="text.primary">
           {user.jobtitle} | {user.location} | {user.followers} followers
-        </Typography>
+        </Typography> */}
         {/* <Box
           display={{ xs: 'block', md: 'flex' }}
           alignItems="center"

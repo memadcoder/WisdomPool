@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   Grid,
   Typography,
@@ -14,12 +14,20 @@ import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
 import Text from '@/components/Text';
 import Label from '@/components/Label';
 import PersonalDetailsModal from '@/components/Modal/Profile/PersonalDetailsModal';
+import { UserContext } from '@/contexts/UserContext';
 
 function EditProfileTab() {
+  const { loggedInUser } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const setModal = () => {
     setOpen(!open);
   };
+
+  const user = {
+    name: loggedInUser?.user?.name,
+    avatar: '/static/images/avatars/1.jpg'
+  };
+
   return (
     <>
       <Grid container spacing={3}>
@@ -60,32 +68,32 @@ function EditProfileTab() {
                   </Grid>
                   <Grid item xs={12} sm={8} md={9}>
                     <Text color="black">
-                      <b>Craig Donin</b>
+                      <b>{loggedInUser?.user?.name}</b>
                     </Text>
                   </Grid>
-                  <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
+                  {/* <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
                     <Box pr={3} pb={2}>
                       Date of birth:
                     </Box>
-                  </Grid>
-                  <Grid item xs={12} sm={8} md={9}>
+                  </Grid> */}
+                  {/* <Grid item xs={12} sm={8} md={9}>
                     <Text color="black">
                       <b>15 March 1977</b>
                     </Text>
-                  </Grid>
-                  <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
+                  </Grid> */}
+                  {/* <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
                     <Box pr={3} pb={2}>
                       Address:
                     </Box>
-                  </Grid>
-                  <Grid item xs={12} sm={8} md={9}>
+                  </Grid> */}
+                  {/* <Grid item xs={12} sm={8} md={9}>
                     <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
                       <Text color="black">
                         1749 High Meadow Lane, SEQUOIA NATIONAL PARK,
                         California, 93262
                       </Text>
                     </Box>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
                     <Box pr={3} pb={2}>
                       Email ID:
@@ -93,7 +101,7 @@ function EditProfileTab() {
                   </Grid>
                   <Grid item xs={12} sm={8} md={9}>
                     <Text color="black">
-                      <b>example@demo.com</b>
+                      <b>{loggedInUser?.user?.email}</b>
                     </Text>
                     <Box pl={1} component="span">
                       <Label color="success">Primary</Label>

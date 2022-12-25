@@ -24,6 +24,9 @@ import PageviewIcon from '@mui/icons-material/Pageview';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
 import Comment from '@/components/Comment';
+import { withPrivateRoute } from '@/hocs/withPrivateRoute';
+import { checkAuthentication } from '@/utility/checkAuthentication';
+import { useState } from 'react';
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -314,6 +317,9 @@ function Avatars() {
   );
 }
 
-Avatars.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
+Avatars.getLayout = (page) => {
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
+};
 
 export default Avatars;

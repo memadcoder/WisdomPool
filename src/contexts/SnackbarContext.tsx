@@ -3,7 +3,7 @@ type SnackbarContext = {
   snackbar: boolean;
   message: string;
   type: any;
-  setSnackbar: () => void;
+  setSnackbar: (flag: boolean) => void;
   setSnackbarMessage: (msg: string) => void;
   setSnackbarType: (typ: string) => void;
 };
@@ -22,9 +22,8 @@ export function SnackbarProvider({ children }: Props) {
   const [message, setMessage] = useState(null);
   const [type, setType] = useState(null);
 
-  const setSnackbar = () => {
-    console.log('called snackbarprovider');
-    setOpen(!snackbar);
+  const setSnackbar = (flag: boolean) => {
+    setOpen(flag);
   };
 
   const setSnackbarMessage = (msg: string) => {

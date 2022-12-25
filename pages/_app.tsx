@@ -14,6 +14,8 @@ import { SidebarProvider } from 'src/contexts/SidebarContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { SnackbarProvider } from '@/contexts/SnackbarContext';
+import { UserProvider } from '@/contexts/UserContext';
+import { getToken } from '@/utility/setUser';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -45,12 +47,14 @@ function TokyoApp(props: TokyoAppProps) {
       </Head>
       <SidebarProvider>
         <SnackbarProvider>
-          <ThemeProvider>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <CssBaseline />
-              {getLayout(<Component {...pageProps} />)}
-            </LocalizationProvider>
-          </ThemeProvider>
+          <UserProvider>
+            <ThemeProvider>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <CssBaseline />
+                {getLayout(<Component {...pageProps} />)}
+              </LocalizationProvider>
+            </ThemeProvider>
+          </UserProvider>
         </SnackbarProvider>
       </SidebarProvider>
     </CacheProvider>

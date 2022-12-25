@@ -25,27 +25,7 @@ function PersonalDetailsModal(props) {
             required
             id="standard-required"
             label="Required"
-            defaultValue="Title"
-            variant="standard"
-            fullWidth={true}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="standard-required"
-            label="Required"
-            defaultValue="Title"
-            variant="standard"
-            fullWidth={true}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="standard-required"
-            label="Required"
-            defaultValue="Title"
+            defaultValue="Name"
             variant="standard"
             fullWidth={true}
           />

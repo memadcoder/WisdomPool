@@ -4,16 +4,18 @@ import PropTypes from 'prop-types';
 
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { withPrivateRoute } from '@/hocs/withPrivateRoute';
 
 interface SidebarLayoutProps {
   children?: ReactNode;
+  isAuthenticated: boolean;
 }
 
 const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
   const theme = useTheme();
 
   return (
-    <>
+    <div>
       <Box
         sx={{
           flex: 1,
@@ -58,7 +60,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
           <Box display="block">{children}</Box>
         </Box>
       </Box>
-    </>
+    </div>
   );
 };
 
@@ -66,4 +68,4 @@ SidebarLayout.propTypes = {
   children: PropTypes.node
 };
 
-export default SidebarLayout;
+export default withPrivateRoute(SidebarLayout);

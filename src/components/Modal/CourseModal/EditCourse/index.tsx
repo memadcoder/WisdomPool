@@ -5,9 +5,9 @@ import TextField from '@mui/material/TextField';
 import { Button, Grid } from '@mui/material';
 
 function EditCourseModal(props) {
-  const { setEditCourseModal, open } = props;
+  const { setModal, open } = props;
   const handleClose = () => {
-    setEditCourseModal();
+    setModal();
   };
 
   return (
@@ -61,7 +61,7 @@ function EditCourseModal(props) {
 }
 
 EditCourseModal.propTypes = {
-  setEditCourseModal: PropTypes.func.isRequired,
+  setModal: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired
 };
 

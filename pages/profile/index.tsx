@@ -5,23 +5,24 @@ import Footer from '@/components/Footer';
 import { Grid, Container } from '@mui/material';
 
 import ProfileCover from '@/content/Management/Users/details/ProfileCover';
-import RecentActivity from '@/content/Management/Users/details/RecentActivity';
-import Feed from '@/content/Management/Users/details/Feed';
-import PopularTags from '@/content/Management/Users/details/PopularTags';
-import MyCards from '@/content/Management/Users/details/MyCards';
-import Addresses from '@/content/Management/Users/details/Addresses';
+import { useContext, useState } from 'react';
+import { UserContext } from '@/contexts/UserContext';
+import { withPrivateRoute } from '@/hocs/withPrivateRoute';
+import { checkAuthentication } from '@/utility/checkAuthentication';
 
 function ManagementUserProfile() {
+  const { loggedInUser } = useContext(UserContext);
+
   const user = {
     savedCards: 7,
-    name: 'Catherine Pike',
+    name: loggedInUser?.user?.name,
     coverImg: '/static/images/placeholders/covers/5.jpg',
     avatar: '/static/images/avatars/4.jpg',
     description:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage",
-    jobtitle: 'Web Developer',
-    location: 'Barcelona, Spain',
-    followers: '465'
+    jobtitle: 'User'
+    // location: 'Barcelona, Spain',
+    // followers: '465'
   };
 
   return (
@@ -62,8 +63,10 @@ function ManagementUserProfile() {
   );
 }
 
-ManagementUserProfile.getLayout = (page) => (
-  <SidebarLayout>{page}</SidebarLayout>
-);
+ManagementUserProfile.getLayout = (page) => {
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+
+  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
+};
 
 export default ManagementUserProfile;

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 
 import NextLink from 'next/link';
 
@@ -17,11 +17,14 @@ import {
 } from '@mui/material';
 
 import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
+import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import { UserContext } from '@/contexts/UserContext';
+import { clearToken } from '@/utility/setUser';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -59,10 +62,18 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
+  const router = useRouter();
+  const { setLoggedInUser, loggedInUser } = useContext(UserContext);
+  const handleLogout = () => {
+    clearToken();
+    setLoggedInUser(null);
+    router.push('/');
+  };
+  console.log({ loggedInUser });
   const user = {
-    name: 'Catherine Pike',
+    name: loggedInUser?.user?.name,
     avatar: '/static/images/avatars/1.jpg',
-    jobtitle: 'Project Manager'
+    jobtitle: 'User'
   };
 
   const ref = useRef<any>(null);
@@ -137,7 +148,13 @@ function HeaderUserbox() {
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button
+            color="primary"
+            fullWidth
+            onClick={() => {
+              handleLogout();
+            }}
+          >
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
           </Button>

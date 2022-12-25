@@ -3,7 +3,15 @@ export const setToken = (token: string) => {
     return;
 }
 
+export const clearToken = () => {
+    localStorage.removeItem('wisdompool-user-token');
+}
+
 export const getToken = () => {
-    const token = localStorage.getItem('wisdompool-user-token');
-    return token;
+    if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('wisdompool-user-token');
+        return { token: token, isLoggedIn: true };
+    }
+    return null;
+
 }

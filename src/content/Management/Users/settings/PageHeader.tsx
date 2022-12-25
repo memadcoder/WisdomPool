@@ -1,8 +1,12 @@
+import { UserContext } from '@/contexts/UserContext';
 import { Typography } from '@mui/material';
+import { useContext } from 'react';
 
 function PageHeader() {
+  const { loggedInUser } = useContext(UserContext);
+
   const user = {
-    name: 'Catherine Pike',
+    name: loggedInUser?.user?.name,
     avatar: '/static/images/avatars/1.jpg'
   };
 

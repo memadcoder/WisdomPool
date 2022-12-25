@@ -1,19 +1,14 @@
 import {
   Box,
-  CardMedia,
   Typography,
   Card,
   CardHeader,
   Divider,
-  Avatar,
   IconButton,
   Button,
   CardActions,
   Link,
   InputBase,
-  ListItemAvatar,
-  ListItemText,
-  List,
   ListItemButton
 } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -27,7 +22,6 @@ import CommentTwoToneIcon from '@mui/icons-material/CommentTwoTone';
 import ShareTwoToneIcon from '@mui/icons-material/ShareTwoTone';
 import Text from '@/components/Text';
 import { useState } from 'react';
-import Label from 'src/components/Label';
 import Comment from '@/components/Comment';
 
 const CardActionsWrapper = styled(CardActions)(
@@ -35,22 +29,6 @@ const CardActionsWrapper = styled(CardActions)(
      background: ${theme.colors.alpha.black[5]};
      padding: ${theme.spacing(3)};
 `
-);
-
-const MessageInputWrapper = styled(InputBase)(
-  ({ theme }) => `
-    font-size: ${theme.typography.pxToRem(18)};
-    padding: ${theme.spacing(1)};
-    width: 100%;
-`
-);
-
-const ListItemWrapper = styled(ListItemButton)(
-  ({ theme }) => `
-        &.MuiButtonBase-root {
-            margin: ${theme.spacing(1)} 0;
-        }
-  `
 );
 
 const course = {
@@ -98,17 +76,11 @@ const course = {
 };
 
 function ActivityTab() {
-  const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg'
-  };
-
   const [currentContent, setCurrentContent] = useState(course.currentContent);
 
   return (
     <Card>
       <CardHeader
-        // avatar={<Avatar src="/static/images/avatars/5.jpg" />}
         action={
           <IconButton color="primary">
             <MoreHorizTwoToneIcon fontSize="medium" />
@@ -138,11 +110,6 @@ function ActivityTab() {
           // </>
         }
       />
-      {/* <Box px={3} pb={2}>
-        <Typography variant="h4" fontWeight="normal">
-          {course.description}
-        </Typography>
-      </Box> */}
       <div className="course-video-frame">
         <iframe
           width="100%"
@@ -166,7 +133,6 @@ function ActivityTab() {
             onClick={() => {
               if (currentContent - 1 >= 0)
                 setCurrentContent(currentContent - 1);
-              console.log('Current Content', currentContent);
             }}
             style={{
               color: 'white',
@@ -181,7 +147,6 @@ function ActivityTab() {
             onClick={() => {
               if (currentContent + 1 <= course.contentDetails.length)
                 setCurrentContent(currentContent + 1);
-              console.log('Current Content', currentContent);
             }}
             style={{
               color: 'white',

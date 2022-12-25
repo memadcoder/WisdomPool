@@ -16,6 +16,8 @@ import NextLink from 'next/link';
 import { createResource } from '@/api';
 import { setToken } from '@/utility/setUser';
 import { SnackbarContext } from '@/contexts/SnackbarContext';
+import { useRouter } from 'next/router';
+import { UserContext } from '@/contexts/UserContext';
 
 function Copyright(props: any) {
   return (
@@ -38,8 +40,10 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const router = useRouter();
   const { setSnackbar, setSnackbarMessage, setSnackbarType } =
     React.useContext(SnackbarContext);
+  const { setLoggedInUser } = React.useContext(UserContext);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -52,12 +56,12 @@ export default function SignIn() {
     // login
     try {
       const response = await createResource(payload, '/users/login');
-      setSnackbar();
-      setSnackbarMessage('Successfully Logged In');
-      setSnackbarType('success');
       setToken(response.data.accessToken);
+      setLoggedInUser(response.data);
+      router.push('/pool');
     } catch (error) {
-      setSnackbar();
+      setLoggedInUser(null);
+      setSnackbar(true);
       setSnackbarMessage(
         error.response.data.message || error.response.data.message?.[0]
       );

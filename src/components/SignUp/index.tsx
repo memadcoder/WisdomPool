@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NextLink from 'next/link';
 import { createResource } from '@/api';
 import { SnackbarContext } from '@/contexts/SnackbarContext';
+import Snackbars from '../Snackbar';
 
 const theme = createTheme();
 
@@ -32,15 +33,17 @@ export default function SignUp() {
     // create the new user
     try {
       const response = await createResource(payload, '/users');
-      setSnackbar();
+      console.log({ response });
       setSnackbarMessage('Congratulations !! You are registered successfully');
       setSnackbarType('success');
+      setSnackbar(true);
     } catch (error) {
-      setSnackbar();
+      console.log(error);
       setSnackbarMessage(
         error.response.data.message || error.response.data.message?.[0]
       );
       setSnackbarType('error');
+      setSnackbar(true);
     }
   };
 
@@ -69,17 +72,6 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              {/* <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -137,6 +129,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
+        <Snackbars />
         {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
     </ThemeProvider>

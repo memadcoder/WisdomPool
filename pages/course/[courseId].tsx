@@ -1,18 +1,13 @@
 import Head from 'next/head';
 
 import SidebarLayout from '@/layouts/SidebarLayout';
-
-import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
 import { Container, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
-
-import AccountBalance from '@/content/Dashboards/Crypto/AccountBalance';
-import Wallets from '@/content/Dashboards/Crypto/Wallets';
-import AccountSecurity from '@/content/Dashboards/Crypto/AccountSecurity';
-import WatchList from '@/content/Dashboards/Crypto/WatchList';
 import ActivityTab from '@/content/Management/Users/settings/ActivityTab';
 import Avatars from 'pages/components/avatars';
+import { checkAuthentication } from '@/utility/checkAuthentication';
+import { useState } from 'react';
+// import { withPrivateRoute } from '@/hocs/withPrivateRoute';
 
 function DashboardCrypto() {
   return (
@@ -54,6 +49,9 @@ function DashboardCrypto() {
   );
 }
 
-DashboardCrypto.getLayout = (page) => <SidebarLayout>{page}</SidebarLayout>;
+DashboardCrypto.getLayout = (page) => {
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
+};
 
 export default DashboardCrypto;
