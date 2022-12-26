@@ -52,16 +52,6 @@ function Overview() {
               flex={1}
             >
               <Box />
-              {/* <Box>
-                  <Button
-                    component={Link}
-                    href="/pool"
-                    variant="contained"
-                    sx={{ ml: 2 }}
-                  >
-                    Live Preview
-                  </Button>
-                </Box> */}
             </Box>
           </Box>
         </Container>

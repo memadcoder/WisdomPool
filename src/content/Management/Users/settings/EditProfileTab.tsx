@@ -77,7 +77,7 @@ function EditProfileTab() {
                   </Grid>
                   <Grid item xs={12} sm={8} md={9}>
                     <Text color="black">
-                      <b>{loggedInUser?.user?.email}</b>
+                      <b>{loggedInUser?.email}</b>
                     </Text>
                     <Box pl={1} component="span">
                       <Label color="success">Primary</Label>
@@ -89,7 +89,11 @@ function EditProfileTab() {
           </Card>
         </Grid>
       </Grid>
-      <PersonalDetailsModal open={open} setModal={setModal} />
+      <PersonalDetailsModal
+        open={open}
+        setModal={setModal}
+        user={loggedInUser}
+      />
     </>
   );
 }

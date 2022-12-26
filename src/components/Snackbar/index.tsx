@@ -14,6 +14,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 export default function Snackbars() {
   const { snackbar, message, type, setSnackbar } =
     React.useContext(SnackbarContext);
+  console.log('called snackbar', { snackbar, message, type, setSnackbar });
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -29,7 +30,7 @@ export default function Snackbars() {
     <Stack spacing={2} sx={{ width: '100%' }}>
       <Snackbar
         open={snackbar}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >

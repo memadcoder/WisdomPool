@@ -8,8 +8,6 @@ import Snackbars from '@/components/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 
 function DashboardCrypto() {
-  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
-
   return (
     <>
       <Head>

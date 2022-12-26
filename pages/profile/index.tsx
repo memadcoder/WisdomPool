@@ -6,6 +6,7 @@ import { Grid, Container } from '@mui/material';
 import ProfileCover from '@/content/Management/Users/details/ProfileCover';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getToken } from '@/utility/setUser';
+import Snackbars from '@/components/Snackbar';
 
 function ManagementUserProfile() {
   const [loggedInUser, setUser] = useState(getToken()?.user);
@@ -38,6 +39,7 @@ function ManagementUserProfile() {
           </Grid>
         </Grid>
       </Container>
+      <Snackbars />
       <Footer />
     </>
   );

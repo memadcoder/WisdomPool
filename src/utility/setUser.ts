@@ -1,5 +1,4 @@
 export const setToken = (token: string, user: object) => {
-    console.log("here", user);
     localStorage.setItem('wisdompool-user-token', token);
     localStorage.setItem('wisdompool-user', JSON.stringify(user))
     return;

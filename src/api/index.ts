@@ -7,7 +7,6 @@ const API = axios.create({
 });
 
 const setToken = (token: string) => {
-    console.log("token", token)
     API.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 
@@ -38,9 +37,15 @@ export const getResourceById = (id: string) => {
 };
 
 // Update a resource
-export const updateResource = (id: string, data: ResourceType) => {
+export const updateResources = (data: ResourceType, resource: string) => {
     // setToken(getToken()?.token);
-    return API.put<ResourceType>(`/api/resources/${id}`, data);
+    return API.put<ResourceType>(`${baseURL}` + resource, data);
+};
+
+// Update a resource
+export const updateResource = (data: ResourceType, resource: string) => {
+    setToken(getToken()?.token);
+    return API.patch<ResourceType>(`${baseURL}` + resource, data);
 };
 
 // Delete a resource

@@ -45,8 +45,8 @@ function TokyoApp(props: TokyoAppProps) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      <SidebarProvider>
-        <SnackbarProvider>
+      <SnackbarProvider>
+        <SidebarProvider>
           <UserProvider>
             <ThemeProvider>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -55,8 +55,8 @@ function TokyoApp(props: TokyoAppProps) {
               </LocalizationProvider>
             </ThemeProvider>
           </UserProvider>
-        </SnackbarProvider>
-      </SidebarProvider>
+        </SidebarProvider>
+      </SnackbarProvider>
     </CacheProvider>
   );
 }
