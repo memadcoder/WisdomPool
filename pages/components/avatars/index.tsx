@@ -6,7 +6,6 @@ import {
   Container,
   Grid,
   Card,
-  CardHeader,
   CardContent,
   Divider,
   Typography,
@@ -15,52 +14,19 @@ import {
 } from '@mui/material';
 import Text from '@/components/Text';
 import NextLink from 'next/link';
-import Footer from '@/components/Footer';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import { deepOrange, deepPurple, green, pink } from '@mui/material/colors';
-import FolderIcon from '@mui/icons-material/Folder';
-import PageviewIcon from '@mui/icons-material/Pageview';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
 import Comment from '@/components/Comment';
-import { withPrivateRoute } from '@/hocs/withPrivateRoute';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { useState } from 'react';
-
-function stringToColor(string: string) {
-  let hash = 0;
-  let i;
-
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-
-  let color = '#';
-
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.substr(-2);
-  }
-  /* eslint-enable no-bitwise */
-
-  return color;
-}
-
-function stringAvatar(name: string) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name)
-    },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
-  };
-}
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useRouter } from 'next/router';
 
 const poolFeeds = [
   {
     _id: 1,
     courseId: 1,
+    enrolled: true,
     title: 'Nodejs Fundamental',
     authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
     description:
@@ -75,6 +41,7 @@ const poolFeeds = [
   {
     _id: 1,
     courseId: 2,
+    enrolled: false,
     title: 'Nodejs Fundamental',
     authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
     description:
@@ -89,6 +56,7 @@ const poolFeeds = [
   {
     _id: 1,
     courseId: 3,
+    enrolled: true,
     title: 'Nodejs Fundamental',
     authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
     description:
@@ -103,6 +71,7 @@ const poolFeeds = [
   {
     _id: 1,
     courseId: 4,
+    enrolled: false,
     title: 'Nodejs Fundamental',
     authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
     description:
@@ -117,6 +86,7 @@ const poolFeeds = [
   {
     _id: 1,
     courseId: 5,
+    enrolled: true,
     title: 'Nodejs Fundamental',
     authors: ['Madhav Gautam', 'Sagar Devkota', 'Amrit Devkota'],
     description: '',
@@ -130,6 +100,12 @@ const poolFeeds = [
 ];
 
 function Avatars() {
+  const router = useRouter();
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+
+  const handleEnroll = () => {
+    if (!isLoggedIn) router.push('/login');
+  };
   return (
     <>
       <Head>
@@ -152,93 +128,57 @@ function Avatars() {
           spacing={3}
         >
           {poolFeeds.map((feed) => {
-            {
-              /* <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Images" />
-              <Divider />
-              <CardContent>
-                <Stack direction="row" spacing={2}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatars/1.jpg" />
-                  <Avatar
-                    alt="Travis Howard"
-                    src="/static/images/avatars/2.jpg"
-                  />
-                  <Avatar
-                    alt="Cindy Baker"
-                    src="/static/images/avatars/3.jpg"
-                  />
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Letters" />
-              <Divider />
-              <CardContent>
-                <Stack direction="row" spacing={2}>
-                  <Avatar>H</Avatar>
-                  <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-                  <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
-                </Stack>
-                <Divider sx={{ my: 5 }} />
-                <Stack direction="row" spacing={2}>
-                  <Avatar {...stringAvatar('Kent Dodds')} />
-                  <Avatar {...stringAvatar('Jed Watson')} />
-                  <Avatar {...stringAvatar('Tim Neutkens')} />
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid> */
-            }
-            {
-              /* <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Sizes" />
-              <Divider />
-              <CardContent>
-                <Stack direction="row" spacing={2}>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatars/4.jpg"
-                    sx={{ width: 24, height: 24 }}
-                  />
-                  <Avatar alt="Remy Sharp" src="/static/images/avatars/5.jpg" />
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatars/3.jpg"
-                    sx={{ width: 56, height: 56 }}
-                  />
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid> */
-            }
             return (
-              <Grid item xs={12} key={feed._id}>
+              <Grid item xs={12} key={feed.courseId}>
                 <Card>
-                  <NextLink href={`course/${feed.courseId}`} passHref>
-                    <Box
-                      p={3}
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="space-between"
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <Box>
+                  <Box
+                    p={3}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    style={{
+                      cursor: 'pointer',
+                      background: '#223354'
+                      // color: 'ActiveBorder'
+                    }}
+                  >
+                    <NextLink href={`course/${feed.courseId}`} passHref>
+                      <Box style={{ color: 'ButtonHighlight' }}>
                         <Typography variant="h4" gutterBottom>
                           {feed.title}
                         </Typography>
-                        <Typography variant="subtitle2">
+                        <Typography
+                          variant="subtitle2"
+                          color={'ButtonHighlight'}
+                        >
                           {feed.description}
                         </Typography>
                       </Box>
-                      {/* <Button variant="text" startIcon={<EditTwoToneIcon />}>
-              Edit
-            </Button> */}
-                    </Box>
-                  </NextLink>
+                    </NextLink>
+
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      startIcon={
+                        !isLoggedIn ? (
+                          <SubscriptionsIcon />
+                        ) : feed?.enrolled ? (
+                          <CheckCircleIcon />
+                        ) : (
+                          <SubscriptionsIcon />
+                        )
+                      }
+                      onClick={() => {
+                        handleEnroll();
+                      }}
+                    >
+                      {!isLoggedIn
+                        ? 'Enroll'
+                        : feed?.enrolled
+                        ? 'Enrolled'
+                        : 'Enroll'}
+                    </Button>
+                  </Box>
 
                   <Divider />
                   <CardContent sx={{ p: 4 }}>
@@ -312,14 +252,13 @@ function Avatars() {
           })}
         </Grid>
       </Container>
-      {/* <Footer /> */}
     </>
   );
 }
 
 Avatars.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // use later
+  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
 };
 
 export default Avatars;

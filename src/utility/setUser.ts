@@ -7,6 +7,7 @@ export const setToken = (token: string, user: object) => {
 
 export const clearToken = () => {
     localStorage.removeItem('wisdompool-user-token');
+    localStorage.removeItem('wisdompool-user');
 }
 
 export const getToken = () => {

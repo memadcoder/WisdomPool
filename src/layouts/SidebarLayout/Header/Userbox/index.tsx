@@ -66,6 +66,7 @@ function HeaderUserbox() {
   const handleLogout = () => {
     clearToken();
     router.push('/');
+    location.reload();
   };
 
   const user = {

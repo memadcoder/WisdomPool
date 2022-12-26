@@ -1,87 +1,42 @@
-import {
-  Typography,
-  Box,
-  Card,
-  Container,
-  Button,
-  styled
-} from '@mui/material';
-import type { ReactElement } from 'react';
-import BaseLayout from 'src/layouts/BaseLayout';
-
-import Link from 'src/components/Link';
 import Head from 'next/head';
-
-import Logo from 'src/components/LogoSign';
-import Hero from 'src/content/Overview/Hero';
+import * as React from 'react';
+import SidebarLayout from '@/layouts/SidebarLayout';
+import { Container, Grid } from '@mui/material';
+import Footer from '@/components/Footer';
+import Avatars from 'pages/components/avatars';
 import Snackbars from '@/components/Snackbar';
+import { checkAuthentication } from '@/utility/checkAuthentication';
 
-const HeaderWrapper = styled(Card)(
-  ({ theme }) => `
-  width: 100%;
-  display: flex;
-  align-items: center;
-  height: ${theme.spacing(10)};
-  margin-bottom: ${theme.spacing(10)};
-`
-);
+function DashboardCrypto() {
+  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
 
-const OverviewWrapper = styled(Box)(
-  ({ theme }) => `
-    overflow: auto;
-    background: ${theme.palette.common.white};
-    flex: 1;
-    overflow-x: hidden;
-`
-);
-
-function Overview() {
   return (
-    <OverviewWrapper>
+    <>
       <Head>
         <title>Wisdom Pool</title>
       </Head>
-      <HeaderWrapper>
-        <Container maxWidth="lg">
-          <Box display="flex" alignItems="center">
-            <Logo />
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              flex={1}
-            >
-              <Box />
-              {/* <Box>
-                <Button
-                  component={Link}
-                  href="/pool"
-                  variant="contained"
-                  sx={{ ml: 2 }}
-                >
-                  Live Preview
-                </Button>
-              </Box> */}
-            </Box>
-          </Box>
-        </Container>
-      </HeaderWrapper>
-      <Snackbars />
-      <Hero />
-      <Container maxWidth="lg" sx={{ mt: 8 }}>
-        <Typography textAlign="center" variant="subtitle1">
-          Copyright ©
-          <Link href="" target="_blank" rel="noopener noreferrer">
-            WisdomPool.com
-          </Link>
-        </Typography>
+      <Container maxWidth="lg">
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="stretch"
+          spacing={4}
+        >
+          <Grid item xs={12}>
+            <Avatars />
+          </Grid>
+        </Grid>
+        <Snackbars />
       </Container>
-    </OverviewWrapper>
+      <Footer />
+    </>
   );
 }
 
-export default Overview;
-
-Overview.getLayout = function getLayout(page: ReactElement) {
-  return <BaseLayout>{page}</BaseLayout>;
+DashboardCrypto.getLayout = (page) => {
+  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication()); // use later
+  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
 };
+
+export default DashboardCrypto;

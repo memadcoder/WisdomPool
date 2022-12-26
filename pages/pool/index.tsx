@@ -24,7 +24,7 @@ function DashboardCrypto() {
           spacing={4}
         >
           <Grid item xs={12}>
-            <Avatars isAuthenticated={isLoggedIn} />
+            <Avatars />
           </Grid>
         </Grid>
         <Snackbars />
@@ -35,8 +35,8 @@ function DashboardCrypto() {
 }
 
 DashboardCrypto.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
+  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication()); // use later
+  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
 };
 
 export default DashboardCrypto;

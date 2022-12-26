@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Scrollbar from 'src/components/Scrollbar';
 import { SidebarContext } from 'src/contexts/SidebarContext';
+import NextLink from 'next/link';
 
 import {
   Box,
@@ -13,9 +14,11 @@ import {
   lighten,
   darken
 } from '@mui/material';
-
+import { useRouter } from 'next/router';
 import SidebarMenu from './SidebarMenu';
 import Logo from 'src/components/LogoSign';
+import { checkAuthentication } from '@/utility/checkAuthentication';
+import { clearToken } from '@/utility/setUser';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -30,7 +33,9 @@ const SidebarWrapper = styled(Box)(
 );
 
 function Sidebar() {
+  const router = useRouter();
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
   const closeSidebar = () => toggleSidebar();
   const theme = useTheme();
 
@@ -79,17 +84,25 @@ function Sidebar() {
           }}
         />
         <Box p={2}>
-          <Button
-            href=""
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="contained"
-            color="success"
-            size="small"
-            fullWidth
-          >
-            Know Wisdom Pool
-          </Button>
+          <NextLink href={isLoggedIn ? '/' : '/login'} passHref>
+            <Button
+              href=""
+              rel="noopener noreferrer"
+              variant="contained"
+              color="success"
+              size="small"
+              fullWidth
+              onClick={() => {
+                if (isLoggedIn) {
+                  clearToken();
+                  router.push('/');
+                  location.reload();
+                }
+              }}
+            >
+              {isLoggedIn ? 'Logout' : 'SignIn / SignUp'}
+            </Button>
+          </NextLink>
         </Box>
       </SidebarWrapper>
       <Drawer

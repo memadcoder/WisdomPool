@@ -1,16 +1,7 @@
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  Menu,
-  MenuItem,
-  styled
-} from '@mui/material';
+import { checkAuthentication } from '@/utility/checkAuthentication';
+import { Box, List, ListItem, ListItemText, styled } from '@mui/material';
 import { useRef, useState } from 'react';
 import Link from 'src/components/Link';
-
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
 const ListWrapper = styled(Box)(
   ({ theme }) => `
@@ -64,16 +55,7 @@ const ListWrapper = styled(Box)(
 );
 
 function HeaderMenu() {
-  const ref = useRef<any>(null);
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
-
-  const handleClose = (): void => {
-    setOpen(false);
-  };
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
 
   return (
     <>
@@ -90,83 +72,53 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={Link}
-            href="/pool"
+            href="/"
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
               primary="Pool"
             />
           </ListItem>
+          {isLoggedIn && (
+            <>
+              <ListItem
+                classes={{ root: 'MuiListItem-indicators' }}
+                button
+                component={Link}
+                href="/mycourse"
+              >
+                <ListItemText
+                  primaryTypographyProps={{ noWrap: true }}
+                  primary="My Course"
+                />
+              </ListItem>
+              <ListItem
+                classes={{ root: 'MuiListItem-indicators' }}
+                button
+                component={Link}
+                href="/fav"
+              >
+                <ListItemText
+                  primaryTypographyProps={{ noWrap: true }}
+                  primary="Favourites"
+                />
+              </ListItem>
 
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={Link}
-            href="/mycourse"
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="My Course"
-            />
-          </ListItem>
-
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={Link}
-            href="/fav"
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="Favourites"
-            />
-          </ListItem>
-
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={Link}
-            href="/liked"
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="Liked"
-            />
-          </ListItem>
-          {/* <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            ref={ref}
-            onClick={handleOpen}
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary={
-                <Box display="flex" alignItems="center">
-                  Others
-                  <Box display="flex" alignItems="center" pl={0.3}>
-                    <ExpandMoreTwoToneIcon fontSize="small" />
-                  </Box>
-                </Box>
-              }
-            />
-          </ListItem> */}
+              <ListItem
+                classes={{ root: 'MuiListItem-indicators' }}
+                button
+                component={Link}
+                href="/liked"
+              >
+                <ListItemText
+                  primaryTypographyProps={{ noWrap: true }}
+                  primary="Liked"
+                />
+              </ListItem>
+            </>
+          )}
         </List>
       </ListWrapper>
-      {/* <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
-        <MenuItem sx={{ px: 3 }} component={Link} href="/">
-          Overview
-        </MenuItem>
-        <MenuItem sx={{ px: 3 }} component={Link} href="/components/tabs">
-          Tabs
-        </MenuItem>
-        <MenuItem sx={{ px: 3 }} component={Link} href="/components/cards">
-          Cards
-        </MenuItem>
-        <MenuItem sx={{ px: 3 }} component={Link} href="/components/modals">
-          Modals
-        </MenuItem>
-      </Menu> */}
     </>
   );
 }

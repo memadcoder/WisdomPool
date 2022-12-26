@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Typography, Button, Grid } from '@mui/material';
 import AddCourseModal from '../Modal/CourseModal/AddCourse';
+import { checkAuthentication } from '@/utility/checkAuthentication';
 
 interface PageTitleProps {
   heading?: string;
@@ -16,6 +17,7 @@ const PageTitle: FC<PageTitleProps> = ({
   docs = '',
   ...rest
 }) => {
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // used now
   const [open, setOpen] = useState(false);
   const setAddCourseModal = () => {
     setOpen(!open);
@@ -35,20 +37,24 @@ const PageTitle: FC<PageTitleProps> = ({
           </Typography>
           <Typography variant="subtitle2">{subHeading}</Typography>
         </Grid>
-        <Grid item>
-          <Button
-            sx={{ mt: { xs: 2, md: 0 } }}
-            variant="contained"
-            startIcon={<AddTwoToneIcon fontSize="small" />}
-            onClick={() => {
-              setAddCourseModal();
-            }}
-          >
-            Add Course
-          </Button>
-        </Grid>
+        {isLoggedIn && (
+          <>
+            <Grid item>
+              <Button
+                sx={{ mt: { xs: 2, md: 0 } }}
+                variant="contained"
+                startIcon={<AddTwoToneIcon fontSize="small" />}
+                onClick={() => {
+                  setAddCourseModal();
+                }}
+              >
+                Add Course
+              </Button>
+            </Grid>
+            <AddCourseModal open={open} setAddCourseModal={setAddCourseModal} />
+          </>
+        )}
       </Grid>
-      <AddCourseModal open={open} setAddCourseModal={setAddCourseModal} />
     </>
   );
 };

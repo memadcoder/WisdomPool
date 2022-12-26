@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { Typography, Avatar, Grid, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+import { getToken } from '@/utility/setUser';
 
 function PageHeader() {
+  const [loggedInUser, setUser] = useState(getToken()?.user);
+
   const user = {
-    name: 'Catherine Pike',
+    name: loggedInUser?.name,
     avatar: '/static/images/avatars/1.jpg'
   };
   const theme = useTheme();
@@ -25,19 +29,10 @@ function PageHeader() {
       </Grid>
       <Grid item>
         <Typography variant="h3" component="h3" gutterBottom>
-          Welcome, {user.name}!
+          Welcome, {user.name}
         </Typography>
         <Typography variant="subtitle2">Let's Grow Together !</Typography>
       </Grid>
-      {/* <Grid item marginLeft={5}>
-        <Button
-          sx={{ mt: { xs: 2, md: 0 } }}
-          variant="contained"
-          startIcon={<AddTwoToneIcon fontSize="small" />}
-        >
-          Add Course
-        </Button>
-      </Grid> */}
     </Grid>
   );
 }

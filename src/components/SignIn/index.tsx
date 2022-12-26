@@ -42,15 +42,15 @@ export default function SignIn() {
       console.log(response.data);
       setToken(response.data.accessToken, response.data.user);
       setLoggedInUser(response.data);
-      router.push('/pool');
+      router.push('/');
     } catch (error) {
       setLoggedInUser(null);
       console.log(error);
-      // setSnackbarMessage(
-      //   error.response.data.message || error.response.data.message?.[0]
-      // );
-      // setSnackbarType('error');
-      // setSnackbar(true);
+      setSnackbarMessage(
+        error.response.data.message || error.response.data.message?.[0]
+      );
+      setSnackbarType('error');
+      setSnackbar(true);
     }
   };
 

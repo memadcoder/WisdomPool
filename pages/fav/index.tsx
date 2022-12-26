@@ -126,7 +126,7 @@ function Favourites() {
 }
 
 Favourites.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); //used now
 
   return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
 };

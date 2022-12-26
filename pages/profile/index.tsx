@@ -44,7 +44,7 @@ function ManagementUserProfile() {
 }
 
 ManagementUserProfile.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
+  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // use this time also
 
   return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
 };
