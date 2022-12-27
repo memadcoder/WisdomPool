@@ -17,8 +17,9 @@ import ThumbUpAltTwoToneIcon from '@mui/icons-material/ThumbUpAltTwoTone';
 import CommentTwoToneIcon from '@mui/icons-material/CommentTwoTone';
 import ShareTwoToneIcon from '@mui/icons-material/ShareTwoTone';
 import Text from '@/components/Text';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Comment from '@/components/Comment';
+import { useRouter } from 'next/router';
 
 const CardActionsWrapper = styled(CardActions)(
   ({ theme }) => `
@@ -27,52 +28,30 @@ const CardActionsWrapper = styled(CardActions)(
 `
 );
 
-const course = {
-  title: 'Node Js',
-  currentContent: 1,
-  description:
-    'You will be able to know basics fundamental of Nodejs from different  youtube content creator. there are total 4 videos. Sit and enjoy your learning. You will be able to know basics fundamental of Nodejs from different youtube content creator. there are total 4 videos. Sit and enjoy your learning. You will be able to know basics fundamental of Nodejs from different youtube content creator. there are total 4 videos. Sit and enjoy your learning.',
-  contentDetails: [
-    {
-      link: 'https://www.youtube.com/embed/tgbNymZ7vqY',
-      title: 'Bohemain Rhapsody',
-      channelName: 'Bohemain Rocks',
-      description: 'Bohemain Rhapsody, The Muppets Music Video',
-      videoLength: '4:47 mins',
-      contentCreatorLink: 'https://www.youtube.com/@MuppetsStudio',
-      thumpsUp: [{ name: 'Madhav Gautam' }],
-      comments: [{ name: 'Madhav Gautam', comment: 'This is nice Video' }],
-      completeStatus: 'COMPLETED'
-    },
-    {
-      link: 'https://www.youtube.com/embed/BLl32FvcdVM',
-      title: 'Nodejs Tutorial in One Video',
-      channelName: 'CodeWithHarry',
-      description: 'Nodejs Tutorial in hindi',
-      videoLength: '1:48 hours',
-      contentCreatorLink: 'https://www.youtube.com/@CodeWithHarry',
-      thumpsUp: [{ name: 'Madhav Gautam' }],
-      comments: [
-        { name: 'Madhav Gautam', comment: 'This is nice Video' },
-        { name: 'Madhav Gautam', comment: 'This is nice Video' }
-      ],
-      completeStatus: 'NOT_COMPLETED'
-    },
-    {
-      link: 'https://www.youtube.com/embed/TlB_eWDSMt4',
-      title: 'Code With Mosh',
-      description: '',
-      videoLength: '',
-      contentCreatorLink: '',
-      thumpsUp: [{ name: 'Madhav Gautam' }],
-      comments: [{ name: 'Madhav Gautam', comment: 'This is nice Video' }],
-      completeStatus: 'NOT_COMPLETED'
-    }
-  ]
-};
+function ActivityTab({ contentId, contents }) {
+  const router = useRouter();
+  const { courseId } = router.query;
+  const [currentContent, setContent] = useState(null);
+  const [nextContent, setNextContent] = useState(null);
+  const [prevContent, setPrevContent] = useState(null);
 
-function ActivityTab() {
-  const [currentContent, setCurrentContent] = useState(course.currentContent);
+  useEffect(() => {
+    const current = contents.filter((data) => data.content.id === contentId);
+    setContent(current[0]);
+  }, [contentId]);
+
+  useEffect(() => {
+    setNextContent(null);
+    setPrevContent(null);
+    const next = contents.filter(
+      (data) => data.sequence === currentContent?.sequence + 1
+    );
+    const prev = contents.filter(
+      (data) => data.sequence === currentContent?.sequence - 1
+    );
+    if (next.length) setNextContent(next[0].content);
+    if (prev.length) setPrevContent(prev[0].content);
+  }, [currentContent]);
 
   return (
     <Card>
@@ -84,14 +63,14 @@ function ActivityTab() {
         }
         titleTypographyProps={{ variant: 'h4' }}
         subheaderTypographyProps={{ variant: 'subtitle2' }}
-        title={course.title}
-        subheader={<>{course.description}</>}
+        title={currentContent?.content?.title}
+        subheader={<>{currentContent?.content?.description}</>}
       />
       <div className="course-video-frame">
         <iframe
           width="100%"
           height="600px"
-          src={course.contentDetails[currentContent].link}
+          src={currentContent?.content?.link}
           frameborder="0"
           allowfullscreen
         ></iframe>
@@ -122,14 +101,16 @@ function ActivityTab() {
                 textAlign: 'right'
               }}
             >
-              {course.contentDetails[currentContent - 1]?.title ||
-                'No Previous'}
+              {prevContent?.title || 'No Previous'}
             </p>
             <SkipPreviousIcon
               fontSize="large"
               onClick={() => {
-                if (currentContent - 1 >= 0)
-                  setCurrentContent(currentContent - 1);
+                console.log({ courseId, prevContent });
+                if (prevContent?.id)
+                  router.push(
+                    `http://localhost:3001/course/${courseId}/content/${prevContent.id}`
+                  );
               }}
               style={{
                 color: 'white',
@@ -152,13 +133,16 @@ function ActivityTab() {
                 textOverflow: 'ellipsis'
               }}
             >
-              {course.contentDetails[currentContent + 1]?.title || 'No Next'}
+              {nextContent?.title || 'No Next'}
             </p>
             <SkipNextIcon
               fontSize="large"
               onClick={() => {
-                if (currentContent + 1 < course.contentDetails.length)
-                  setCurrentContent(currentContent + 1);
+                console.log({ courseId, nextContent });
+                if (nextContent?.id)
+                  router.push(
+                    `http://localhost:3001/course/${courseId}/content/${nextContent?.id}`
+                  );
               }}
               style={{
                 color: 'white',
@@ -170,27 +154,27 @@ function ActivityTab() {
       </div>
       <Box p={3}>
         <Typography variant="h2" sx={{ pb: 1 }}>
-          {course.contentDetails[currentContent].title}
+          {currentContent?.content?.title}
         </Typography>
         <Typography variant="subtitle2">
           <Link
-            href={course.contentDetails[currentContent].contentCreatorLink}
+            href={currentContent?.content?.contentCreatorLink}
             underline="hover"
           >
-            {course.contentDetails[currentContent].channelName}
+            {currentContent?.content?.channelName}
           </Link>{' '}
-          • {course.contentDetails[currentContent].videoLength}
+          • {currentContent?.content?.videoLength}
         </Typography>
       </Box>
       <Divider />
-      <CardActionsWrapper
+      {/* <CardActionsWrapper
         sx={{
           display: { xs: 'block', md: 'flex' },
           alignItems: 'center',
           justifyContent: 'space-between'
         }}
-      >
-        <Box>
+      > */}
+      {/* <Box>
           <Button startIcon={<ThumbUpAltTwoToneIcon />} variant="contained">
             Like
           </Button>
@@ -204,21 +188,21 @@ function ActivityTab() {
           <Button startIcon={<ShareTwoToneIcon />} variant="outlined">
             Share
           </Button>
-        </Box>
-        <Box sx={{ mt: { xs: 2, md: 0 } }}>
+        </Box> */}
+      {/* <Box sx={{ mt: { xs: 2, md: 0 } }}>
           <Typography variant="subtitle2" component="span">
             <Text color="black">
-              <b>{course.contentDetails[currentContent].thumpsUp.length}</b>
+              <b>{currentContent?.content?.thumpsUp?.length}</b>
             </Text>{' '}
             reactions •{' '}
             <Text color="black">
-              <b>{course.contentDetails[currentContent].comments.length}</b>
+              <b>{currentContent?.content?.comments?.length}</b>
             </Text>{' '}
             comments
           </Typography>
-        </Box>
-      </CardActionsWrapper>
-      <Comment />
+        </Box> */}
+      {/* </CardActionsWrapper> */}
+      <Comment courseId={courseId} contentId={contentId} />
     </Card>
   );
 }

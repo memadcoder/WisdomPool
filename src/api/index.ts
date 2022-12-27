@@ -16,6 +16,7 @@ interface GetResourceType {
     message: string,
     accessToken: string,
     user: object;
+
 }
 
 // Create a new resource
@@ -25,9 +26,9 @@ export const createResource = (data: ResourceType, resource: string) => {
 };
 
 // Read a list of resources
-export const getResources = () => {
-    // setToken(getToken()?.token);
-    return API.get<ResourceType>('/api/resources');
+export const getResources = (resource: string) => {
+    setToken(getToken()?.token);
+    return API.get<GetResourceType>(`${baseURL}` + resource);
 };
 
 // Read a single resource by id

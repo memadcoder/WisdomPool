@@ -7,8 +7,10 @@ import {
   List,
   ListItemButton
 } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 import { styled } from '@mui/material/styles';
+import { getResources } from '@/api';
 
 const MessageInputWrapper = styled(InputBase)(
   ({ theme }) => `
@@ -26,7 +28,28 @@ const ListItemWrapper = styled(ListItemButton)(
     `
 );
 
-function Comment() {
+function Comment({ courseId, contentId }) {
+  const [comments, setComments] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log('here in comment');
+    getComments();
+  }, [courseId, contentId]);
+
+  const getComments = async () => {
+    try {
+      const response = await getResources(
+        `/comment?courseId=${courseId}&contentId=${contentId}`
+      );
+      console.log('response.data', response.data);
+      setComments(response.data);
+    } catch (error) {
+      console.log('error here', error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const user = {
     name: 'Catherine Pike',
     avatar: '/static/images/avatars/1.jpg'
@@ -51,94 +74,124 @@ function Comment() {
           />
         </Box>
       </div>
-      <div className="comment-view-section">
-        <List disablePadding component="div">
-          <ListItemWrapper>
-            <ListItemAvatar>
-              <Avatar src="/static/images/avatars/1.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              sx={{
-                mr: 1
-              }}
-              primaryTypographyProps={{
-                color: 'textPrimary',
-                variant: 'h5',
-                noWrap: true
-              }}
-              secondaryTypographyProps={{
-                color: 'textSecondary',
-                noWrap: true
-              }}
-              primary="Zain Baptista"
-              secondary="Hey there, how are you today? Is it ok if I call you?"
-            />
-          </ListItemWrapper>
-          <ListItemWrapper>
-            <ListItemAvatar>
-              <Avatar src="/static/images/avatars/2.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              sx={{
-                mr: 1
-              }}
-              primaryTypographyProps={{
-                color: 'textPrimary',
-                variant: 'h5',
-                noWrap: true
-              }}
-              secondaryTypographyProps={{
-                color: 'textSecondary',
-                noWrap: true
-              }}
-              primary="Kierra Herwitz"
-              secondary="Hi! Did you manage to send me those documents"
-            />
-          </ListItemWrapper>
-          <ListItemWrapper>
-            <ListItemAvatar>
-              <Avatar src="/static/images/avatars/3.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              sx={{
-                mr: 1
-              }}
-              primaryTypographyProps={{
-                color: 'textPrimary',
-                variant: 'h5',
-                noWrap: true
-              }}
-              secondaryTypographyProps={{
-                color: 'textSecondary',
-                noWrap: true
-              }}
-              primary="Craig Vaccaro"
-              secondary="Ola, I still haven't received the program schedule"
-            />
-          </ListItemWrapper>
-          <ListItemWrapper>
-            <ListItemAvatar>
-              <Avatar src="/static/images/avatars/4.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              sx={{
-                mr: 1
-              }}
-              primaryTypographyProps={{
-                color: 'textPrimary',
-                variant: 'h5',
-                noWrap: true
-              }}
-              secondaryTypographyProps={{
-                color: 'textSecondary',
-                noWrap: true
-              }}
-              primary="Adison Press"
-              secondary="I recently did some buying on Amazon and now I'm stuck"
-            />
-          </ListItemWrapper>
-        </List>
-      </div>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div className="comment-view-section">
+          <List disablePadding component="div">
+            {comments?.length &&
+              comments.map((comment) => {
+                return (
+                  <ListItemWrapper>
+                    <ListItemAvatar>
+                      <Avatar src="/static/images/avatars/1.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      sx={{
+                        mr: 1
+                      }}
+                      primaryTypographyProps={{
+                        color: 'textPrimary',
+                        variant: 'h5',
+                        noWrap: true
+                      }}
+                      secondaryTypographyProps={{
+                        color: 'textSecondary',
+                        noWrap: true
+                      }}
+                      primary={comment.user.name}
+                      secondary={comment.comment}
+                    />
+                  </ListItemWrapper>
+                );
+              })}
+            {/* <ListItemWrapper>
+              <ListItemAvatar>
+                <Avatar src="/static/images/avatars/1.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                sx={{
+                  mr: 1
+                }}
+                primaryTypographyProps={{
+                  color: 'textPrimary',
+                  variant: 'h5',
+                  noWrap: true
+                }}
+                secondaryTypographyProps={{
+                  color: 'textSecondary',
+                  noWrap: true
+                }}
+                primary="Zain Baptista"
+                secondary="Hey there, how are you today? Is it ok if I call you?"
+              />
+            </ListItemWrapper>
+            <ListItemWrapper>
+              <ListItemAvatar>
+                <Avatar src="/static/images/avatars/2.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                sx={{
+                  mr: 1
+                }}
+                primaryTypographyProps={{
+                  color: 'textPrimary',
+                  variant: 'h5',
+                  noWrap: true
+                }}
+                secondaryTypographyProps={{
+                  color: 'textSecondary',
+                  noWrap: true
+                }}
+                primary="Kierra Herwitz"
+                secondary="Hi! Did you manage to send me those documents"
+              />
+            </ListItemWrapper>
+            <ListItemWrapper>
+              <ListItemAvatar>
+                <Avatar src="/static/images/avatars/3.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                sx={{
+                  mr: 1
+                }}
+                primaryTypographyProps={{
+                  color: 'textPrimary',
+                  variant: 'h5',
+                  noWrap: true
+                }}
+                secondaryTypographyProps={{
+                  color: 'textSecondary',
+                  noWrap: true
+                }}
+                primary="Craig Vaccaro"
+                secondary="Ola, I still haven't received the program schedule"
+              />
+            </ListItemWrapper>
+            <ListItemWrapper>
+              <ListItemAvatar>
+                <Avatar src="/static/images/avatars/4.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                sx={{
+                  mr: 1
+                }}
+                primaryTypographyProps={{
+                  color: 'textPrimary',
+                  variant: 'h5',
+                  noWrap: true
+                }}
+                secondaryTypographyProps={{
+                  color: 'textSecondary',
+                  noWrap: true
+                }}
+                primary="Adison Press"
+                secondary="I recently did some buying on Amazon and now I'm stuck"
+              />
+            </ListItemWrapper> */}
+          </List>
+        </div>
+      )}
     </>
   );
 }
