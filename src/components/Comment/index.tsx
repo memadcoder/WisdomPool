@@ -8,9 +8,12 @@ import {
   ListItemButton
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { styled } from '@mui/material/styles';
-import { getResources } from '@/api';
+import { getResources, createResource, deleteResource } from '@/api';
+import AlertDialog from '@/components/AlertDialog';
+import { getToken } from '@/utility/setUser';
 
 const MessageInputWrapper = styled(InputBase)(
   ({ theme }) => `
@@ -31,9 +34,27 @@ const ListItemWrapper = styled(ListItemButton)(
 function Comment({ courseId, contentId }) {
   const [comments, setComments] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
+  const [loggedInUser, setUser] = useState(getToken()?.user);
+
+  const setConfirmDialog = () => {
+    setOpen(!open);
+  };
+
+  const confirmAgree = async () => {
+    try {
+      const response = await deleteResource(deletingId, `/comment`);
+      const filteredComments = comments.filter(
+        (comment) => comment.id !== deletingId
+      );
+      setComments(filteredComments);
+    } catch (error) {
+      console.log('error here', error);
+    }
+  };
 
   useEffect(() => {
-    console.log('here in comment');
     getComments();
   }, [courseId, contentId]);
 
@@ -50,39 +71,73 @@ function Comment({ courseId, contentId }) {
       setLoading(false);
     }
   };
+  const updateComments = async (comment) => {
+    try {
+      const response = await createResource(
+        {
+          content: contentId,
+          course: courseId,
+          comment
+        },
+        `/comment`
+      );
+      const updatedComments = [
+        {
+          user: { name: response.data.user.name },
+          comment: response.data.comment
+        },
+        ...comments
+      ];
+      setComments(updatedComments);
+    } catch (error) {
+      console.log('error here', error);
+    }
+  };
   const user = {
     name: 'Catherine Pike',
     avatar: '/static/images/avatars/1.jpg'
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      console.log('event', event.target.value);
+      updateComments(event.target.value);
+    }
+  };
   return (
     <>
-      <div
-        className="comment-input-section"
-        style={{ margin: '12px 12px 12px 12px' }}
-      >
-        <Box flexGrow={1} display="flex" alignItems="center">
-          <Avatar
-            sx={{ display: { xs: 'none', sm: 'flex' }, mr: 1 }}
-            alt={user.name}
-            src={user.avatar}
-          />
-          <MessageInputWrapper
-            autoFocus
-            placeholder="Write your comment here..."
-            fullWidth
-          />
-        </Box>
-      </div>
+      {loggedInUser?.id ? (
+        <div
+          className="comment-input-section"
+          style={{ margin: '12px 12px 12px 12px' }}
+        >
+          <Box flexGrow={1} display="flex" alignItems="center">
+            <Avatar
+              sx={{ display: { xs: 'none', sm: 'flex' }, mr: 1 }}
+              alt={user.name}
+              src={user.avatar}
+            />
+            <MessageInputWrapper
+              autoFocus
+              placeholder="Write your comment here..."
+              fullWidth
+              onKeyDown={handleKeyDown}
+            />
+          </Box>
+        </div>
+      ) : (
+        <></>
+      )}
+
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
         <div className="comment-view-section">
           <List disablePadding component="div">
-            {comments?.length &&
+            {comments?.length ? (
               comments.map((comment) => {
                 return (
-                  <ListItemWrapper>
+                  <ListItemWrapper key={comment.id}>
                     <ListItemAvatar>
                       <Avatar src="/static/images/avatars/1.jpg" />
                     </ListItemAvatar>
@@ -102,93 +157,35 @@ function Comment({ courseId, contentId }) {
                       primary={comment.user.name}
                       secondary={comment.comment}
                     />
+                    {/* <ListItemAvatar> */}
+                    {comment.user.id === loggedInUser?.id ? (
+                      <>
+                        {' '}
+                        <DeleteIcon
+                          onClick={() => {
+                            setDeletingId(comment.id);
+                            setOpen(true);
+                            console.log('delete clicked');
+                          }}
+                        />
+                        <AlertDialog
+                          open={open}
+                          setOpen={setConfirmDialog}
+                          confirmAgree={confirmAgree}
+                          message="Are you sure you want to delete?"
+                        />
+                      </>
+                    ) : (
+                      <></>
+                    )}
+
+                    {/* </ListItemAvatar> */}
                   </ListItemWrapper>
                 );
-              })}
-            {/* <ListItemWrapper>
-              <ListItemAvatar>
-                <Avatar src="/static/images/avatars/1.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                sx={{
-                  mr: 1
-                }}
-                primaryTypographyProps={{
-                  color: 'textPrimary',
-                  variant: 'h5',
-                  noWrap: true
-                }}
-                secondaryTypographyProps={{
-                  color: 'textSecondary',
-                  noWrap: true
-                }}
-                primary="Zain Baptista"
-                secondary="Hey there, how are you today? Is it ok if I call you?"
-              />
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ListItemAvatar>
-                <Avatar src="/static/images/avatars/2.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                sx={{
-                  mr: 1
-                }}
-                primaryTypographyProps={{
-                  color: 'textPrimary',
-                  variant: 'h5',
-                  noWrap: true
-                }}
-                secondaryTypographyProps={{
-                  color: 'textSecondary',
-                  noWrap: true
-                }}
-                primary="Kierra Herwitz"
-                secondary="Hi! Did you manage to send me those documents"
-              />
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ListItemAvatar>
-                <Avatar src="/static/images/avatars/3.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                sx={{
-                  mr: 1
-                }}
-                primaryTypographyProps={{
-                  color: 'textPrimary',
-                  variant: 'h5',
-                  noWrap: true
-                }}
-                secondaryTypographyProps={{
-                  color: 'textSecondary',
-                  noWrap: true
-                }}
-                primary="Craig Vaccaro"
-                secondary="Ola, I still haven't received the program schedule"
-              />
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ListItemAvatar>
-                <Avatar src="/static/images/avatars/4.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                sx={{
-                  mr: 1
-                }}
-                primaryTypographyProps={{
-                  color: 'textPrimary',
-                  variant: 'h5',
-                  noWrap: true
-                }}
-                secondaryTypographyProps={{
-                  color: 'textSecondary',
-                  noWrap: true
-                }}
-                primary="Adison Press"
-                secondary="I recently did some buying on Amazon and now I'm stuck"
-              />
-            </ListItemWrapper> */}
+              })
+            ) : (
+              <></>
+            )}
           </List>
         </div>
       )}

@@ -21,7 +21,7 @@ interface GetResourceType {
 
 // Create a new resource
 export const createResource = (data: ResourceType, resource: string) => {
-    // setToken(getToken()?.token);
+    setToken(getToken()?.token);
     return API.post<GetResourceType>(`${baseURL}` + resource, data);
 };
 
@@ -50,9 +50,9 @@ export const updateResource = (data: ResourceType, resource: string) => {
 };
 
 // Delete a resource
-export const deleteResource = (id: string) => {
-    // setToken(getToken()?.token);
-    return API.delete(`/api/resources/${id}`);
+export const deleteResource = (id: string, resource: string) => {
+    setToken(getToken()?.token);
+    return API.delete(`${baseURL}` + resource + `/${id}`);
 };
 
 

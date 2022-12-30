@@ -82,8 +82,6 @@ const poolFeeds = [
 ];
 
 function Liked() {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
-  // const { isLoggedIn } = useContext(UserContext);
   const [open, setOpen] = useState(false);
 
   const setConfirmDialog = () => {

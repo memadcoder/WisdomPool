@@ -23,15 +23,17 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarIcon from '@mui/icons-material/Star';
 import { useRouter } from 'next/router';
-import { getResources } from '@/api';
+import { getResources, createResource } from '@/api';
 
 function Avatars() {
   const router = useRouter();
   const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
   const [poolFeeds, setPoolFeeds] = useState(null);
+  const [enrolledCourse, setEnrolledCourse] = useState(null);
 
   useEffect(() => {
     getPoolFeeds();
+    if (isLoggedIn) getEnrolledCourse();
   }, []);
 
   const getPoolFeeds = async () => {
@@ -43,9 +45,42 @@ function Avatars() {
       console.log('error', error);
     }
   };
-  const handleEnroll = () => {
-    if (!isLoggedIn) router.push('/login');
+
+  const enrollInCourse = async (courseId) => {
+    try {
+      const response = await createResource({ course: courseId }, '/enrol');
+      router.push(`/course/${courseId}`);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
+
+  const getEnrolledCourse = async () => {
+    try {
+      const response = await getResources('/enrol');
+      console.log('enrolled course', response.data);
+      setEnrolledCourse(response.data);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  const handleEnroll = (courseId) => {
+    if (!isLoggedIn) return router.push('/login');
+    if (isLoggedIn && !checkIfCourseEnrolled(courseId)) {
+      return enrollInCourse(courseId);
+    }
+    router.push(`/course/${courseId}`);
+  };
+
+  const checkIfCourseEnrolled = (courseId) => {
+    const enrolled = enrolledCourse?.filter(
+      (enroll) => enroll.course.id === courseId
+    );
+    const flag = enrolled?.length ? true : false;
+    return flag;
+  };
+
   return (
     <>
       <Head>
@@ -113,12 +148,12 @@ function Avatars() {
                           feed?.byAdmin ? <StarIcon color="warning" /> : ''
                         }
                         onClick={() => {
-                          handleEnroll();
+                          handleEnroll(feed.id);
                         }}
                       >
                         {!isLoggedIn
                           ? 'Enroll'
-                          : feed?.enrolled
+                          : checkIfCourseEnrolled(feed.id)
                           ? 'Enrolled'
                           : 'Enroll'}
                       </Button>

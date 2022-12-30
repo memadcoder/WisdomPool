@@ -121,7 +121,7 @@ function Avatars() {
                           )
                         }
                         onClick={() => {
-                          router.push(`content/${feed.content.id}`);
+                          router.push(`${courseId}/content/${feed.content.id}`);
                         }}
                       >
                         {!isLoggedIn
