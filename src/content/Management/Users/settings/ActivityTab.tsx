@@ -106,7 +106,6 @@ function ActivityTab({ contentId, contents }) {
             <SkipPreviousIcon
               fontSize="large"
               onClick={() => {
-                console.log({ courseId, prevContent });
                 if (prevContent?.id)
                   router.push(
                     `http://localhost:3001/course/${courseId}/content/${prevContent.id}`
@@ -138,7 +137,6 @@ function ActivityTab({ contentId, contents }) {
             <SkipNextIcon
               fontSize="large"
               onClick={() => {
-                console.log({ courseId, nextContent });
                 if (nextContent?.id)
                   router.push(
                     `http://localhost:3001/course/${courseId}/content/${nextContent?.id}`
@@ -167,41 +165,6 @@ function ActivityTab({ contentId, contents }) {
         </Typography>
       </Box>
       <Divider />
-      {/* <CardActionsWrapper
-        sx={{
-          display: { xs: 'block', md: 'flex' },
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}
-      > */}
-      {/* <Box>
-          <Button startIcon={<ThumbUpAltTwoToneIcon />} variant="contained">
-            Like
-          </Button>
-          <Button
-            startIcon={<CommentTwoToneIcon />}
-            variant="outlined"
-            sx={{ mx: 2 }}
-          >
-            Comment
-          </Button>
-          <Button startIcon={<ShareTwoToneIcon />} variant="outlined">
-            Share
-          </Button>
-        </Box> */}
-      {/* <Box sx={{ mt: { xs: 2, md: 0 } }}>
-          <Typography variant="subtitle2" component="span">
-            <Text color="black">
-              <b>{currentContent?.content?.thumpsUp?.length}</b>
-            </Text>{' '}
-            reactions •{' '}
-            <Text color="black">
-              <b>{currentContent?.content?.comments?.length}</b>
-            </Text>{' '}
-            comments
-          </Typography>
-        </Box> */}
-      {/* </CardActionsWrapper> */}
       <Comment courseId={courseId} contentId={contentId} />
     </Card>
   );

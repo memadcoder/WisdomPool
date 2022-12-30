@@ -6,8 +6,45 @@ import Footer from '@/components/Footer';
 import Avatars from 'pages/components/avatars';
 import Snackbars from '@/components/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
+import { getResources } from '@/api';
 
 function DashboardCrypto() {
+  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
+  const [poolFeeds, setPoolFeeds] = React.useState(null);
+  const [enrolledCourse, setEnrolledCourse] = React.useState(null);
+  const [isLoading, setLoading] = React.useState(true);
+
+  const subHeading =
+    'Pool contains recommended contents according to your interest.';
+  React.useEffect(() => {
+    setLoading(true);
+    getPoolFeeds();
+    if (isLoggedIn) getEnrolledCourse();
+  }, []);
+
+  const getPoolFeeds = async () => {
+    try {
+      const response = await getResources('/course');
+      console.log('response.data', response.data);
+      setPoolFeeds(response.data);
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getEnrolledCourse = async () => {
+    try {
+      const response = await getResources('/enrol');
+      console.log('enrolled course', response.data);
+      setEnrolledCourse(response.data);
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <Head>
@@ -22,7 +59,13 @@ function DashboardCrypto() {
           spacing={4}
         >
           <Grid item xs={12}>
-            <Avatars />
+            <Avatars
+              isLoading={isLoading}
+              poolFeeds={poolFeeds}
+              enrolledCourse={enrolledCourse}
+              title={'Pool'}
+              subHeading={subHeading}
+            />
           </Grid>
         </Grid>
         <Snackbars />

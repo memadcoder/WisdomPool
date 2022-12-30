@@ -8,38 +8,36 @@ import Snackbars from '@/components/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getResources } from '@/api';
 
-function DashboardCrypto() {
+function EnrolledCourse() {
   const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
+  const [isLoading, setLoading] = React.useState(true);
   const [poolFeeds, setPoolFeeds] = React.useState(null);
   const [enrolledCourse, setEnrolledCourse] = React.useState(null);
+
+  const subHeading = 'Enrolled contains course you have already joined to.';
+
   React.useEffect(() => {
-    getPoolFeeds();
     if (isLoggedIn) getEnrolledCourse();
   }, []);
-
-  const getPoolFeeds = async () => {
-    try {
-      const response = await getResources('/course');
-      console.log('response.data', response.data);
-      setPoolFeeds(response.data);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
 
   const getEnrolledCourse = async () => {
     try {
       const response = await getResources('/enrol');
       console.log('enrolled course', response.data);
       setEnrolledCourse(response.data);
+      const filteredData = response?.data?.map((value) => value.course);
+      setPoolFeeds(filteredData);
     } catch (error) {
       console.log('error', error);
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <>
       <Head>
-        <title>Wisdom Pool</title>
+        <title>Enrolled Course</title>
       </Head>
       <Container maxWidth="lg">
         <Grid
@@ -53,7 +51,9 @@ function DashboardCrypto() {
             <Avatars
               poolFeeds={poolFeeds}
               enrolledCourse={enrolledCourse}
-              title="Pool"
+              title="Enrolled Course"
+              subHeading={subHeading}
+              isLoading={isLoading}
             />
           </Grid>
         </Grid>
@@ -64,9 +64,9 @@ function DashboardCrypto() {
   );
 }
 
-DashboardCrypto.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication()); // use later
-  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
+EnrolledCourse.getLayout = (page) => {
+  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication()); // use now
+  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
 };
 
-export default DashboardCrypto;
+export default EnrolledCourse;

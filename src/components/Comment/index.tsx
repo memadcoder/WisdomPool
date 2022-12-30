@@ -14,6 +14,7 @@ import { styled } from '@mui/material/styles';
 import { getResources, createResource, deleteResource } from '@/api';
 import AlertDialog from '@/components/AlertDialog';
 import { getToken } from '@/utility/setUser';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const MessageInputWrapper = styled(InputBase)(
   ({ theme }) => `
@@ -130,7 +131,7 @@ function Comment({ courseId, contentId }) {
       )}
 
       {isLoading ? (
-        <h1>Loading...</h1>
+        <CircularProgress />
       ) : (
         <div className="comment-view-section">
           <List disablePadding component="div">

@@ -23,43 +23,18 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarIcon from '@mui/icons-material/Star';
 import { useRouter } from 'next/router';
-import { getResources, createResource } from '@/api';
+import { createResource } from '@/api';
+import StatusNoData from 'pages/status/no-data';
+import CircularProgress from '@mui/material/CircularProgress';
 
-function Avatars() {
+function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
   const router = useRouter();
   const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
-  const [poolFeeds, setPoolFeeds] = useState(null);
-  const [enrolledCourse, setEnrolledCourse] = useState(null);
-
-  useEffect(() => {
-    getPoolFeeds();
-    if (isLoggedIn) getEnrolledCourse();
-  }, []);
-
-  const getPoolFeeds = async () => {
-    try {
-      const response = await getResources('/course');
-      console.log('response.data', response.data);
-      setPoolFeeds(response.data);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
 
   const enrollInCourse = async (courseId) => {
     try {
       const response = await createResource({ course: courseId }, '/enrol');
       router.push(`/course/${courseId}`);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
-
-  const getEnrolledCourse = async () => {
-    try {
-      const response = await getResources('/enrol');
-      console.log('enrolled course', response.data);
-      setEnrolledCourse(response.data);
     } catch (error) {
       console.log('error', error);
     }
@@ -84,14 +59,13 @@ function Avatars() {
   return (
     <>
       <Head>
-        <title>Pool</title>
+        <title>{title}</title>
       </Head>
       <PageTitleWrapper>
         <PageHeader />
         <PageTitle
           // heading="Pool"
-          subHeading="Pool contains recommended contents according to your interest."
-          docs="https://material-ui.com/components/avatars/"
+          subHeading={subHeading}
         />
       </PageTitleWrapper>
       <Container maxWidth="md">
@@ -102,133 +76,77 @@ function Avatars() {
           alignItems="stretch"
           spacing={3}
         >
-          {poolFeeds?.length &&
-            poolFeeds?.map((feed) => {
-              return (
-                <Grid item xs={12} key={feed.id}>
-                  <Card>
-                    <Box
-                      p={3}
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="space-between"
-                      style={{
-                        cursor: 'pointer',
-                        background: '#223354'
-                        // color: 'ActiveBorder'
-                      }}
-                    >
-                      <NextLink href={`course/${feed.id}`} passHref>
-                        <Box style={{ color: 'ButtonHighlight' }}>
-                          <Typography variant="h4" gutterBottom>
-                            {feed.title}
-                          </Typography>
-                          <Typography
-                            variant="subtitle2"
-                            color={'ButtonHighlight'}
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            <>
+              {poolFeeds?.length ? (
+                poolFeeds?.map((feed) => {
+                  return (
+                    <Grid item xs={12} key={feed.id}>
+                      <Card>
+                        <Box
+                          p={3}
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="space-between"
+                          style={{
+                            cursor: 'pointer',
+                            background: '#223354'
+                            // color: 'ActiveBorder'
+                          }}
+                        >
+                          <NextLink href={`course/${feed.id}`} passHref>
+                            <Box style={{ color: 'ButtonHighlight' }}>
+                              <Typography variant="h4" gutterBottom>
+                                {feed.title}
+                              </Typography>
+                              <Typography
+                                variant="subtitle2"
+                                color={'ButtonHighlight'}
+                              >
+                                {feed.description}
+                              </Typography>
+                            </Box>
+                          </NextLink>
+
+                          <Button
+                            variant="outlined"
+                            color="success"
+                            endIcon={
+                              !isLoggedIn ? (
+                                <SubscriptionsIcon />
+                              ) : checkIfCourseEnrolled(feed.id) ? (
+                                <CheckCircleIcon />
+                              ) : (
+                                <SubscriptionsIcon />
+                              )
+                            }
+                            startIcon={
+                              feed?.byAdmin ? <StarIcon color="warning" /> : ''
+                            }
+                            onClick={() => {
+                              handleEnroll(feed.id);
+                            }}
                           >
-                            {feed.description}
-                          </Typography>
+                            {!isLoggedIn
+                              ? 'Enroll'
+                              : checkIfCourseEnrolled(feed.id)
+                              ? 'Enrolled'
+                              : 'Enroll'}
+                          </Button>
                         </Box>
-                      </NextLink>
 
-                      <Button
-                        variant="outlined"
-                        color="success"
-                        endIcon={
-                          !isLoggedIn ? (
-                            <SubscriptionsIcon />
-                          ) : feed?.enrolled ? (
-                            <CheckCircleIcon />
-                          ) : (
-                            <SubscriptionsIcon />
-                          )
-                        }
-                        startIcon={
-                          feed?.byAdmin ? <StarIcon color="warning" /> : ''
-                        }
-                        onClick={() => {
-                          handleEnroll(feed.id);
-                        }}
-                      >
-                        {!isLoggedIn
-                          ? 'Enroll'
-                          : checkIfCourseEnrolled(feed.id)
-                          ? 'Enrolled'
-                          : 'Enroll'}
-                      </Button>
-                    </Box>
-
-                    <Divider />
-                    {/* <CardContent sx={{ p: 4 }}>
-                      <Typography variant="subtitle2">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Total Time:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed?.totalTime}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Created Date:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Text color="black">
-                              <b>{feed?.createdDate}</b>
-                            </Text>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={4}
-                            md={3}
-                            textAlign={{ sm: 'right' }}
-                          >
-                            <Box pr={3} pb={2}>
-                              Content Creators:
-                            </Box>
-                          </Grid>
-                          <Grid item xs={12} sm={8} md={9}>
-                            <Box sx={{ maxWidth: { xs: 'auto', sm: 300 } }}>
-                              {feed?.authors?.map((author, index) => {
-                                return (
-                                  <>
-                                    <Text color="black" key={index}>
-                                      {author}
-                                    </Text>
-                                    <br />
-                                  </>
-                                );
-                              })}
-                            </Box>
-                          </Grid>
-                        </Grid>
-                      </Typography>
-                    </CardContent>
-                    <Divider /> */}
-                    {/* <Comment /> */}
-                  </Card>
-                </Grid>
-              );
-            })}
+                        <Divider />
+                      </Card>
+                    </Grid>
+                  );
+                })
+              ) : (
+                <StatusNoData />
+              )}
+            </>
+          )}
         </Grid>
       </Container>
     </>

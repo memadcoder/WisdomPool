@@ -37,7 +37,7 @@ const PageTitle: FC<PageTitleProps> = ({
           </Typography>
           <Typography variant="subtitle2">{subHeading}</Typography>
         </Grid>
-        {isLoggedIn && (
+        {/* {isLoggedIn && (
           <>
             <Grid item>
               <Button
@@ -53,7 +53,7 @@ const PageTitle: FC<PageTitleProps> = ({
             </Grid>
             <AddCourseModal open={open} setAddCourseModal={setAddCourseModal} />
           </>
-        )}
+        )} */}
       </Grid>
     </>
   );

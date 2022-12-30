@@ -8,6 +8,7 @@ import { checkAuthentication } from '@/utility/checkAuthentication';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getResources } from '@/api';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Content() {
   const router = useRouter();
@@ -21,51 +22,7 @@ function Content() {
   const getCourseContent = async () => {
     try {
       const response = await getResources(`/course/${courseId}/course-content`);
-      console.log('response.data', response.data);
-      const dataToSet = [
-        {
-          id: '3',
-          sequence: 0,
-          content: {
-            id: '1',
-            title: 'Bohemain Rhapsody',
-            description: 'Bohemain Rhapsody, The Muppets Music Video',
-            slug: 'Bohemain-Rhapsody',
-            link: 'https://www.youtube.com/embed/tgbNymZ7vqY',
-            contentType: 'VIDEO',
-            byAdmin: true
-          }
-        },
-        {
-          id: '4',
-          sequence: 1,
-          content: {
-            id: '2',
-            title: 'Nodejs Tutorial in One Video',
-            description: 'Nodejs Tutorial in hindi',
-            slug: 'Nodejs-Tutorial-in-One-Video',
-            link: 'https://www.youtube.com/embed/BLl32FvcdVM',
-            contentType: 'VIDEO',
-            byAdmin: true
-          }
-        },
-        {
-          id: '5',
-          sequence: 2,
-          content: {
-            id: '3',
-            title: 'Code With Mosh',
-            description:
-              'this is the description about code with mosh tutorial',
-            slug: 'Code-With-Mosh',
-            link: 'https://www.youtube.com/embed/TlB_eWDSMt4',
-            contentType: 'VIDEO',
-            byAdmin: true
-          }
-        }
-      ];
-      // setContents(response.data);
-      setContents(dataToSet);
+      setContents(response.data);
       setLoading(false);
     } catch (error) {
       console.log('error', error);
@@ -85,7 +42,7 @@ function Content() {
           spacing={4}
         >
           {isLoading ? (
-            <h1>Loading...</h1>
+            <CircularProgress style={{ marginTop: '100px' }} />
           ) : (
             <Grid item xs={12}>
               <ActivityTab contentId={contentId} contents={contents} />

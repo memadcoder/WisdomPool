@@ -204,6 +204,19 @@ function SidebarMenu() {
               {isLoggedIn && (
                 <>
                   <ListItem component="div">
+                    <NextLink href="/enrolled" passHref>
+                      <Button
+                        className={currentRoute === '/enrolled' ? 'active' : ''}
+                        disableRipple
+                        component="a"
+                        onClick={closeSidebar}
+                        startIcon={<BallotTwoToneIcon />}
+                      >
+                        Enrolled
+                      </Button>
+                    </NextLink>
+                  </ListItem>
+                  {/* <ListItem component="div">
                     <NextLink href="/mycourse" passHref>
                       <Button
                         className={currentRoute === '/mycourse' ? 'active' : ''}
@@ -241,7 +254,7 @@ function SidebarMenu() {
                         Liked
                       </Button>
                     </NextLink>
-                  </ListItem>
+                  </ListItem> */}
                 </>
               )}
             </List>
