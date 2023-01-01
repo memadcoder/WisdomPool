@@ -20,7 +20,6 @@ function DashboardCrypto() {
   const getPoolFeeds = async () => {
     try {
       const response = await getResources('/course');
-      console.log('response.data', response.data);
       setPoolFeeds(response.data);
     } catch (error) {
       console.log('error', error);
@@ -30,7 +29,6 @@ function DashboardCrypto() {
   const getEnrolledCourse = async () => {
     try {
       const response = await getResources('/enrol');
-      console.log('enrolled course', response.data);
       setEnrolledCourse(response.data);
     } catch (error) {
       console.log('error', error);

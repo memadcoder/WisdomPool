@@ -149,7 +149,7 @@ function HeaderUserbox() {
             }}
           >
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
-            Sign out
+            Logout
           </Button>
         </Box>
       </Popover>

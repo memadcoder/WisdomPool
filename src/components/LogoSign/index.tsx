@@ -98,31 +98,29 @@ function Logo() {
   const theme = useTheme();
 
   return (
-    <TooltipWrapper
-      title="Tokyo Free White Next.js Typescript Admin Dashboard"
-      arrow
-    >
-      <LogoWrapper href="/">
-        <Badge
-          sx={{
-            '.MuiBadge-badge': {
-              fontSize: theme.typography.pxToRem(11),
-              right: -2,
-              top: 8
-            }
-          }}
-          overlap="circular"
-          color="success"
-          badgeContent="1.0"
-        >
-          <LogoSignWrapper>
-            <LogoSign>
-              <LogoSignInner />
-            </LogoSign>
-          </LogoSignWrapper>
-        </Badge>
-      </LogoWrapper>
-    </TooltipWrapper>
+    <img src="./icon-500x500.png" height={180} width={180} />
+    // <TooltipWrapper title="Wisdom Pool" arrow>
+    //   <LogoWrapper href="/">
+    //     <Badge
+    //       sx={{
+    //         '.MuiBadge-badge': {
+    //           fontSize: theme.typography.pxToRem(11),
+    //           right: -2,
+    //           top: 8
+    //         }
+    //       }}
+    //       overlap="circular"
+    //       color="success"
+    //       badgeContent="1.0"
+    //     >
+    //       <LogoSignWrapper>
+    //         <LogoSign>
+    //           <LogoSignInner />
+    //         </LogoSign>
+    //       </LogoSignWrapper>
+    //     </Badge>
+    //   </LogoWrapper>
+    // </TooltipWrapper>
   );
 }
 

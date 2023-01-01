@@ -117,7 +117,7 @@ function Status500() {
               <Container maxWidth="sm">
                 <Box textAlign="center">
                   <TypographyPrimary variant="h1" sx={{ my: 2 }}>
-                    Tokyo Free White Next.js Typescript Admin Dashboard
+                    Wisdom Pool
                   </TypographyPrimary>
                   <TypographySecondary
                     variant="h4"

@@ -98,13 +98,13 @@ const ProfileCover = ({ user }) => {
         <CardCoverAction>
           <Input accept="image/*" id="change-cover" multiple type="file" />
           <label htmlFor="change-cover">
-            <Button
+            {/* <Button
               startIcon={<UploadTwoToneIcon />}
               variant="contained"
               component="span"
             >
               Change cover
-            </Button>
+            </Button> */}
           </label>
         </CardCoverAction>
       </CardCover>
@@ -118,9 +118,9 @@ const ProfileCover = ({ user }) => {
             type="file"
           />
           <label htmlFor="icon-button-file">
-            <IconButton component="span" color="primary">
-              <UploadTwoToneIcon />
-            </IconButton>
+            {/* <IconButton component="span" color="primary"> */}
+            {/* <UploadTwoToneIcon /> */}
+            {/* </IconButton> */}
           </label>
         </ButtonUploadWrapper>
       </AvatarWrapper>

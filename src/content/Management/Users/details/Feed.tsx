@@ -35,7 +35,7 @@ function Feed() {
       name: 'Ede Stoving',
       jobtitle: 'VP Operations',
       company: 'Cogibox',
-      avatar: '/static/images/avatars/4.jpg'
+      avatar: '/static/images/avatars/default-profile.jpg'
     },
     {
       name: 'Crissy Spere',

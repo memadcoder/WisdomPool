@@ -92,7 +92,7 @@ function ActivityTab({ contentId, contents }) {
                 fontSize: '10px',
                 position: 'absolute',
                 marginLeft: '-140px',
-                marginTop: '6px',
+                marginTop: '22px',
                 width: '145px',
                 height: '30px',
                 whiteSpace: 'nowrap',
@@ -104,7 +104,7 @@ function ActivityTab({ contentId, contents }) {
               {prevContent?.title || 'No Previous'}
             </p>
             <SkipPreviousIcon
-              fontSize="large"
+              sx={{ fontSize: 60 }}
               onClick={() => {
                 if (prevContent?.id)
                   router.push(
@@ -123,8 +123,8 @@ function ActivityTab({ contentId, contents }) {
                 fontSize: '10px',
                 textAlign: 'left',
                 position: 'absolute',
-                marginLeft: '30px',
-                marginTop: '6px',
+                marginLeft: '50px',
+                marginTop: '22px',
                 width: '150px',
                 height: '30px',
                 whiteSpace: 'nowrap',
@@ -135,7 +135,7 @@ function ActivityTab({ contentId, contents }) {
               {nextContent?.title || 'No Next'}
             </p>
             <SkipNextIcon
-              fontSize="large"
+              sx={{ fontSize: 60 }}
               onClick={() => {
                 if (nextContent?.id)
                   router.push(

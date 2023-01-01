@@ -37,9 +37,7 @@ export default function SignIn() {
 
     // login
     try {
-      console.log('here');
       const response = await createResource(payload, '/users/login');
-      console.log(response.data);
       setToken(response.data.accessToken, response.data.user);
       setLoggedInUser(response.data);
       router.push('/');

@@ -14,10 +14,12 @@ import NextLink from 'next/link';
 import { createResource } from '@/api';
 import { SnackbarContext } from '@/contexts/SnackbarContext';
 import Snackbars from '../Snackbar';
+import { useRouter } from 'next/router';
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const router = useRouter();
   const { setSnackbar, setSnackbarMessage, setSnackbarType } =
     React.useContext(SnackbarContext);
 
@@ -33,10 +35,10 @@ export default function SignUp() {
     // create the new user
     try {
       const response = await createResource(payload, '/users');
-      console.log({ response });
       setSnackbarMessage('Congratulations !! You are registered successfully');
       setSnackbarType('success');
       setSnackbar(true);
+      router.push('/login');
     } catch (error) {
       console.log(error);
       setSnackbarMessage(

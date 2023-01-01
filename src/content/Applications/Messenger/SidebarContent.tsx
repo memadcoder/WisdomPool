@@ -283,7 +283,7 @@ function SidebarContent() {
             </ListItemWrapper>
             <ListItemWrapper>
               <ListItemAvatar>
-                <Avatar src="/static/images/avatars/4.jpg" />
+                <Avatar src="/static/images/avatars/default-profile.jpg" />
               </ListItemAvatar>
               <ListItemText
                 sx={{
@@ -335,7 +335,7 @@ function SidebarContent() {
             </ListItemWrapper>
             <ListItemWrapper>
               <ListItemAvatar>
-                <Avatar src="/static/images/avatars/4.jpg" />
+                <Avatar src="/static/images/avatars/default-profile.jpg" />
               </ListItemAvatar>
               <ListItemText
                 sx={{
@@ -500,7 +500,7 @@ function SidebarContent() {
                 component={Link}
                 href="#"
                 alt="Travis Howard"
-                src="/static/images/avatars/4.jpg"
+                src="/static/images/avatars/default-profile.jpg"
               />
             </Tooltip>
             <Tooltip arrow title="View profile for Craig Vaccaro">

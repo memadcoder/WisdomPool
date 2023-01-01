@@ -51,7 +51,7 @@ function Comment({ courseId, contentId }) {
       );
       setComments(filteredComments);
     } catch (error) {
-      console.log('error here', error);
+      console.log('error', error);
     }
   };
 
@@ -64,10 +64,9 @@ function Comment({ courseId, contentId }) {
       const response = await getResources(
         `/comment?courseId=${courseId}&contentId=${contentId}`
       );
-      console.log('response.data', response.data);
       setComments(response.data);
     } catch (error) {
-      console.log('error here', error);
+      console.log('error', error);
     } finally {
       setLoading(false);
     }
@@ -91,7 +90,7 @@ function Comment({ courseId, contentId }) {
       ];
       setComments(updatedComments);
     } catch (error) {
-      console.log('error here', error);
+      console.log('error', error);
     }
   };
   const user = {
@@ -101,8 +100,8 @@ function Comment({ courseId, contentId }) {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      console.log('event', event.target.value);
       updateComments(event.target.value);
+      event.target.value = '';
     }
   };
   return (
@@ -166,7 +165,6 @@ function Comment({ courseId, contentId }) {
                           onClick={() => {
                             setDeletingId(comment.id);
                             setOpen(true);
-                            console.log('delete clicked');
                           }}
                         />
                         <AlertDialog

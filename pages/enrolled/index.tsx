@@ -23,7 +23,6 @@ function EnrolledCourse() {
   const getEnrolledCourse = async () => {
     try {
       const response = await getResources('/enrol');
-      console.log('enrolled course', response.data);
       setEnrolledCourse(response.data);
       const filteredData = response?.data?.map((value) => value.course);
       setPoolFeeds(filteredData);
