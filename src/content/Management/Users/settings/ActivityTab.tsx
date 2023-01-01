@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import {
   Box,
   Typography,
@@ -54,119 +55,125 @@ function ActivityTab({ contentId, contents }) {
   }, [currentContent]);
 
   return (
-    <Card>
-      <CardHeader
-        action={
-          <IconButton color="primary">
-            <MoreHorizTwoToneIcon fontSize="medium" />
-          </IconButton>
-        }
-        titleTypographyProps={{ variant: 'h4' }}
-        subheaderTypographyProps={{ variant: 'subtitle2' }}
-        title={currentContent?.content?.title}
-        subheader={<>{currentContent?.content?.description}</>}
-      />
-      <div className="course-video-frame">
-        <iframe
-          width="100%"
-          height="600px"
-          src={currentContent?.content?.link}
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
-        <div
-          className="arrow-button-container"
-          style={{
-            position: 'relative',
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'rgb(17, 25, 42)',
-            color: 'white'
-          }}
-        >
-          <div>
-            <p
-              style={{
-                fontSize: '10px',
-                position: 'absolute',
-                marginLeft: '-140px',
-                marginTop: '22px',
-                width: '145px',
-                height: '30px',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                textAlign: 'right'
-              }}
-            >
-              {prevContent?.title || 'No Previous'}
-            </p>
-            <SkipPreviousIcon
-              sx={{ fontSize: 60 }}
-              onClick={() => {
-                if (prevContent?.id)
-                  router.push(
-                    `http://localhost:3001/course/${courseId}/content/${prevContent.id}`
-                  );
-              }}
-              style={{
-                color: 'white',
-                cursor: 'pointer'
-              }}
-            />
-          </div>
-          <div>
-            <p
-              style={{
-                fontSize: '10px',
-                textAlign: 'left',
-                position: 'absolute',
-                marginLeft: '50px',
-                marginTop: '22px',
-                width: '150px',
-                height: '30px',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}
-            >
-              {nextContent?.title || 'No Next'}
-            </p>
-            <SkipNextIcon
-              sx={{ fontSize: 60 }}
-              onClick={() => {
-                if (nextContent?.id)
-                  router.push(
-                    `http://localhost:3001/course/${courseId}/content/${nextContent?.id}`
-                  );
-              }}
-              style={{
-                color: 'white',
-                cursor: 'pointer'
-              }}
-            />
+    <>
+      <Head>
+        <title>Wisdom Pool - {currentContent?.content?.title}</title> // make
+        this dynamic according to sele
+      </Head>
+      <Card>
+        <CardHeader
+          action={
+            <IconButton color="primary">
+              <MoreHorizTwoToneIcon fontSize="medium" />
+            </IconButton>
+          }
+          titleTypographyProps={{ variant: 'h4' }}
+          subheaderTypographyProps={{ variant: 'subtitle2' }}
+          title={currentContent?.content?.title}
+          subheader={<>{currentContent?.content?.description}</>}
+        />
+        <div className="course-video-frame">
+          <iframe
+            width="100%"
+            height="600px"
+            src={currentContent?.content?.link}
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <div
+            className="arrow-button-container"
+            style={{
+              position: 'relative',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgb(17, 25, 42)',
+              color: 'white'
+            }}
+          >
+            <div>
+              <p
+                style={{
+                  fontSize: '10px',
+                  position: 'absolute',
+                  marginLeft: '-140px',
+                  marginTop: '22px',
+                  width: '145px',
+                  height: '30px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  textAlign: 'right'
+                }}
+              >
+                {prevContent?.title || 'No Previous'}
+              </p>
+              <SkipPreviousIcon
+                sx={{ fontSize: 60 }}
+                onClick={() => {
+                  if (prevContent?.id)
+                    router.push(
+                      `http://localhost:3001/course/${courseId}/content/${prevContent.id}`
+                    );
+                }}
+                style={{
+                  color: 'white',
+                  cursor: 'pointer'
+                }}
+              />
+            </div>
+            <div>
+              <p
+                style={{
+                  fontSize: '10px',
+                  textAlign: 'left',
+                  position: 'absolute',
+                  marginLeft: '50px',
+                  marginTop: '22px',
+                  width: '150px',
+                  height: '30px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                {nextContent?.title || 'No Next'}
+              </p>
+              <SkipNextIcon
+                sx={{ fontSize: 60 }}
+                onClick={() => {
+                  if (nextContent?.id)
+                    router.push(
+                      `http://localhost:3001/course/${courseId}/content/${nextContent?.id}`
+                    );
+                }}
+                style={{
+                  color: 'white',
+                  cursor: 'pointer'
+                }}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <Box p={3}>
-        <Typography variant="h2" sx={{ pb: 1 }}>
-          {currentContent?.content?.title}
-        </Typography>
-        <Typography variant="subtitle2">
-          <Link
-            href={currentContent?.content?.contentCreatorLink}
-            underline="hover"
-          >
-            {currentContent?.content?.channelName}
-          </Link>{' '}
-          • {currentContent?.content?.videoLength}
-        </Typography>
-      </Box>
-      <Divider />
-      <Comment courseId={courseId} contentId={contentId} />
-    </Card>
+        <Box p={3}>
+          <Typography variant="h2" sx={{ pb: 1 }}>
+            {currentContent?.content?.title}
+          </Typography>
+          <Typography variant="subtitle2">
+            <Link
+              href={currentContent?.content?.contentCreatorLink}
+              underline="hover"
+            >
+              {currentContent?.content?.channelName}
+            </Link>{' '}
+            • {currentContent?.content?.videoLength}
+          </Typography>
+        </Box>
+        <Divider />
+        <Comment courseId={courseId} contentId={contentId} />
+      </Card>
+    </>
   );
 }
 

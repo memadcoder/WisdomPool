@@ -59,7 +59,7 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>Wisdom Pool - {title}</title>
       </Head>
       <PageTitleWrapper>
         <PageHeader />

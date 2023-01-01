@@ -110,9 +110,7 @@ function StatusNoData() {
 
   return (
     <>
-      <Head>
-        <title>No-Data</title>
-      </Head>
+      <Head>{/* <title>No-Data</title> */}</Head>
       <MainContent>
         <TopWrapper>
           <Container maxWidth="md">

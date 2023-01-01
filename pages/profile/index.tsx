@@ -23,7 +23,10 @@ function ManagementUserProfile() {
   return (
     <>
       <Head>
-        <title>User Details - Management</title>
+        <title>
+          Wisdom Pool - User{' '}
+          {loggedInUser?.name ? `, ${loggedInUser?.name}` : ''}
+        </title>
       </Head>
       <Container sx={{ mt: 3 }} maxWidth="lg">
         <Grid

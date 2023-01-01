@@ -38,7 +38,7 @@ function ManagementUserSettings() {
   return (
     <>
       <Head>
-        <title>User Settings - Applications</title>
+        <title>Wisdom Pool - User Settings</title>
       </Head>
       <PageTitleWrapper>
         <PageHeader />

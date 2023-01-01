@@ -36,7 +36,7 @@ function EnrolledCourse() {
   return (
     <>
       <Head>
-        <title>Enrolled Course</title>
+        <title>Wisdom Pool - Enrolled Course</title>
       </Head>
       <Container maxWidth="lg">
         <Grid

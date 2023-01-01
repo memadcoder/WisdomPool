@@ -28,17 +28,30 @@ function Avatars() {
   const router = useRouter();
   const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
   const [contents, setContents] = useState(null);
+  const [courseDetails, setCourseDetails] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const { courseId } = router.query;
 
   useEffect(() => {
+    getCourseDetails();
     getCourseContent();
   }, []);
+
+  const getCourseDetails = async () => {
+    try {
+      const response = await getResources(`/course/${courseId}/course-content`);
+      setCourseDetails(response.data);
+      console.log({ courseDetails });
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   const getCourseContent = async () => {
     try {
       const response = await getResources(`/course/${courseId}/course-content`);
       setContents(response.data);
+      console.log({ contents });
     } catch (error) {
       console.log('error', error);
     } finally {
@@ -49,7 +62,8 @@ function Avatars() {
   return (
     <>
       <Head>
-        <title>Pool</title>
+        <title>Wisdom Pool - Course{}</title> // replace title with selected
+        course later
       </Head>
       <PageTitleWrapper>
         {/* <PageHeader /> */}

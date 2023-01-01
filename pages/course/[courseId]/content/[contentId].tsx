@@ -30,9 +30,6 @@ function Content() {
   };
   return (
     <>
-      <Head>
-        <title>Wisdom Pool</title>
-      </Head>
       <Container maxWidth="lg">
         <Grid
           container
