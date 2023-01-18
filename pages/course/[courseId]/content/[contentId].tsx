@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getResources } from '@/api';
 import CircularProgress from '@mui/material/CircularProgress';
+import AuthLayout from '@/layouts/AuthLayout';
 
 function Content() {
   const router = useRouter();
@@ -52,9 +53,6 @@ function Content() {
   );
 }
 
-Content.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // use later
-  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
-};
+Content.getLayout = AuthLayout;
 
 export default Content;

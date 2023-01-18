@@ -3,10 +3,11 @@ import * as React from 'react';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import { Container, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
-import Avatars from 'pages/components/avatars';
+import Avatars from '@/components/avatars';
 import Snackbars from '@/components/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getResources } from '@/api';
+import AuthLayout from '@/layouts/AuthLayout';
 
 function DashboardCrypto() {
   const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
@@ -73,9 +74,8 @@ function DashboardCrypto() {
   );
 }
 
-DashboardCrypto.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication()); // use later
-  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
-};
+
+
+DashboardCrypto.getLayout = AuthLayout
 
 export default DashboardCrypto;

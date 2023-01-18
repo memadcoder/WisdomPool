@@ -6,8 +6,9 @@ import Footer from '@/components/Footer';
 import { Container, Grid } from '@mui/material';
 import AlertDialog from '@/components/AlertDialog';
 import { UserContext } from '@/contexts/UserContext';
-import Feeds from 'pages/components/Feeds';
+import Feeds from '@/components/Feeds';
 import { checkAuthentication } from '@/utility/checkAuthentication';
+import AuthLayout from '@/layouts/AuthLayout';
 
 const poolFeeds = [
   {
@@ -125,10 +126,6 @@ function Favourites() {
   );
 }
 
-Favourites.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); //used now
-
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
-};
+Favourites.getLayout = AuthLayout
 
 export default Favourites;

@@ -24,7 +24,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarIcon from '@mui/icons-material/Star';
 import { useRouter } from 'next/router';
 import { createResource } from '@/api';
-import StatusNoData from 'pages/status/no-data';
+import StatusNoData from '@/components/status/no-data';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {

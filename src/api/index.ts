@@ -12,12 +12,9 @@ const setToken = (token: string) => {
 
 
 interface ResourceType extends Record<string, any> { }
-interface GetResourceType {
-    message: string,
-    accessToken: string,
-    user: object;
 
-}
+// just a quick fix
+interface GetResourceType {[index: string]:any;}
 
 // Create a new resource
 export const createResource = (data: ResourceType, resource: string) => {
