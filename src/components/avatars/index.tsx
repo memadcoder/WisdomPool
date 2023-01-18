@@ -153,9 +153,4 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
   );
 }
 
-Avatars.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // use later
-  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
-};
-
 export default Avatars;

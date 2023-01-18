@@ -82,7 +82,8 @@ function PersonalDetailsModal(props) {
 
 PersonalDetailsModal.propTypes = {
   setModal: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired
+  open: PropTypes.bool.isRequired,
+  user: PropTypes.any
 };
 
 export default PersonalDetailsModal;

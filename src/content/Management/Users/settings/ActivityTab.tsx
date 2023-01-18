@@ -57,8 +57,8 @@ function ActivityTab({ contentId, contents }) {
   return (
     <>
       <Head>
-        <title>Wisdom Pool - {currentContent?.content?.title}</title> // make
-        this dynamic according to sele
+        <title>Wisdom Pool - {currentContent?.content?.title}</title> 
+        {/* make this dynamic according to sele */}
       </Head>
       <Card>
         <CardHeader
@@ -77,8 +77,6 @@ function ActivityTab({ contentId, contents }) {
             width="100%"
             height="600px"
             src={currentContent?.content?.link}
-            frameborder="0"
-            allowfullscreen
           ></iframe>
           <div
             className="arrow-button-container"
