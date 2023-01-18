@@ -1,6 +1,6 @@
 import { getToken } from '@/utility/setUser';
 import axios from 'axios';
-const baseURL = 'http://localhost:3000';
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const API = axios.create({
     baseURL
