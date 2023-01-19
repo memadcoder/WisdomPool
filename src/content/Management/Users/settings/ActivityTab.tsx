@@ -147,7 +147,7 @@ function ActivityTab({ contentId, contents }) {
                 {prevContent?.title || 'No Previous'}
               </p>
               {prevContent?.id && (
-                <Link href={`/course/${courseId}/content/${prevContent.id}`}>
+                <Link href={`/course/${encodeURIComponent(courseId+"")}/content/${encodeURIComponent(prevContent.id)}`}>
                   <SkipPreviousIcon
                     sx={{ fontSize: 60 }}
                     style={{
@@ -185,7 +185,7 @@ function ActivityTab({ contentId, contents }) {
                 {nextContent?.title || 'No Next'}
               </p>
               {nextContent?.id && (
-                <Link href={`/course/${courseId}/content/${nextContent?.id}`}>
+                <Link href={`/course/${encodeURIComponent(courseId+"")}/content/${encodeURIComponent(nextContent?.id)}`}>
                   <SkipNextIcon
                     sx={{ fontSize: 60 }}
                     style={{

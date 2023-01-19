@@ -17,8 +17,10 @@ function Content() {
   const { courseId, contentId } = router.query;
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
-    getCourseContent();
-  }, []);
+    if(courseId && contentId) {
+      getCourseContent();
+    }
+  }, [courseId, contentId]);
 
   const getCourseContent = async () => {
     try {

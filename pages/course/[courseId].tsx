@@ -34,9 +34,11 @@ function Avatars() {
   const { courseId } = router.query;
 
   useEffect(() => {
-    getCourseDetails();
-    getCourseContent();
-  }, []);
+    if (courseId) {
+      getCourseDetails();
+      getCourseContent();
+    }
+  }, [courseId]);
 
   const getCourseDetails = async () => {
     try {
@@ -64,7 +66,7 @@ function Avatars() {
     <>
       <Head>
         <title>Wisdom Pool - Course{}</title>
-        { /* replace title with selected course later */}
+        {/* replace title with selected course later */}
       </Head>
       <PageTitleWrapper>
         {/* <PageHeader /> */}
@@ -166,6 +168,6 @@ function Avatars() {
   );
 }
 
-Avatars.getLayout = AuthLayout
+Avatars.getLayout = AuthLayout;
 
 export default Avatars;
