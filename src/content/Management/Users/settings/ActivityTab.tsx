@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import Remove from '@mui/icons-material/Remove';
 import { styled } from '@mui/material/styles';
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
 import ThumbUpAltTwoToneIcon from '@mui/icons-material/ThumbUpAltTwoTone';
@@ -54,11 +55,53 @@ function ActivityTab({ contentId, contents }) {
     if (prev.length) setPrevContent(prev[0].content);
   }, [currentContent]);
 
+  const getContent = () => {
+    if (currentContent?.content?.contentType == 'VIDEO') {
+      // for now its only YT video so.
+      let link = currentContent?.content?.link;
+      let theVideId = link.split('v=')[1];
+      return (
+        <div>
+          <iframe
+            width="100%"
+            height="500px"
+            src={`https://www.youtube.com/embed/${theVideId}`}
+            title="YouTube video player"
+          ></iframe>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <div style={{ margin: 10 }}>
+          <p>
+            A blog post is embedded in the following section. If you are getting
+            any error. you can access it using this link.{' '}
+            <a
+              href={currentContent?.content?.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {currentContent?.content?.link}
+            </a>
+          </p>
+        </div>
+        <div>
+          <iframe
+            width="100%"
+            height="500px"
+            src={currentContent?.content?.link}
+          ></iframe>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <Head>
-        <title>Wisdom Pool - {currentContent?.content?.title}</title> // make
-        this dynamic according to sele
+        <title>Wisdom Pool - {currentContent?.content?.title}</title>
+        {/* make this dynamic according to sele */}
       </Head>
       <Card>
         <CardHeader
@@ -73,13 +116,7 @@ function ActivityTab({ contentId, contents }) {
           subheader={<>{currentContent?.content?.description}</>}
         />
         <div className="course-video-frame">
-          <iframe
-            width="100%"
-            height="600px"
-            src={currentContent?.content?.link}
-            frameborder="0"
-            allowfullscreen
-          ></iframe>
+          {getContent()}
           <div
             className="arrow-button-container"
             style={{
@@ -109,19 +146,26 @@ function ActivityTab({ contentId, contents }) {
               >
                 {prevContent?.title || 'No Previous'}
               </p>
-              <SkipPreviousIcon
-                sx={{ fontSize: 60 }}
-                onClick={() => {
-                  if (prevContent?.id)
-                    router.push(
-                      `http://localhost:3001/course/${courseId}/content/${prevContent.id}`
-                    );
-                }}
-                style={{
-                  color: 'white',
-                  cursor: 'pointer'
-                }}
-              />
+              {prevContent?.id && (
+                <Link href={`/course/${encodeURIComponent(courseId+"")}/content/${encodeURIComponent(prevContent.id)}`}>
+                  <SkipPreviousIcon
+                    sx={{ fontSize: 60 }}
+                    style={{
+                      color: 'white',
+                      cursor: 'pointer'
+                    }}
+                  />
+                </Link>
+              )}
+
+              {!prevContent?.id && (
+                <Remove
+                  sx={{ fontSize: 60 }}
+                  style={{
+                    color: 'white'
+                  }}
+                />
+              )}
             </div>
             <div>
               <p
@@ -140,19 +184,25 @@ function ActivityTab({ contentId, contents }) {
               >
                 {nextContent?.title || 'No Next'}
               </p>
-              <SkipNextIcon
-                sx={{ fontSize: 60 }}
-                onClick={() => {
-                  if (nextContent?.id)
-                    router.push(
-                      `http://localhost:3001/course/${courseId}/content/${nextContent?.id}`
-                    );
-                }}
-                style={{
-                  color: 'white',
-                  cursor: 'pointer'
-                }}
-              />
+              {nextContent?.id && (
+                <Link href={`/course/${encodeURIComponent(courseId+"")}/content/${encodeURIComponent(nextContent?.id)}`}>
+                  <SkipNextIcon
+                    sx={{ fontSize: 60 }}
+                    style={{
+                      color: 'white',
+                      cursor: 'pointer'
+                    }}
+                  />
+                </Link>
+              )}
+              {!nextContent?.id && (
+                <Remove
+                  sx={{ fontSize: 60 }}
+                  style={{
+                    color: 'white'
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>

@@ -70,8 +70,8 @@ function Overview() {
   );
 }
 
-export default Overview;
-
 Overview.getLayout = function getLayout(page: ReactElement) {
   return <BaseLayout>{page}</BaseLayout>;
 };
+
+export default Overview;

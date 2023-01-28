@@ -142,9 +142,4 @@ function Feeds(props: any) {
   );
 }
 
-Feeds.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); //use later
-  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
-};
-
 export default Feeds;

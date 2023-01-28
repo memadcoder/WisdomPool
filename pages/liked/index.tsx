@@ -5,9 +5,10 @@ import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
 import { Container, Grid } from '@mui/material';
 import AlertDialog from '@/components/AlertDialog';
-import Feeds from 'pages/components/Feeds';
+import Feeds from '@/components/Feeds';
 import { UserContext } from '@/contexts/UserContext';
 import { checkAuthentication } from '@/utility/checkAuthentication';
+import AuthLayout from '@/layouts/AuthLayout';
 
 const poolFeeds = [
   {
@@ -123,9 +124,6 @@ function Liked() {
   );
 }
 
-Liked.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // used now
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
-};
+Liked.getLayout = AuthLayout
 
 export default Liked;

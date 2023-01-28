@@ -6,8 +6,9 @@ import Footer from '@/components/Footer';
 import { Container, Grid } from '@mui/material';
 import { useState } from 'react';
 import EditCourseModal from '@/components/Modal/CourseModal/EditCourse';
-import Feeds from 'pages/components/Feeds';
+import Feeds from '@/components/Feeds';
 import { checkAuthentication } from '@/utility/checkAuthentication';
+import AuthLayout from '@/layouts/AuthLayout';
 
 const poolFeeds = [
   {
@@ -114,10 +115,6 @@ function MyCourse() {
   );
 }
 
-MyCourse.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // used now
-
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
-};
+MyCourse.getLayout = AuthLayout
 
 export default MyCourse;

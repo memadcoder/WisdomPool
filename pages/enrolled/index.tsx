@@ -1,12 +1,15 @@
-import Head from 'next/head';
 import * as React from 'react';
-import SidebarLayout from '@/layouts/SidebarLayout';
+import Head from 'next/head';
+
 import { Container, Grid } from '@mui/material';
+
+import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
-import Avatars from 'pages/components/avatars';
+import Avatars from '@/components/avatars';
 import Snackbars from '@/components/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getResources } from '@/api';
+import AuthLayout from '@/layouts/AuthLayout';
 
 function EnrolledCourse() {
   const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
@@ -63,9 +66,5 @@ function EnrolledCourse() {
   );
 }
 
-EnrolledCourse.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication()); // use now
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
-};
-
+EnrolledCourse.getLayout = AuthLayout
 export default EnrolledCourse;

@@ -22,7 +22,8 @@ import StarIcon from '@mui/icons-material/Star';
 import { useRouter } from 'next/router';
 import { getResources } from '@/api';
 import CircularProgress from '@mui/material/CircularProgress';
-import StatusNoData from 'pages/status/no-data';
+import StatusNoData from '@/components/status/no-data';
+import AuthLayout from '@/layouts/AuthLayout';
 
 function Avatars() {
   const router = useRouter();
@@ -33,9 +34,11 @@ function Avatars() {
   const { courseId } = router.query;
 
   useEffect(() => {
-    getCourseDetails();
-    getCourseContent();
-  }, []);
+    if (courseId) {
+      getCourseDetails();
+      getCourseContent();
+    }
+  }, [courseId]);
 
   const getCourseDetails = async () => {
     try {
@@ -62,8 +65,8 @@ function Avatars() {
   return (
     <>
       <Head>
-        <title>Wisdom Pool - Course{}</title> // replace title with selected
-        course later
+        <title>Wisdom Pool - Course{}</title>
+        {/* replace title with selected course later */}
       </Head>
       <PageTitleWrapper>
         {/* <PageHeader /> */}
@@ -165,9 +168,6 @@ function Avatars() {
   );
 }
 
-Avatars.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // use later
-  return <SidebarLayout isAuthenticated>{page}</SidebarLayout>;
-};
+Avatars.getLayout = AuthLayout;
 
 export default Avatars;

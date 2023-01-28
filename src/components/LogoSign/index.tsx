@@ -98,7 +98,7 @@ function Logo() {
   const theme = useTheme();
 
   return (
-    <img src="./icon-500x500.png" height={180} width={180} />
+    <img src="/icon-500x500.png" height={180} width={180} />
     // <TooltipWrapper title="Wisdom Pool" arrow>
     //   <LogoWrapper href="/">
     //     <Badge
