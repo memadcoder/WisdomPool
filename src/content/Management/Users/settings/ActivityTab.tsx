@@ -64,7 +64,7 @@ function ActivityTab({ contentId, contents }) {
         <div>
           <iframe
             width="100%"
-            height="500px"
+            height="400px"
             src={`https://www.youtube.com/embed/${theVideId}`}
             title="YouTube video player"
           ></iframe>
@@ -147,7 +147,11 @@ function ActivityTab({ contentId, contents }) {
                 {prevContent?.title || 'No Previous'}
               </p>
               {prevContent?.id && (
-                <Link href={`/course/${encodeURIComponent(courseId+"")}/content/${encodeURIComponent(prevContent.id)}`}>
+                <Link
+                  href={`/course/${encodeURIComponent(
+                    courseId + ''
+                  )}/content/${encodeURIComponent(prevContent.id)}`}
+                >
                   <SkipPreviousIcon
                     sx={{ fontSize: 60 }}
                     style={{
@@ -185,7 +189,11 @@ function ActivityTab({ contentId, contents }) {
                 {nextContent?.title || 'No Next'}
               </p>
               {nextContent?.id && (
-                <Link href={`/course/${encodeURIComponent(courseId+"")}/content/${encodeURIComponent(nextContent?.id)}`}>
+                <Link
+                  href={`/course/${encodeURIComponent(
+                    courseId + ''
+                  )}/content/${encodeURIComponent(nextContent?.id)}`}
+                >
                   <SkipNextIcon
                     sx={{ fontSize: 60 }}
                     style={{
