@@ -104,52 +104,63 @@ function Avatars() {
                             // color: 'ActiveBorder'
                           }}
                         >
-                          <NextLink
-                            href={`${courseId}/content/${feed.content.id}`}
-                            passHref
+                          <Grid
+                            container
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="stretch"
+                            spacing={1}
                           >
-                            <Box style={{ color: 'ButtonHighlight' }}>
-                              <Typography variant="h4" gutterBottom>
-                                {feed.content.title}
-                              </Typography>
-                              <Typography
-                                variant="subtitle2"
-                                color={'ButtonHighlight'}
+                            <Grid item xs={12} sm={9}>
+                              <NextLink
+                                href={`${courseId}/content/${feed.content.id}`}
+                                passHref
                               >
-                                {feed.content.description}
-                              </Typography>
-                            </Box>
-                          </NextLink>
-
-                          <Button
-                            variant="outlined"
-                            color="success"
-                            startIcon={
-                              feed?.content?.byAdmin ? (
-                                <StarIcon color="warning" />
-                              ) : (
-                                ''
-                              )
-                            }
-                            endIcon={
-                              isLoggedIn && feed?.content?.completed ? (
-                                <AddTaskIcon />
-                              ) : (
-                                <PlayCircleFilledIcon />
-                              )
-                            }
-                            onClick={() => {
-                              router.push(
-                                `${courseId}/content/${feed.content.id}`
-                              );
-                            }}
-                          >
-                            {!isLoggedIn
-                              ? 'Start'
-                              : feed?.completed
-                              ? 'Read Again'
-                              : 'Start'}
-                          </Button>
+                                <Box style={{ color: 'ButtonHighlight' }}>
+                                  <Typography variant="h4" gutterBottom>
+                                    {feed.content.title}
+                                  </Typography>
+                                  <Typography
+                                    variant="subtitle2"
+                                    color={'ButtonHighlight'}
+                                  >
+                                    {feed.content.description}
+                                  </Typography>
+                                </Box>
+                              </NextLink>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                              <Button
+                                variant="outlined"
+                                color="success"
+                                startIcon={
+                                  feed?.content?.byAdmin ? (
+                                    <StarIcon color="warning" />
+                                  ) : (
+                                    ''
+                                  )
+                                }
+                                endIcon={
+                                  isLoggedIn && feed?.content?.completed ? (
+                                    <AddTaskIcon />
+                                  ) : (
+                                    <PlayCircleFilledIcon />
+                                  )
+                                }
+                                onClick={() => {
+                                  router.push(
+                                    `${courseId}/content/${feed.content.id}`
+                                  );
+                                }}
+                              >
+                                {!isLoggedIn
+                                  ? 'Start'
+                                  : feed?.completed
+                                  ? 'Read Again'
+                                  : 'Start'}
+                              </Button>
+                            </Grid>
+                          </Grid>
                         </Box>
 
                         <Divider />

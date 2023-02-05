@@ -96,45 +96,61 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
                             // color: 'ActiveBorder'
                           }}
                         >
-                          <NextLink href={`course/${feed.id}`} passHref>
-                            <Box style={{ color: 'ButtonHighlight' }}>
-                              <Typography variant="h4" gutterBottom>
-                                {feed.title}
-                              </Typography>
-                              <Typography
-                                variant="subtitle2"
-                                color={'ButtonHighlight'}
-                              >
-                                {feed.description}
-                              </Typography>
-                            </Box>
-                          </NextLink>
-
-                          <Button
-                            variant="outlined"
-                            color="success"
-                            endIcon={
-                              !isLoggedIn ? (
-                                <SubscriptionsIcon />
-                              ) : checkIfCourseEnrolled(feed.id) ? (
-                                <CheckCircleIcon />
-                              ) : (
-                                <SubscriptionsIcon />
-                              )
-                            }
-                            startIcon={
-                              feed?.byAdmin ? <StarIcon color="warning" /> : ''
-                            }
-                            onClick={() => {
-                              handleEnroll(feed.id);
-                            }}
+                          <Grid
+                            container
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="stretch"
+                            spacing={1}
                           >
-                            {!isLoggedIn
-                              ? 'Enroll'
-                              : checkIfCourseEnrolled(feed.id)
-                              ? 'Enrolled'
-                              : 'Enroll'}
-                          </Button>
+                            <Grid item xs={12} sm={9}>
+                              <NextLink href={`course/${feed.id}`} passHref>
+                                <Box style={{ color: 'ButtonHighlight' }}>
+                                  <Typography variant="h4" gutterBottom>
+                                    {feed.title}
+                                  </Typography>
+                                  <Typography
+                                    variant="subtitle2"
+                                    color={'ButtonHighlight'}
+                                  >
+                                    {feed.description}
+                                  </Typography>
+                                </Box>
+                              </NextLink>
+                            </Grid>
+
+                            <Grid item xs={12} sm={3}>
+                              <Button
+                                variant="outlined"
+                                color="success"
+                                endIcon={
+                                  !isLoggedIn ? (
+                                    <SubscriptionsIcon />
+                                  ) : checkIfCourseEnrolled(feed.id) ? (
+                                    <CheckCircleIcon />
+                                  ) : (
+                                    <SubscriptionsIcon />
+                                  )
+                                }
+                                startIcon={
+                                  feed?.byAdmin ? (
+                                    <StarIcon color="warning" />
+                                  ) : (
+                                    ''
+                                  )
+                                }
+                                onClick={() => {
+                                  handleEnroll(feed.id);
+                                }}
+                              >
+                                {!isLoggedIn
+                                  ? 'Enroll'
+                                  : checkIfCourseEnrolled(feed.id)
+                                  ? 'Enrolled'
+                                  : 'Enroll'}
+                              </Button>
+                            </Grid>
+                          </Grid>
                         </Box>
 
                         <Divider />
