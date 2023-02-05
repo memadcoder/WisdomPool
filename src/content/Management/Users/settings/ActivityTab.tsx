@@ -163,10 +163,11 @@ function ActivityTab({ contentId, contents }) {
               )}
 
               {!prevContent?.id && (
-                <Remove
+                <SkipPreviousIcon
                   sx={{ fontSize: 60 }}
                   style={{
-                    color: 'white'
+                    color: 'grey',
+                    cursor: 'not-allowed'
                   }}
                 />
               )}
@@ -204,10 +205,11 @@ function ActivityTab({ contentId, contents }) {
                 </Link>
               )}
               {!nextContent?.id && (
-                <Remove
+                <SkipNextIcon
                   sx={{ fontSize: 60 }}
                   style={{
-                    color: 'white'
+                    color: 'grey',
+                    cursor: 'not-allowed'
                   }}
                 />
               )}
@@ -218,7 +220,7 @@ function ActivityTab({ contentId, contents }) {
           <Typography variant="h2" sx={{ pb: 1 }}>
             {currentContent?.content?.title}
           </Typography>
-          <Typography variant="subtitle2">
+          {/* <Typography variant="subtitle2">
             <Link
               href={currentContent?.content?.contentCreatorLink}
               underline="hover"
@@ -226,7 +228,7 @@ function ActivityTab({ contentId, contents }) {
               {currentContent?.content?.channelName}
             </Link>{' '}
             • {currentContent?.content?.videoLength}
-          </Typography>
+          </Typography> */}
         </Box>
         <Divider />
         <Comment courseId={courseId} contentId={contentId} />
