@@ -24,7 +24,7 @@ const HeaderWrapper = styled(Card)(
     display: flex;
     align-items: center;
     height: ${theme.spacing(10)};
-    margin-bottom: ${theme.spacing(10)};
+    // margin-bottom: ${theme.spacing(10)};
   `
 );
 
@@ -46,7 +46,7 @@ function Register() {
       <HeaderWrapper>
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center">
-            <Logo />
+            <Logo width={120} height={120} />
             <Box
               display="flex"
               alignItems="center"
@@ -81,7 +81,7 @@ function Register() {
         </Grid>
         <Snackbars />
       </Container>
-      <Container maxWidth="lg" sx={{ mt: 8 }}>
+      <Container maxWidth="lg" sx={{ mt: 3 }}>
         <Typography textAlign="center" variant="subtitle1">
           Copyright ©
           <Link href="" target="_blank" rel="noopener noreferrer">

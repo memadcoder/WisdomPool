@@ -22,7 +22,7 @@ const HeaderWrapper = styled(Card)(
     display: flex;
     align-items: center;
     height: ${theme.spacing(10)};
-    margin-bottom: ${theme.spacing(10)};
+    // margin-bottom: ${theme.spacing(10)};
   `
 );
 
@@ -43,22 +43,20 @@ function Overview() {
       </Head>
       <HeaderWrapper>
         <Container maxWidth="lg">
-          <Box display="flex" alignItems="center">
-            <Logo />
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              flex={1}
-            >
-              <Box />
-            </Box>
+          {/* <Box display="flex" alignItems="center"> */}
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            flex={1}
+          >
+            <Logo height={120} width={120} />
           </Box>
         </Container>
       </HeaderWrapper>
       <Snackbars />
       <Hero />
-      <Container maxWidth="lg" sx={{ mt: 8 }}>
+      <Container maxWidth="lg" sx={{ mt: 5 }}>
         <Typography textAlign="center" variant="subtitle1">
           Copyright ©
           <Link href="" target="_blank" rel="noopener noreferrer">
