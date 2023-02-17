@@ -7,6 +7,7 @@ import ProfileCover from '@/content/Management/Users/details/ProfileCover';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getToken } from '@/utility/setUser';
 import Snackbars from '@/components/Snackbar';
+import AuthLayout from '@/layouts/AuthLayout';
 
 function ManagementUserProfile() {
   const [loggedInUser, setUser] = useState(getToken()?.user);
@@ -47,10 +48,6 @@ function ManagementUserProfile() {
   );
 }
 
-ManagementUserProfile.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); // use this time also
-
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
-};
+ManagementUserProfile.getLayout = AuthLayout
 
 export default ManagementUserProfile;

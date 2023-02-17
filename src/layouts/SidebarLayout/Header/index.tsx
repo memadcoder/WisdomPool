@@ -73,8 +73,8 @@ function Header() {
         <HeaderMenu />
       </Stack>
       <Box display="flex" alignItems="center">
-        <HeaderButtons />
-        {isLoggedIn && <HeaderUserbox />}
+        {/* <HeaderButtons />
+        {isLoggedIn && <HeaderUserbox />} */}
         <Box
           component="span"
           sx={{

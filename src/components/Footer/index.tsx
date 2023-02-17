@@ -17,25 +17,8 @@ function Footer() {
         justifyContent="space-between"
       >
         <Box>
-          <Typography variant="subtitle1">
-            &copy; 2022 - Wisdom Pool
-          </Typography>
+          <Typography variant="subtitle1">&copy; 2022 - Wisdom Pool</Typography>
         </Box>
-        <Typography
-          sx={{
-            pt: { xs: 2, md: 0 }
-          }}
-          variant="subtitle1"
-        >
-          Crafted by{' '}
-          <Link
-            href="https://bloomui.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            BloomUI.com
-          </Link>
-        </Typography>
       </Box>
     </FooterWrapper>
   );

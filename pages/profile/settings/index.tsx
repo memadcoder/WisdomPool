@@ -12,6 +12,7 @@ import EditProfileTab from '@/content/Management/Users/settings/EditProfileTab';
 import NotificationsTab from '@/content/Management/Users/settings/NotificationsTab';
 import SecurityTab from '@/content/Management/Users/settings/SecurityTab';
 import { checkAuthentication } from '@/utility/checkAuthentication';
+import AuthLayout from '@/layouts/AuthLayout';
 
 const TabsWrapper = styled(Tabs)(
   () => `
@@ -66,9 +67,8 @@ function ManagementUserSettings() {
             </TabsWrapper>
           </Grid>
           <Grid item xs={12}>
-            {currentTab === 'activity' && <ActivityTab />}
+            asdfasdfasdf
             {currentTab === 'edit_profile' && <EditProfileTab />}
-            {currentTab === 'notifications' && <NotificationsTab />}
             {currentTab === 'security' && <SecurityTab />}
           </Grid>
         </Grid>
@@ -78,9 +78,6 @@ function ManagementUserSettings() {
   );
 }
 
-ManagementUserSettings.getLayout = (page) => {
-  const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication()); //use later
-  return <SidebarLayout isAuthenticated={isLoggedIn}>{page}</SidebarLayout>;
-};
+ManagementUserSettings.getLayout = AuthLayout
 
 export default ManagementUserSettings;

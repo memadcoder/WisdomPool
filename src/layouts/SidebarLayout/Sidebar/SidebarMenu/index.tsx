@@ -171,13 +171,6 @@ function SidebarMenu() {
   return (
     <>
       <MenuWrapper>
-        <List component="div">
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div"></ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
         <List
           component="div"
           subheader={

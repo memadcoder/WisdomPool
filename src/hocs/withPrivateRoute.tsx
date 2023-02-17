@@ -2,7 +2,7 @@ import { checkAuthentication } from '@/utility/checkAuthentication';
 import { NextPage } from 'next/types';
 
 interface Props {
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 export const withPrivateRoute = (WrappedComponent: React.FC<Props>) => {

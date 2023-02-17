@@ -81,9 +81,10 @@ function Comment({ courseId, contentId }) {
         },
         `/comment`
       );
+
       const updatedComments = [
         {
-          user: { name: response.data.user.name },
+          user: { name: response.data.user.name, id: response.data.user.id },
           comment: response.data.comment
         },
         ...comments

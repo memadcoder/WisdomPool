@@ -92,40 +92,6 @@ function HeaderMenu() {
                   primary="Enrolled"
                 />
               </ListItem>
-              {/* <ListItem
-                classes={{ root: 'MuiListItem-indicators' }}
-                button
-                component={Link}
-                href="/mycourse"
-              >
-                <ListItemText
-                  primaryTypographyProps={{ noWrap: true }}
-                  primary="My Course"
-                />
-              </ListItem>
-              <ListItem
-                classes={{ root: 'MuiListItem-indicators' }}
-                button
-                component={Link}
-                href="/fav"
-              >
-                <ListItemText
-                  primaryTypographyProps={{ noWrap: true }}
-                  primary="Favourites"
-                />
-              </ListItem>
-
-              <ListItem
-                classes={{ root: 'MuiListItem-indicators' }}
-                button
-                component={Link}
-                href="/liked"
-              >
-                <ListItemText
-                  primaryTypographyProps={{ noWrap: true }}
-                  primary="Liked"
-                />
-              </ListItem> */}
             </>
           )}
         </List>

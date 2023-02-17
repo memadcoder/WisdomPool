@@ -9,6 +9,11 @@ import {
 } from '@mui/material';
 import Link from 'src/components/Link';
 
+interface LogoProps {
+  height?: number;
+  width?: number;
+}
+
 const LogoWrapper = styled(Link)(
   ({ theme }) => `
         color: ${theme.palette.text.primary};
@@ -94,11 +99,11 @@ const TooltipWrapper = styled(({ className, ...props }: TooltipProps) => (
   }
 }));
 
-function Logo() {
+function Logo({ height, width }: LogoProps) {
   const theme = useTheme();
 
   return (
-    <img src="./icon-500x500.png" height={180} width={180} />
+    <img src="/icon-500x500.png" height={height || 180} width={width || 180} />
     // <TooltipWrapper title="Wisdom Pool" arrow>
     //   <LogoWrapper href="/">
     //     <Badge

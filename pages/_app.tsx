@@ -23,12 +23,12 @@ type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-interface TokyoAppProps extends AppProps {
+interface WisdompoolProps extends AppProps {
   emotionCache?: EmotionCache;
   Component: NextPageWithLayout;
 }
 
-function TokyoApp(props: TokyoAppProps) {
+function Wisdompool(props: WisdompoolProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const getLayout = Component.getLayout ?? ((page) => page);
 
@@ -39,7 +39,7 @@ function TokyoApp(props: TokyoAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>Tokyo Free White NextJS Typescript Admin Dashboard</title>
+        <title>Wisdom Pool</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -61,4 +61,4 @@ function TokyoApp(props: TokyoAppProps) {
   );
 }
 
-export default TokyoApp;
+export default Wisdompool;
