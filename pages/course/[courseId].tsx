@@ -91,7 +91,7 @@ function Avatars() {
               {contents?.length ? (
                 contents?.map((feed) => {
                   return (
-                    <Grid item xs={12} key={feed.content.id}>
+                    <Grid item xs={12} key={feed.content._id}>
                       <Card>
                         <Box
                           p={3}
@@ -113,7 +113,7 @@ function Avatars() {
                           >
                             <Grid item xs={12} sm={9}>
                               <NextLink
-                                href={`${courseId}/content/${feed.content.id}`}
+                                href={`${courseId}/content/${feed.content._id}`}
                                 passHref
                               >
                                 <Box style={{ color: 'ButtonHighlight' }}>
@@ -149,7 +149,7 @@ function Avatars() {
                                 }
                                 onClick={() => {
                                   router.push(
-                                    `${courseId}/content/${feed.content.id}`
+                                    `${courseId}/content/${feed.content._id}`
                                   );
                                 }}
                               >

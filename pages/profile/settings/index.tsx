@@ -67,7 +67,6 @@ function ManagementUserSettings() {
             </TabsWrapper>
           </Grid>
           <Grid item xs={12}>
-            asdfasdfasdf
             {currentTab === 'edit_profile' && <EditProfileTab />}
             {currentTab === 'security' && <SecurityTab />}
           </Grid>

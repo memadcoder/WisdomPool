@@ -36,7 +36,7 @@ function DashboardCrypto() {
 
   const getEnrolledCourse = async () => {
     try {
-      const response = await getResources('/enrol');
+      const response = await getResources('/enroll');
       setEnrolledCourse(response.data);
     } catch (error) {
       console.log('error', error);

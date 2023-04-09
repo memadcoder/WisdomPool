@@ -38,7 +38,8 @@ function ActivityTab({ contentId, contents }) {
   const [prevContent, setPrevContent] = useState(null);
 
   useEffect(() => {
-    const current = contents.filter((data) => data.content.id === contentId);
+    console.log(contents);
+    const current = contents.filter((data) => data.content._id === contentId);
     setContent(current[0]);
   }, [contentId]);
 
@@ -146,11 +147,11 @@ function ActivityTab({ contentId, contents }) {
               >
                 {prevContent?.title || 'No Previous'}
               </p>
-              {prevContent?.id && (
+              {prevContent?._id && (
                 <Link
                   href={`/course/${encodeURIComponent(
                     courseId + ''
-                  )}/content/${encodeURIComponent(prevContent.id)}`}
+                  )}/content/${encodeURIComponent(prevContent._id)}`}
                 >
                   <SkipPreviousIcon
                     sx={{ fontSize: 60 }}
@@ -162,7 +163,7 @@ function ActivityTab({ contentId, contents }) {
                 </Link>
               )}
 
-              {!prevContent?.id && (
+              {!prevContent?._id && (
                 <SkipPreviousIcon
                   sx={{ fontSize: 60 }}
                   style={{
@@ -189,11 +190,11 @@ function ActivityTab({ contentId, contents }) {
               >
                 {nextContent?.title || 'No Next'}
               </p>
-              {nextContent?.id && (
+              {nextContent?._id && (
                 <Link
                   href={`/course/${encodeURIComponent(
                     courseId + ''
-                  )}/content/${encodeURIComponent(nextContent?.id)}`}
+                  )}/content/${encodeURIComponent(nextContent?._id)}`}
                 >
                   <SkipNextIcon
                     sx={{ fontSize: 60 }}
@@ -204,7 +205,7 @@ function ActivityTab({ contentId, contents }) {
                   />
                 </Link>
               )}
-              {!nextContent?.id && (
+              {!nextContent?._id && (
                 <SkipNextIcon
                   sx={{ fontSize: 60 }}
                   style={{

@@ -33,7 +33,7 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
 
   const enrollInCourse = async (courseId) => {
     try {
-      const response = await createResource({ course: courseId }, '/enrol');
+      const response = await createResource({ course: courseId }, '/enroll');
       router.push(`/course/${courseId}`);
     } catch (error) {
       console.log('error', error);
@@ -83,7 +83,7 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
               {poolFeeds?.length ? (
                 poolFeeds?.map((feed) => {
                   return (
-                    <Grid item xs={12} key={feed.id}>
+                    <Grid item xs={12} key={feed._id}>
                       <Card>
                         <Box
                           p={3}
@@ -104,7 +104,7 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
                             spacing={1}
                           >
                             <Grid item xs={12} sm={9}>
-                              <NextLink href={`course/${feed.id}`} passHref>
+                              <NextLink href={`course/${feed._id}`} passHref>
                                 <Box style={{ color: 'ButtonHighlight' }}>
                                   <Typography variant="h4" gutterBottom>
                                     {feed.title}
@@ -126,7 +126,7 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
                                 endIcon={
                                   !isLoggedIn ? (
                                     <SubscriptionsIcon />
-                                  ) : checkIfCourseEnrolled(feed.id) ? (
+                                  ) : checkIfCourseEnrolled(feed._id) ? (
                                     <CheckCircleIcon />
                                   ) : (
                                     <SubscriptionsIcon />
@@ -140,12 +140,12 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
                                   )
                                 }
                                 onClick={() => {
-                                  handleEnroll(feed.id);
+                                  handleEnroll(feed._id);
                                 }}
                               >
                                 {!isLoggedIn
                                   ? 'Enroll'
-                                  : checkIfCourseEnrolled(feed.id)
+                                  : checkIfCourseEnrolled(feed._id)
                                   ? 'Enrolled'
                                   : 'Enroll'}
                               </Button>

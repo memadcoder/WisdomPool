@@ -31,3 +31,12 @@ npm start
 ```
 
 Make use of [PM2](https://github.com/Unitech/pm2).
+
+### with pm2
+
+
+    Make sure you set the envs first
+```
+npm run build
+pm2 start npm --name "WisdomFE" -- start++
+```
