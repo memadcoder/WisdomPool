@@ -60,11 +60,13 @@ function Comment({ courseId, contentId }) {
   }, [courseId, contentId]);
 
   const getComments = async () => {
+    console.log("get comments")
     try {
       const response = await getResources(
         `/comment?courseId=${courseId}&contentId=${contentId}`
       );
-      setComments(response.data);
+    console.log("comments received")
+    setComments(response.data);
     } catch (error) {
       console.log('error', error);
     } finally {
@@ -75,8 +77,8 @@ function Comment({ courseId, contentId }) {
     try {
       const response = await createResource(
         {
-          content: contentId,
-          course: courseId,
+          contentId: contentId,
+          courseId: courseId,
           comment
         },
         `/comment`
@@ -84,7 +86,7 @@ function Comment({ courseId, contentId }) {
 
       const updatedComments = [
         {
-          user: { name: response.data.user.name, id: response.data.user.id },
+          user: { name: response.data.user.name, _id: response.data.user._id },
           comment: response.data.comment
         },
         ...comments
@@ -107,7 +109,7 @@ function Comment({ courseId, contentId }) {
   };
   return (
     <>
-      {loggedInUser?.id ? (
+      {loggedInUser?._id ? (
         <div
           className="comment-input-section"
           style={{ margin: '12px 12px 12px 12px' }}
@@ -138,7 +140,7 @@ function Comment({ courseId, contentId }) {
             {comments?.length ? (
               comments.map((comment) => {
                 return (
-                  <ListItemWrapper key={comment.id}>
+                  <ListItemWrapper key={comment._id}>
                     <ListItemAvatar>
                       <Avatar src="/static/images/avatars/1.jpg" />
                     </ListItemAvatar>
@@ -159,12 +161,12 @@ function Comment({ courseId, contentId }) {
                       secondary={comment.comment}
                     />
                     {/* <ListItemAvatar> */}
-                    {comment.user.id === loggedInUser?.id ? (
+                    {comment.user._id === loggedInUser?._id ? (
                       <>
                         {' '}
                         <DeleteIcon
                           onClick={() => {
-                            setDeletingId(comment.id);
+                            setDeletingId(comment._id);
                             setOpen(true);
                           }}
                         />
