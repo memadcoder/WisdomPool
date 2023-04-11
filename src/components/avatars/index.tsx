@@ -33,7 +33,7 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
 
   const enrollInCourse = async (courseId) => {
     try {
-      const response = await createResource({ course: courseId }, '/enroll');
+      const response = await createResource({ courseId: courseId }, '/enroll');
       router.push(`/course/${courseId}`);
     } catch (error) {
       console.log('error', error);
@@ -50,7 +50,7 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
 
   const checkIfCourseEnrolled = (courseId) => {
     const enrolled = enrolledCourse?.filter(
-      (enroll) => enroll.course.id === courseId
+      (enroll) => enroll.course._id === courseId
     );
     const flag = enrolled?.length ? true : false;
     return flag;
