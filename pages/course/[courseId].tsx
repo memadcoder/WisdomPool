@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import SidebarLayout from '@/layouts/SidebarLayout';
 import PageTitle from '@/components/PageTitle';
 import PageTitleWrapper from '@/components/PageTitleWrapper';
 import {
   Container,
   Grid,
   Card,
-  CardContent,
   Divider,
   Typography,
   Box,

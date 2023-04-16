@@ -1,10 +1,6 @@
-import Head from 'next/head';
-
-import SidebarLayout from '@/layouts/SidebarLayout';
 import { Container, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
 import ContentDetails from '@/component/page-components/course/content/ContentDetails';
-import { checkAuthentication } from '@/utility/checkAuthentication';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getResources } from '@/api';

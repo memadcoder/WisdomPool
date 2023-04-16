@@ -1,11 +1,6 @@
-import Head from 'next/head';
-
-import SidebarLayout from '@/layouts/SidebarLayout';
 import {
-  Container,
   Grid,
   Card,
-  CardHeader,
   CardContent,
   Divider,
   Typography,
@@ -17,9 +12,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Text from '@/components/Text';
 import NextLink from 'next/link';
-import { withPrivateRoute } from '@/hocs/withPrivateRoute';
-import { checkAuthentication } from '@/utility/checkAuthentication';
-import { useState } from 'react';
 
 function Feeds(props: any) {
   const { feeds, setModal, type, DialogModal } = props;

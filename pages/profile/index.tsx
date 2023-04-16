@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
 import { Grid, Container } from '@mui/material';
 import ProfileCover from '@/component/page-components/profile/ProfileCover';
-import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getToken } from '@/utility/setUser';
 import Snackbars from '@/components/Snackbar';
 import AuthLayout from '@/layouts/AuthLayout';

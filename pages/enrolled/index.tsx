@@ -3,7 +3,6 @@ import Head from 'next/head';
 
 import { Container, Grid } from '@mui/material';
 
-import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
 import CourseList from '@/component/CourseList';
 import Snackbars from '@/components/Snackbar';

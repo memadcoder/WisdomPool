@@ -1,22 +1,17 @@
-import { useEffect } from 'react';
 import Head from 'next/head';
-import SidebarLayout from '@/layouts/SidebarLayout';
 import PageTitle from '@/components/PageTitle';
 import PageTitleWrapper from '@/components/PageTitleWrapper';
 import {
   Container,
   Grid,
   Card,
-  CardContent,
   Divider,
   Typography,
   Box,
   Button
 } from '@mui/material';
-import Text from '@/components/Text';
 import NextLink from 'next/link';
 import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
-import Comment from '@/components/Comment';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { useState } from 'react';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';

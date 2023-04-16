@@ -6,29 +6,15 @@ import {
   CardHeader,
   Divider,
   IconButton,
-  Button,
-  CardActions,
   Link
 } from '@mui/material';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import Remove from '@mui/icons-material/Remove';
-import { styled } from '@mui/material/styles';
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
-import ThumbUpAltTwoToneIcon from '@mui/icons-material/ThumbUpAltTwoTone';
-import CommentTwoToneIcon from '@mui/icons-material/CommentTwoTone';
-import ShareTwoToneIcon from '@mui/icons-material/ShareTwoTone';
-import Text from '@/components/Text';
 import { useEffect, useState } from 'react';
-import Comment from '@/components/Comment';
+import Comment from '@/component/Comment';
 import { useRouter } from 'next/router';
 
-const CardActionsWrapper = styled(CardActions)(
-  ({ theme }) => `
-     background: ${theme.colors.alpha.black[5]};
-     padding: ${theme.spacing(3)};
-`
-);
 
 function ContentDetails({ contentId, contents }) {
   const router = useRouter();
