@@ -27,7 +27,7 @@ import { createResource } from '@/api';
 import StatusNoData from '@/components/status/no-data';
 import CircularProgress from '@mui/material/CircularProgress';
 
-function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
+function CourseList({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
   const router = useRouter();
   const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
 
@@ -169,4 +169,4 @@ function Avatars({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {
   );
 }
 
-export default Avatars;
+export default CourseList;

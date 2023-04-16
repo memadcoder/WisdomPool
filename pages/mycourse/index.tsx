@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { Container, Grid } from '@mui/material';
 import { useState } from 'react';
 import EditCourseModal from '@/components/Modal/CourseModal/EditCourse';
-import Feeds from '@/components/Feeds';
+import Feeds from '@/component/Feeds';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import AuthLayout from '@/layouts/AuthLayout';
 

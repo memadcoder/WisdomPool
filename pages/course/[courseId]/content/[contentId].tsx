@@ -3,7 +3,7 @@ import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import { Container, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
-import ActivityTab from '@/content/Management/Users/settings/ActivityTab';
+import ContentDetails from '@/component/page-components/course/content/ContentDetails';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -45,7 +45,7 @@ function Content() {
             <CircularProgress style={{ marginTop: '100px' }} />
           ) : (
             <Grid item xs={12}>
-              <ActivityTab contentId={contentId} contents={contents} />
+              <ContentDetails contentId={contentId} contents={contents} />
             </Grid>
           )}
         </Grid>

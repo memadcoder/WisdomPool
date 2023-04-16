@@ -30,7 +30,7 @@ const CardActionsWrapper = styled(CardActions)(
 `
 );
 
-function ActivityTab({ contentId, contents }) {
+function ContentDetails({ contentId, contents }) {
   const router = useRouter();
   const { courseId } = router.query;
   const [currentContent, setContent] = useState(null);
@@ -238,4 +238,4 @@ function ActivityTab({ contentId, contents }) {
   );
 }
 
-export default ActivityTab;
+export default ContentDetails;

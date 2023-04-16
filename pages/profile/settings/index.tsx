@@ -7,10 +7,9 @@ import { Container, Tabs, Tab, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
 import { styled } from '@mui/material/styles';
 
-import ActivityTab from '@/content/Management/Users/settings/ActivityTab';
-import EditProfileTab from '@/content/Management/Users/settings/EditProfileTab';
+import EditProfileTab from '@/component/page-components/profile/settings/EditProfileTab';
 import NotificationsTab from '@/content/Management/Users/settings/NotificationsTab';
-import SecurityTab from '@/content/Management/Users/settings/SecurityTab';
+import SecurityTab from '@/component/page-components/profile/settings/SecurityTab';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import AuthLayout from '@/layouts/AuthLayout';
 

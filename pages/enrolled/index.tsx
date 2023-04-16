@@ -5,7 +5,7 @@ import { Container, Grid } from '@mui/material';
 
 import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
-import Avatars from '@/components/avatars';
+import CourseList from '@/component/CourseList';
 import Snackbars from '@/components/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getResources } from '@/api';
@@ -50,7 +50,7 @@ function EnrolledCourse() {
           spacing={4}
         >
           <Grid item xs={12}>
-            <Avatars
+            <CourseList
               poolFeeds={poolFeeds}
               enrolledCourse={enrolledCourse}
               title="Enrolled Course"

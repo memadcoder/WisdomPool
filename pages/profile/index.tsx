@@ -3,13 +3,13 @@ import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
 import { Grid, Container } from '@mui/material';
-import ProfileCover from '@/content/Management/Users/details/ProfileCover';
+import ProfileCover from '@/component/page-components/profile/ProfileCover';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getToken } from '@/utility/setUser';
 import Snackbars from '@/components/Snackbar';
 import AuthLayout from '@/layouts/AuthLayout';
 
-function ManagementUserProfile() {
+function UserProfile() {
   const [loggedInUser, setUser] = useState(getToken()?.user);
 
   const user = {
@@ -48,6 +48,6 @@ function ManagementUserProfile() {
   );
 }
 
-ManagementUserProfile.getLayout = AuthLayout
+UserProfile.getLayout = AuthLayout
 
-export default ManagementUserProfile;
+export default UserProfile;

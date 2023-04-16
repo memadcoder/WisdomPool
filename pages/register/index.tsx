@@ -14,8 +14,7 @@ import Link from 'src/components/Link';
 import Head from 'next/head';
 
 import Logo from 'src/components/LogoSign';
-import Hero from 'src/content/Overview/Hero';
-import SignUp from '@/components/SignUp';
+import SignUp from '@/component/page-components/register/SignUp';
 import Snackbars from '@/components/Snackbar';
 
 const HeaderWrapper = styled(Card)(

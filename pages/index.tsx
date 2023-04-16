@@ -3,13 +3,13 @@ import * as React from 'react';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import { Container, Grid } from '@mui/material';
 import Footer from '@/components/Footer';
-import Avatars from '@/components/avatars';
+import CourseList from '@/component/CourseList';
 import Snackbars from '@/components/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getResources } from '@/api';
 import AuthLayout from '@/layouts/AuthLayout';
 
-function DashboardCrypto() {
+function Home() {
   const [isLoggedIn, setIsloggedIn] = React.useState(checkAuthentication());
   const [poolFeeds, setPoolFeeds] = React.useState(null);
   const [enrolledCourse, setEnrolledCourse] = React.useState(null);
@@ -58,7 +58,7 @@ function DashboardCrypto() {
           spacing={4}
         >
           <Grid item xs={12}>
-            <Avatars
+            <CourseList
               isLoading={isLoading}
               poolFeeds={poolFeeds}
               enrolledCourse={enrolledCourse}
@@ -76,6 +76,6 @@ function DashboardCrypto() {
 
 
 
-DashboardCrypto.getLayout = AuthLayout
+Home.getLayout = AuthLayout
 
-export default DashboardCrypto;
+export default Home;

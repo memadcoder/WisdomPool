@@ -13,7 +13,7 @@ import Link from 'src/components/Link';
 import Head from 'next/head';
 
 import Logo from 'src/components/LogoSign';
-import Hero from 'src/content/Overview/Hero';
+import LoginForm from 'src/component/page-components/login/LoginForm';
 import Snackbars from '@/components/Snackbar';
 
 const HeaderWrapper = styled(Card)(
@@ -35,7 +35,7 @@ const OverviewWrapper = styled(Box)(
   `
 );
 
-function Overview() {
+function Login() {
   return (
     <OverviewWrapper>
       <Head>
@@ -55,7 +55,7 @@ function Overview() {
         </Container>
       </HeaderWrapper>
       <Snackbars />
-      <Hero />
+      <LoginForm />
       <Container maxWidth="lg" sx={{ mt: 5 }}>
         <Typography textAlign="center" variant="subtitle1">
           Copyright ©
@@ -68,8 +68,8 @@ function Overview() {
   );
 }
 
-Overview.getLayout = function getLayout(page: ReactElement) {
+Login.getLayout = function getLayout(page: ReactElement) {
   return <BaseLayout>{page}</BaseLayout>;
 };
 
-export default Overview;
+export default Login;

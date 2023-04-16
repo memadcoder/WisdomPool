@@ -5,7 +5,7 @@ import SidebarLayout from '@/layouts/SidebarLayout';
 import Footer from '@/components/Footer';
 import { Container, Grid } from '@mui/material';
 import AlertDialog from '@/components/AlertDialog';
-import Feeds from '@/components/Feeds';
+import Feeds from '@/component/Feeds';
 import { UserContext } from '@/contexts/UserContext';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import AuthLayout from '@/layouts/AuthLayout';

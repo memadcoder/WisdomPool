@@ -25,7 +25,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import StatusNoData from '@/components/status/no-data';
 import AuthLayout from '@/layouts/AuthLayout';
 
-function Avatars() {
+function CourseDetails() {
   const router = useRouter();
   const [isLoggedIn, setIsloggedIn] = useState(checkAuthentication());
   const [contents, setContents] = useState(null);
@@ -179,6 +179,6 @@ function Avatars() {
   );
 }
 
-Avatars.getLayout = AuthLayout;
+CourseDetails.getLayout = AuthLayout;
 
-export default Avatars;
+export default CourseDetails;
