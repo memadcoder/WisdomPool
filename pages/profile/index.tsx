@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 import { Grid, Container } from '@mui/material';
 import ProfileCover from '@/component/page-components/profile/ProfileCover';
 import { getToken } from '@/utility/setUser';
-import Snackbars from '@/components/Snackbar';
+import Snackbars from '@/component/Snackbar';
 import AuthLayout from '@/layouts/AuthLayout';
 
 function UserProfile() {

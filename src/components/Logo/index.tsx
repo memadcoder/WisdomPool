@@ -1,5 +1,5 @@
 import { Box, styled, Tooltip } from '@mui/material';
-import Link from 'src/components/Link';
+import Link from '@/component/Link';
 
 const LogoWrapper = styled(Link)(
   ({ theme }) => `

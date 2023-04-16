@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { styled } from '@mui/material/styles';
 import { getResources, createResource, deleteResource } from '@/api';
-import AlertDialog from '@/components/AlertDialog';
+import AlertDialog from '@/component/AlertDialog';
 import { getToken } from '@/utility/setUser';
 import CircularProgress from '@mui/material/CircularProgress';
 

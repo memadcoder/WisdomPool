@@ -2,9 +2,9 @@ import { useState, useContext } from 'react';
 import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
 
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 import { Container, Grid } from '@mui/material';
-import AlertDialog from '@/components/AlertDialog';
+import AlertDialog from '@/component/AlertDialog';
 import { UserContext } from '@/contexts/UserContext';
 import Feeds from '@/component/Feeds';
 import { checkAuthentication } from '@/utility/checkAuthentication';

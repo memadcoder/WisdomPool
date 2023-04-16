@@ -1,9 +1,9 @@
 import { useState, ChangeEvent } from 'react';
 import Head from 'next/head';
-import PageHeader from '@/content/Management/Users/settings/PageHeader';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
+import PageHeader from '@/component/page-components/profile/settings/PageHeader';
+import PageTitleWrapper from '@/component/PageTitleWrapper';
 import { Container, Tabs, Tab, Grid } from '@mui/material';
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 import { styled } from '@mui/material/styles';
 
 import EditProfileTab from '@/component/page-components/profile/settings/EditProfileTab';

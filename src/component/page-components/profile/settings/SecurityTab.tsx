@@ -9,7 +9,7 @@ import {
   ListItemText,
   Button
 } from '@mui/material';
-import SecurityDetailsModal from '@/components/Modal/Profile/SecurityDetailsModal';
+import SecurityDetailsModal from '@/component/Modal/Profile/SecurityDetailsModal';
 
 function SecurityTab() {
   const [open, setOpen] = useState(false);

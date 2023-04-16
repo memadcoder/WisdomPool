@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import Scrollbar from 'src/components/Scrollbar';
+import Scrollbar from '@/component/Scrollbar';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 import NextLink from 'next/link';
 
@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import SidebarMenu from './SidebarMenu';
-import Logo from 'src/components/LogoSign';
+import Logo from '@/component/LogoSign';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { clearToken } from '@/utility/setUser';
 

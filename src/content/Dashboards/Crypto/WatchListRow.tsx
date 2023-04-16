@@ -11,8 +11,8 @@ import {
   styled,
   useTheme
 } from '@mui/material';
-import Text from 'src/components/Text';
-import Label from 'src/components/Label';
+import Text from '@/component/Text';
+import Label from '@/component/Label';
 import { Chart } from 'src/components/Chart';
 import type { ApexOptions } from 'apexcharts';
 import TrendingDownTwoToneIcon from '@mui/icons-material/TrendingDownTwoTone';

@@ -17,7 +17,7 @@ import type { ReactElement } from 'react';
 import BaseLayout from '@/layouts/BaseLayout';
 
 import Head from 'next/head';
-import Logo from '@/components/LogoSign';
+import Logo from '@/component/LogoSign';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -68,7 +68,7 @@ const ButtonNotify = styled(Button)(
 `
 );
 
-function StatusNoData() {
+function StatusComingSoon() {
   const calculateTimeLeft = () => {
     const difference = +new Date(`2023`) - +new Date();
     let timeLeft = {};
@@ -110,14 +110,17 @@ function StatusNoData() {
 
   return (
     <>
-      <Head>{/* <title>No-Data</title> */}</Head>
+      <Head>
+        <title>Status - Coming Soon</title>
+      </Head>
       <MainContent>
         <TopWrapper>
           <Container maxWidth="md">
+            <Logo />
             <Box textAlign="center" mb={3}>
               <Container maxWidth="xs">
                 <Typography variant="h1" sx={{ mt: 4, mb: 2 }}>
-                  No Data Yet !!!
+                  Coming Soon
                 </Typography>
                 <Typography
                   variant="h3"
@@ -125,7 +128,8 @@ function StatusNoData() {
                   fontWeight="normal"
                   sx={{ mb: 4 }}
                 >
-                  We're working on creating Contents.
+                  We're working on implementing the last features before our
+                  launch!
                 </Typography>
               </Container>
               <img
@@ -134,6 +138,54 @@ function StatusNoData() {
                 src="/static/images/status/coming-soon.svg"
               />
             </Box>
+
+            <Box display="flex" justifyContent="center">
+              {timerComponents.length ? timerComponents : <>Time's up!</>}
+            </Box>
+
+            <Container maxWidth="sm">
+              <Box sx={{ textAlign: 'center', p: 4 }}>
+                <FormControl variant="outlined" fullWidth>
+                  <OutlinedInputWrapper
+                    type="text"
+                    placeholder="Enter your email address here..."
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <ButtonNotify variant="contained" size="small">
+                          Notify Me
+                        </ButtonNotify>
+                      </InputAdornment>
+                    }
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <MailTwoToneIcon />
+                      </InputAdornment>
+                    }
+                  />
+                  <FormHelperText>
+                    We'll email you once our website is launched!
+                  </FormHelperText>
+                </FormControl>
+                <Divider sx={{ my: 4 }} />
+                <Box sx={{ textAlign: 'center' }}>
+                  <Tooltip arrow placement="top" title="Facebook">
+                    <IconButton color="primary">
+                      <FacebookIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip arrow placement="top" title="Twitter">
+                    <IconButton color="primary">
+                      <TwitterIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip arrow placement="top" title="Instagram">
+                    <IconButton color="primary">
+                      <InstagramIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              </Box>
+            </Container>
           </Container>
         </TopWrapper>
       </MainContent>
@@ -141,8 +193,8 @@ function StatusNoData() {
   );
 }
 
-export default StatusNoData;
+export default StatusComingSoon;
 
-StatusNoData.getLayout = function getLayout(page: ReactElement) {
+StatusComingSoon.getLayout = function getLayout(page: ReactElement) {
   return <BaseLayout>{page}</BaseLayout>;
 };

@@ -10,7 +10,7 @@ import {
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import Text from '@/components/Text';
+import Text from '@/component/Text';
 import NextLink from 'next/link';
 
 function Feeds(props: any) {

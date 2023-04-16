@@ -1,8 +1,6 @@
 import { FC, useState } from 'react';
 import PropTypes from 'prop-types';
-import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { Typography, Button, Grid } from '@mui/material';
-import AddCourseModal from '../Modal/CourseModal/AddCourse';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 
 interface PageTitleProps {

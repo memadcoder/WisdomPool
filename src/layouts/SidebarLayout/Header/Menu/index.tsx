@@ -1,7 +1,7 @@
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { Box, List, ListItem, ListItemText, styled } from '@mui/material';
 import { useRef, useState } from 'react';
-import Link from 'src/components/Link';
+import Link from '@/component/Link';
 
 const ListWrapper = styled(Box)(
   ({ theme }) => `

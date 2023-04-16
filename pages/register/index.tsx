@@ -9,12 +9,12 @@ import {
 import type { ReactElement } from 'react';
 import BaseLayout from 'src/layouts/BaseLayout';
 
-import Link from 'src/components/Link';
+import Link from '@/component/Link';
 import Head from 'next/head';
 
-import Logo from 'src/components/LogoSign';
+import Logo from '@/component/LogoSign';
 import SignUp from '@/component/page-components/register/SignUp';
-import Snackbars from '@/components/Snackbar';
+import Snackbars from '@/component/Snackbar';
 
 const HeaderWrapper = styled(Card)(
   ({ theme }) => `

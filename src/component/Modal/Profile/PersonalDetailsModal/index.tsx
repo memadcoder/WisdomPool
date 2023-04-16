@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import { useContext, useState } from 'react';
 import { SnackbarContext } from '@/contexts/SnackbarContext';
 import { updateResource } from '@/api';
-import Snackbars from '@/components/Snackbar';
+import Snackbars from '@/component/Snackbar';
 import { useRouter } from 'next/router';
 import { clearToken } from '@/utility/setUser';
 

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
 
 import PageTitle from '@/components/PageTitle';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
+import PageTitleWrapper from '@/component/PageTitleWrapper';
 import {
   Container,
   Grid,
@@ -16,7 +16,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 
 function Accordions() {
   return (

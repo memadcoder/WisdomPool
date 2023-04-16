@@ -3,9 +3,9 @@ import Head from 'next/head';
 
 import { Container, Grid } from '@mui/material';
 
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 import CourseList from '@/component/CourseList';
-import Snackbars from '@/components/Snackbar';
+import Snackbars from '@/component/Snackbar';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { getResources } from '@/api';
 import AuthLayout from '@/layouts/AuthLayout';

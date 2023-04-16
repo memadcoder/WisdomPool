@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NextLink from 'next/link';
 import { createResource } from '@/api';
 import { SnackbarContext } from '@/contexts/SnackbarContext';
-import Snackbars from '../../../../components/Snackbar';
+import Snackbars from '../../../Snackbar';
 import { useRouter } from 'next/router';
 
 const theme = createTheme();

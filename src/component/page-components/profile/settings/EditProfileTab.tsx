@@ -10,9 +10,9 @@ import {
 } from '@mui/material';
 
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import Text from '@/components/Text';
-import Label from '@/components/Label';
-import PersonalDetailsModal from '@/components/Modal/Profile/PersonalDetailsModal';
+import Text from '@/component/Text';
+import Label from '@/component/Label';
+import PersonalDetailsModal from '@/component/Modal/Profile/PersonalDetailsModal';
 import { getToken } from '@/utility/setUser';
 
 function EditProfileTab() {

@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import PageTitle from '@/components/PageTitle';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
+import PageTitle from '@/component/PageTitle';
+import PageTitleWrapper from '@/component/PageTitleWrapper';
 import {
   Container,
   Grid,
@@ -11,7 +11,7 @@ import {
   Button
 } from '@mui/material';
 import NextLink from 'next/link';
-import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
+import PageHeader from './PageHeader';
 import { checkAuthentication } from '@/utility/checkAuthentication';
 import { useState } from 'react';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
@@ -19,7 +19,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarIcon from '@mui/icons-material/Star';
 import { useRouter } from 'next/router';
 import { createResource } from '@/api';
-import StatusNoData from '@/components/status/no-data';
+import StatusNoData from '@/component/status/no-data';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function CourseList({ poolFeeds, enrolledCourse, title, subHeading, isLoading }) {

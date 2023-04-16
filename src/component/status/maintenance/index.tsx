@@ -11,7 +11,7 @@ import type { ReactElement } from 'react';
 import BaseLayout from '@/layouts/BaseLayout';
 
 import Head from 'next/head';
-import Logo from '@/components/LogoSign';
+import Logo from '@/component/LogoSign';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';

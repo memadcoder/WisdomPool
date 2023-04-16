@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import PageTitle from '@/components/PageTitle';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
+import PageTitle from '@/component/PageTitle';
+import PageTitleWrapper from '@/component/PageTitleWrapper';
 import {
   Container,
   Grid,
@@ -20,7 +20,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { useRouter } from 'next/router';
 import { getResources } from '@/api';
 import CircularProgress from '@mui/material/CircularProgress';
-import StatusNoData from '@/components/status/no-data';
+import StatusNoData from '@/component/status/no-data';
 import AuthLayout from '@/layouts/AuthLayout';
 
 function CourseDetails() {

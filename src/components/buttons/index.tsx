@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import PageTitle from '@/components/PageTitle';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
+import PageTitleWrapper from '@/component/PageTitleWrapper';
 import {
   Button,
   Container,
@@ -12,7 +12,7 @@ import {
   CardContent,
   Divider
 } from '@mui/material';
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 

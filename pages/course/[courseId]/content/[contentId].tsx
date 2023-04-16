@@ -1,5 +1,5 @@
 import { Container, Grid } from '@mui/material';
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 import ContentDetails from '@/component/page-components/course/content/ContentDetails';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';

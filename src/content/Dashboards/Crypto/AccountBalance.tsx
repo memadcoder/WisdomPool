@@ -15,7 +15,7 @@ import {
   ListItemAvatar
 } from '@mui/material';
 import TrendingUp from '@mui/icons-material/TrendingUp';
-import Text from 'src/components/Text';
+import Text from '@/component/Text';
 import { Chart } from 'src/components/Chart';
 import type { ApexOptions } from 'apexcharts';
 

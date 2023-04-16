@@ -7,7 +7,7 @@ import {
   styled,
   useTheme
 } from '@mui/material';
-import Link from 'src/components/Link';
+import Link from '@/component/Link';
 
 interface LogoProps {
   height?: number;

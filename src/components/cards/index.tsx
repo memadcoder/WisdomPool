@@ -3,7 +3,7 @@ import SidebarLayout from '@/layouts/SidebarLayout';
 import { useState } from 'react';
 
 import PageTitle from '@/components/PageTitle';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
+import PageTitleWrapper from '@/component/PageTitleWrapper';
 import {
   Container,
   Grid,
@@ -12,7 +12,7 @@ import {
   CardContent,
   Divider
 } from '@mui/material';
-import Footer from '@/components/Footer';
+import Footer from '@/component/Footer';
 import CardActions from '@mui/material/CardActions';
 import { styled } from '@mui/material/styles';
 
